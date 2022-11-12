@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1001,
+        "name": "JobName",
+        "description": "Beschreibung",
+        "company": {
+            "companyName": "Uni Siegen",
+            "contact": "027377766655",
+            "companyImage": "Bilddatei",
+            "url": "https://uni-siegen.de"
+        },
+        "questCoordinates": {
+            "latitude": 50.947897,
+            "longitude": 7.997845
+        }
+    },
+    {
+        "id": 1002,
+        "name": "JobName 2",
+        "description": "Beschreibung",
+        "company": {
+            "companyName": "Uni Siegen",
+            "contact": "027377766655",
+            "companyImage": "Bilddatei",
+            "url": "https://uni-siegen.de"
+        },
+        "questCoordinates": {
+            "latitude": 50.947897,
+            "longitude": 7.997845
+        }
+    },
+    {
+        "id": 1003,
+        "name": "JobName 3",
+        "description": "Beschreibung",
+        "company": {
+            "companyName": "Uni Siegen",
+            "contact": "027377766655",
+            "companyImage": "Bilddatei",
+            "url": "https://uni-siegen.de"
+        },
+        "questCoordinates": {
+            "latitude": 50.947897,
+            "longitude": 7.997845
+        }
+    }
+]

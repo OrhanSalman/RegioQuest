@@ -1,0 +1,12 @@
+[
+    {
+        "id": 3001,
+        "name": "Mustermann",
+        "email": "muster@mail.de",
+        "userImage": "",
+        "userLocation": {
+            "latitude": 1,
+            "longitude": 2
+        }
+    }
+]
