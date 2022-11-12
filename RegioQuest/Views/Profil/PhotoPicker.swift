@@ -33,20 +33,21 @@ struct PhotoPicker: View {
                     }
                 }
         } else {
+            
+            let frameSize = UIScreen.main.bounds.width * 0.45      // 750
+            
             if let selectedImageData,
                let uiImage = UIImage(data: selectedImageData) {
-            
                 Image(uiImage: uiImage)
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .mask(Circle()
                         .fill(Color.primary))
-                    .frame(maxWidth: UIScreen.main.bounds.width / 2, maxHeight: UIScreen.main.bounds.height / 2)
+                    .frame(width: frameSize, height: frameSize)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 7)
-                    .padding(.top, 20)
+                    .shadow(radius: 4)
             }
         }
     }

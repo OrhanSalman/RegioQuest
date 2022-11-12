@@ -18,11 +18,10 @@ struct ProfilView: View {
                 HStack {
                     CustomTopTabBar(tabIndex: $tabIndex)
                 }
-                .padding()
                 Divider()
             }
-            .padding(10)
-            .padding(.horizontal, 40)
+            .padding(.top, 25)
+            .padding(.horizontal, 70)
             
             VStack {
                 if tabIndex == 0 {
@@ -125,43 +124,94 @@ struct ContentProfil: View {
     var skillData: [Skill] {
         modelDataObject.skillDataStorage
     }
-    @State private var activeIAm = true
+    @State private var openForJobs = true
+    @State private var contactMyMail = true
+    @State private var contactMyPhone = true
     
+    enum ContactOption: String, CaseIterable, Identifiable {
+        case youMe, meYou
+        var id: Self { self }
+    }
+
+    @State private var selectedContactOption: ContactOption = .youMe
     
     var body: some View {
-        
-        
-        VStack {
-            ScrollView(.vertical, showsIndicators: false) {
+        NavigationView {
+            List {
                 VStack {
-                    ForEach(modelData) { data in
-                        VStack {
-                            PhotoPicker()
-                            Spacer(minLength: 10)
-                            Text("@\(data.name)")
-                            Divider()
-                        }
-                        .frame(width: 220, height: 220)
-                    }
-                    NavigationView {
-                        List {
-                            Section(header: Text("Profil")) {
-                                Text("Abschluss")
-                                
-                                NavigationLink(destination: SkillView()) {
-                                    Text("Skill")
-                                }
-                            }
-                            Section(header: Text("Präferenzen")) {
-                                Text("Job")
-                                Toggle("Aktiv", isOn: $activeIAm)
+                    Section() {
+                        ForEach(modelData) { data in
+                            VStack {
+                                PhotoPicker()
+                                Spacer(minLength: 10)
+                                Text("@\(data.name)")
+                                Divider()
                             }
                         }
                     }
                 }
+                .listRowBackground(Color.clear)
+                .listStyle(GroupedListStyle())
+                
+                Section(header: Text("Profil")) {
+                    HStack {
+                        Text("Abschluss")
+                        Spacer()
+                        Text("Realschule, 10. Klasse")
+                            .foregroundColor(.teal)
+                    }
+                    HStack {
+                        Text("Job")
+                        Spacer()
+                        Text("Kfz-Mechaniker")
+                            .foregroundColor(.teal)
+                    }
+                    HStack {
+                        Text("Region")
+                        Spacer()
+                        Text("Olpe")
+                            .foregroundColor(.teal)
+                    }
+                }
+                Section(header: Text("Fortschritt")) {
+                    NavigationLink(destination: SkillView()) {
+                        Text("Einladungen")
+                    }
+                    NavigationLink(destination: SkillView()) {
+                        Text("Quests")
+                    }
+                    NavigationLink(destination: SkillView()) {
+                        Text("Skills")
+                    }
+                    NavigationLink(destination: SkillView()) {
+                        Text("Quote")
+                    }
+
+                }
+                Section(header: Text("Präferenzen")) {
+                    Picker(selection: $selectedContactOption, label: Text("Kontaktaufnahme")) {
+                        Text("Ich darf kontaktiert werden").tag(ContactOption.youMe)
+                        Text("Ich kontaktiere selbst").tag(ContactOption.meYou)
+                    }
+                    // ToDo siehse unten
+                    Toggle("Kontakt per Email", isOn: $contactMyMail)
+                    Toggle("Kontakt per Telefon", isOn: $contactMyPhone)
+                    
+                    
+
+                }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .clipped()
+        }
+    }
+    // ToDo
+    func toggler() {
+        switch self.selectedContactOption {
+        case .meYou:
+            contactMyMail = false
+            contactMyPhone = false
+        case .youMe:
+            contactMyMail = true
+            contactMyPhone = true
         }
     }
 }
@@ -186,25 +236,23 @@ struct SkillView: View {
     @State private var current = 67.0
     @State private var minValue = 0.0
     @State private var maxValue = 170.0
+    
     var body: some View {
         
-        NavigationView {
-            List {
-                ForEach(1..<11) { index in
-                    Gauge(value: current, in: minValue...maxValue) {
-                        Text("BPM")
-                    } currentValueLabel: {
-                        Text("\(Int(current))")
-                    } minimumValueLabel: {
-                        Text("\(Int(minValue))")
-                    } maximumValueLabel: {
-                        Text("\(Int(maxValue))")
-                    }
+        ScrollView(.vertical, showsIndicators: true) {
+            ForEach(1..<11) { index in
+                Gauge(value: current, in: minValue...maxValue) {
+                    Text("BPM")
+                } currentValueLabel: {
+                    Text("\(Int(current))")
+                } minimumValueLabel: {
+                    Text("\(Int(minValue))")
+                } maximumValueLabel: {
+                    Text("\(Int(maxValue))")
                 }
             }
+            
         }
-
-        
     }
 }
 
@@ -230,7 +278,7 @@ struct ContentOptions: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .clipped()
             .overlay(VStack {
-                
+                Text("Nur die App-Einstellungen! Nix mit RegioQuest!")
             }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .clipped(), alignment: .center)
