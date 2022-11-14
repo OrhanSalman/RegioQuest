@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 final class ModelData: ObservableObject {
     @Published var jobsDataStorage: [Job] = load("Job.json")
@@ -15,6 +16,7 @@ final class ModelData: ObservableObject {
 //    @Published var gameEngineDataStorage: [GameEngine] = load("GameEngine.json")
 }
 
+// 1. Load default Dataset
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
 
@@ -36,3 +38,6 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
+
+// 2. Create Appstorage
+ 

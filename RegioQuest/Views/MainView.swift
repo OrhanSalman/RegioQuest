@@ -13,6 +13,8 @@ struct MainView: View {
     @StateObject var locationManager = LocationManager()
     @StateObject var modelData = ModelData()
     
+    @State var badgeCount = 5
+    
     var body: some View {
         
         TabView {
@@ -22,16 +24,20 @@ struct MainView: View {
                 }
                 .environmentObject(modelData)
                 .environmentObject(locationManager)
+            BranchenView()
+                .tabItem {
+                    Label("Berufe", systemImage: "map.circle.fill")
+                }
+                .environmentObject(modelData)
+                .environmentObject(locationManager)
             ScoreView()
                 .tabItem {
                     Label("Score", systemImage: "bell.fill")
                 }
-            QuestView()
-                .tabItem {
-                    Label("Map", systemImage: "map.circle.fill")
+                .badge(badgeCount)
+                .onTapGesture {
+                    badgeCount = 0
                 }
-                .environmentObject(modelData)
-                .environmentObject(locationManager)
             ProfilView()
                 .tabItem {
                     Label("Profil", systemImage: "person.crop.circle.fill")

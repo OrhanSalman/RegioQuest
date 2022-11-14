@@ -115,15 +115,15 @@ extension View {
 }
 
 struct ContentProfil: View {
-    
     @EnvironmentObject var modelDataObject: ModelData
     var modelData: [User] {
         modelDataObject.userDataStorage
     }
-    
     var skillData: [Skill] {
         modelDataObject.skillDataStorage
     }
+    
+    
     @State private var openForJobs = true
     @State private var contactMyMail = true
     @State private var contactMyPhone = true
@@ -135,12 +135,13 @@ struct ContentProfil: View {
 
     @State private var selectedContactOption: ContactOption = .youMe
     
+    
     var body: some View {
-        NavigationView {
-            List {
-                VStack {
-                    Section() {
-                        ForEach(modelData) { data in
+        ForEach(modelData) { data in
+            NavigationView {
+                List {
+                    VStack {
+                        Section() {
                             VStack {
                                 PhotoPicker()
                                 Spacer(minLength: 10)
@@ -149,56 +150,64 @@ struct ContentProfil: View {
                             }
                         }
                     }
-                }
-                .listRowBackground(Color.clear)
-                .listStyle(GroupedListStyle())
-                
-                Section(header: Text("Profil")) {
-                    HStack {
-                        Text("Abschluss")
-                        Spacer()
-                        Text("Realschule, 10. Klasse")
-                            .foregroundColor(.teal)
-                    }
-                    HStack {
-                        Text("Job")
-                        Spacer()
-                        Text("Kfz-Mechaniker")
-                            .foregroundColor(.teal)
-                    }
-                    HStack {
-                        Text("Region")
-                        Spacer()
-                        Text("Olpe")
-                            .foregroundColor(.teal)
-                    }
-                }
-                Section(header: Text("Fortschritt")) {
-                    NavigationLink(destination: SkillView()) {
-                        Text("Einladungen")
-                    }
-                    NavigationLink(destination: SkillView()) {
-                        Text("Quests")
-                    }
-                    NavigationLink(destination: SkillView()) {
-                        Text("Skills")
-                    }
-                    NavigationLink(destination: SkillView()) {
-                        Text("Quote")
-                    }
-
-                }
-                Section(header: Text("Präferenzen")) {
-                    Picker(selection: $selectedContactOption, label: Text("Kontaktaufnahme")) {
-                        Text("Ich darf kontaktiert werden").tag(ContactOption.youMe)
-                        Text("Ich kontaktiere selbst").tag(ContactOption.meYou)
-                    }
-                    // ToDo siehse unten
-                    Toggle("Kontakt per Email", isOn: $contactMyMail)
-                    Toggle("Kontakt per Telefon", isOn: $contactMyPhone)
+                    .listRowBackground(Color.clear)
+                    .listStyle(GroupedListStyle())
                     
-                    
+                    Section(header: Text("Profil")) {
+                        HStack {
+                            Text("Abschluss")
+                            Spacer()
+                            Text(data.education)
+                                .foregroundColor(.teal)
+                        }
+                        HStack {
+                            Text("Job")
+                            Spacer()
+                            Text(data.job)
+                                .foregroundColor(.teal)
+                        }
+                        HStack {
+                            Text("Region")
+                            Spacer()
+                            Text(data.region)
+                                .foregroundColor(.teal)
+                        }
+                    }
+                    Section(header: Text("Fortschritt")) {
+                        NavigationLink(destination: SkillView()) {
+                            Text("Einladungen")
+                        }
+                        NavigationLink(destination: SkillView()) {
+                            Text("Quests")
+                        }
+                        NavigationLink(destination: SkillView()) {
+                            Text("Skills")
+                        }
+                        NavigationLink(destination: SkillView()) {
+                            Text("Quote")
+                        }
+                        
+                    }
+                    Section(header: Text("Präferenzen")) {
+                        Picker(selection: $selectedContactOption, label: Text("Kontaktaufnahme")) {
+                            Text("Unternehmen kontaktieren").tag(ContactOption.youMe)
+                            Text("Ich kontaktiere selbst").tag(ContactOption.meYou)
+                        }
+                        .scaledToFit()
 
+                        /*
+                        Toggle("Kontakt per Email", isOn: Binding<Bool>(
+                            get: { data.preferences.contactMyMail },
+                            set: { value in
+                                data.preferences.contactMyMail = value
+                            }))
+                        Toggle("Kontakt per Telefon", isOn: Binding<Bool>(
+                            get: { data.preferences.contactMyPhone },
+                            set: { value in
+                                data.preferences.contactMyMail = value
+                            }))
+                        */
+                    }
                 }
             }
         }
@@ -233,6 +242,12 @@ struct ContentProfil: View {
  */
 
 struct SkillView: View {
+    // ToDo
+    @EnvironmentObject var modelDataObject: ModelData
+    var modelData: [User] {
+        modelDataObject.userDataStorage
+    }
+    
     @State private var current = 67.0
     @State private var minValue = 0.0
     @State private var maxValue = 170.0

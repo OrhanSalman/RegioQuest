@@ -9,12 +9,6 @@ import SwiftUI
 import MapKit
 
 
-/*
- struct Nutzer: Identifiable, Hashable {
- var id = UUID()
- var name: String
- }
- */
 struct QuestView: View {
     
     //    @EnvironmentObject var model: Job
@@ -24,8 +18,7 @@ struct QuestView: View {
     @State private var showFilterScreen = false
     @State private var showFiltered = false
     
-    
-    
+
     var modelData: [Job] {
         modelDataObject.jobsDataStorage
     }
@@ -37,11 +30,10 @@ struct QuestView: View {
      }
      */
     
-    
     var body: some View {
-        Text("A")
-        /*
-        NavigationView {
+
+        
+        NavigationStack {
             /*
             Toggle(isOn: $showFiltered) {
                 Text("Favorites only")
@@ -49,16 +41,15 @@ struct QuestView: View {
             */
             GeometryReader { gr in
                 ScrollView(.horizontal, showsIndicators: true) {
-                    HStack(alignment: .top, spacing: 6) {
+                    HStack(alignment: .top, spacing: 0) {
                         ForEach(modelData, id: \.self) { data in
                             GeometryReader { geometry in
-                                
-                                
+                                LinearGradient(gradient: Gradient(colors: [Color(.sRGB, red: 30/255, green: 30/255, blue: 30/255), .white.opacity(0.5), .black]), startPoint: .top, endPoint: .bottom)
                                 .clipped()
                                 
                                 .rotation3DEffect(
                                     Angle(
-                                        degrees: Double((geometry.frame(in: .global).minX) / -10)
+                                        degrees: Double((geometry.frame(in: .global).minX) / -20)
                                     ),
                                     axis: (x: 0, y: 1, z: 0),
                                     anchor: .center,
@@ -78,8 +69,6 @@ struct QuestView: View {
                     }
                 }
             }
-            
-            
             .navigationTitle("Regionale Quest")
         }
         .toolbar {
@@ -97,8 +86,8 @@ struct QuestView: View {
         .sheet(isPresented: $showFilterScreen) {
             FilterView()
         }
-        */
     }
+    
     
     func stringSeperator(imagePaths: String) -> [String] {
         let seperatedImages = imagePaths.components(separatedBy: ";")
@@ -116,9 +105,30 @@ struct PlacePin: Identifiable {
     }
 }
 
+/*
+struct ColorMode {
+    @State private var sysColor = Color(UIColor.systemBackground)
+    @State private var primary = Color(.black)
+    @State private var secondary = Color(.white)
+    
+    init(sysColor: Color = Color(UIColor.systemBackground), black: Color = Color(.black), white: Color = Color(.white)) {
+        self.sysColor = sysColor
+        self.primary = primary
+        self.secondary = secondary
+        
+        if(sysColor == primary) {
+            return
+        } else if(sysColor == secondary) {
+            primary = Color(.white)
+            secondary = Color(.black)
+        }
+    }
+    
+}
+*/
 struct QuestView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        QuestView()
             .environmentObject(ModelData())
             .environmentObject(LocationManager())
     }

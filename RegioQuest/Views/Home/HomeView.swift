@@ -28,7 +28,9 @@ struct HomeView: View {
         NavigationView {
             
             List {
-                Text("Ein Text")
+                Text("Empfohlene Jobs für dich")
+                Text("Letzte Quests")
+                Text("Score")
             }
             
             .navigationTitle("Regionale Quest")

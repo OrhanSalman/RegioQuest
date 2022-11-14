@@ -18,6 +18,7 @@
 		22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */; };
 		22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537F05291DE6CE00AF8B28 /* MainView.swift */; };
 		22537F08291DE7A900AF8B28 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537F07291DE7A900AF8B28 /* ScoreView.swift */; };
+		2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255003D29213ED3002B6D72 /* BranchenView.swift */; };
 		22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32071291CBCC9008DAF17 /* GameEngine.swift */; };
 		22B32074291CBCCF008DAF17 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32073291CBCCF008DAF17 /* Job.swift */; };
 		22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32075291CBCD7008DAF17 /* ModelData.swift */; };
@@ -31,6 +32,8 @@
 		22E38FE9291CBA72009D49E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE8291CBA72009D49E1 /* Preview Assets.xcassets */; };
 		22E38FEB291CBA72009D49E1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FEA291CBA72009D49E1 /* Persistence.swift */; };
 		22E38FEE291CBA72009D49E1 /* RegioQuest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FEC291CBA72009D49E1 /* RegioQuest.xcdatamodeld */; };
+		22EE0E712921E5C800D91898 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EE0E702921E5C800D91898 /* Launch Screen.storyboard */; };
+		22EE0E742921E77D00D91898 /* ModelRelations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,7 @@
 		22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		22537F05291DE6CE00AF8B28 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		22537F07291DE7A900AF8B28 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		2255003D29213ED3002B6D72 /* BranchenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchenView.swift; sourceTree = "<group>"; };
 		22B32071291CBCC9008DAF17 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		22B32073291CBCCF008DAF17 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		22B32075291CBCD7008DAF17 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		22E38FE8291CBA72009D49E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22E38FEA291CBA72009D49E1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		22E38FED291CBA72009D49E1 /* RegioQuest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RegioQuest.xcdatamodel; sourceTree = "<group>"; };
+		22EE0E702921E5C800D91898 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelRelations.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				22537EF9291DCC8800AF8B28 /* QuestView.swift */,
+				2255003D29213ED3002B6D72 /* BranchenView.swift */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -211,6 +218,8 @@
 				22E38FEC291CBA72009D49E1 /* RegioQuest.xcdatamodeld */,
 				22E38FE7291CBA72009D49E1 /* Preview Content */,
 				22B32081291CBD55008DAF17 /* LocationManager.swift */,
+				22EE0E702921E5C800D91898 /* Launch Screen.storyboard */,
+				22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */,
 			);
 			path = RegioQuest;
 			sourceTree = "<group>";
@@ -287,6 +296,7 @@
 				220526C9291E02B5001DF063 /* User.json in Resources */,
 				22B32088291CBD8A008DAF17 /* Job.json in Resources */,
 				220526C5291E0214001DF063 /* Skill.json in Resources */,
+				22EE0E712921E5C800D91898 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,10 +320,12 @@
 				220526C1291DF2EB001DF063 /* MapView.swift in Sources */,
 				22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */,
 				22B3207E291CBD29008DAF17 /* FilterView.swift in Sources */,
+				2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */,
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
 				22E38FEE291CBA72009D49E1 /* RegioQuest.xcdatamodeld in Sources */,
 				22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */,
 				22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */,
+				22EE0E742921E77D00D91898 /* ModelRelations.xcdatamodeld in Sources */,
 				22537F08291DE7A900AF8B28 /* ScoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +464,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -485,6 +498,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -532,6 +546,16 @@
 			);
 			currentVersion = 22E38FED291CBA72009D49E1 /* RegioQuest.xcdatamodel */;
 			path = RegioQuest.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */,
+			);
+			currentVersion = 22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */;
+			path = ModelRelations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

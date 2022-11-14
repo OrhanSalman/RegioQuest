@@ -9,14 +9,17 @@ import Foundation
 import CoreLocation
 import SwiftUI
 
+
 struct User: Codable, Hashable, Identifiable {
     var id: Int
     var name: String
-    var email: String?
+    var email: String
+    var region: String
     var userScore: UserScore?
-    var education: String?
-    var preferences: String?
-    var skills: String?
+    var education: String
+    var job: String
+    var preferences: UserPreferences
+    var skills: UserSkills?
     
     
     private var userImage: String
@@ -56,5 +59,11 @@ struct User: Codable, Hashable, Identifiable {
                 userHasProvedThisSkill = false
             }
         }
+    }
+    
+    struct UserPreferences: Codable, Hashable {
+        var contactOption: String
+        var contactMyMail: Bool
+        var contactMyPhone: Bool
     }
 }

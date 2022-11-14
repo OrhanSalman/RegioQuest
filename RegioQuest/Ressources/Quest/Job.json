@@ -1,47 +1,50 @@
 [
     {
         "id": 1001,
-        "name": "JobName",
-        "description": "Beschreibung",
+        "name": "Kfz-Mechaniker (m/w/d)",
+        "branche": "Industrie",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "company": {
-            "companyName": "Uni Siegen",
-            "contact": "027377766655",
+            "companyName": "VW/Skoda Walter Schneider",
+            "contact": "0273/1234567",
             "companyImage": "Bilddatei",
             "url": "https://uni-siegen.de"
         },
         "questCoordinates": {
-            "latitude": 50.947897,
-            "longitude": 7.997845
+            "latitude": 50.899439,
+            "longitude": 8.024947
         }
     },
     {
         "id": 1002,
-        "name": "JobName 2",
-        "description": "Beschreibung",
+        "name": "Bürokaufmann (m/w/d)",
+        "branche": "Verwaltung",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "company": {
-            "companyName": "Uni Siegen",
-            "contact": "027377766655",
+            "companyName": "Stadt Siegen",
+            "contact": "0273/1234567",
             "companyImage": "Bilddatei",
             "url": "https://uni-siegen.de"
         },
         "questCoordinates": {
-            "latitude": 50.947897,
-            "longitude": 7.997845
+            "latitude": 50.874608,
+            "longitude": 8.025414
         }
     },
     {
         "id": 1003,
-        "name": "JobName 3",
-        "description": "Beschreibung",
+        "name": "Bankkaufmann (m/w/d)",
+        "branche": "Bankwesen",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "company": {
-            "companyName": "Uni Siegen",
-            "contact": "027377766655",
+            "companyName": "Sparkasse Siegen",
+            "contact": "0273/1234567",
             "companyImage": "Bilddatei",
             "url": "https://uni-siegen.de"
         },
         "questCoordinates": {
-            "latitude": 50.947897,
-            "longitude": 7.997845
+            "latitude": 50.89482,
+            "longitude": 8.02760
         }
     }
 ]

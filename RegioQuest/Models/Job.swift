@@ -14,6 +14,7 @@ struct Job: Hashable, Codable, Identifiable {
     var name: String
     var description: String
     var company: JobBelongsToCompany
+    var branche: String
 // ToDo    var gameId: Int
     
     private var questCoordinates: Coordinates
