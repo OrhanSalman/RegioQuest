@@ -19,7 +19,7 @@ struct HomeView: View {
     
     //    @EnvironmentObject var model: Job
     
-    @EnvironmentObject var modelDataObject: ModelData
+//    @EnvironmentObject var modelDataObject: ModelData
     @EnvironmentObject var locationManager: LocationManager
     @State private var showFilterScreen = false
     @State private var showFiltered = false
@@ -29,6 +29,8 @@ struct HomeView: View {
             
             List {
                 Text("Empfohlene Jobs für dich")
+                Text("Neueste Storys")
+                Text("Siegerehrung, Lisa hat einen Ausbildunsplatz erquizt, Glückwunsch!")
                 Text("Letzte Quests")
                 Text("Score")
             }
@@ -57,7 +59,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(ModelData())
+//            .environmentObject(ModelData())
             .environmentObject(LocationManager())
     }
 }

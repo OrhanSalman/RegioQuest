@@ -11,17 +11,25 @@ import MapKit
 
 struct QuestView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Job.id, ascending: true)],
+        animation: .default)
+    private var jobs: FetchedResults<Job>
+    private let stack = CoreDataStack.shared
+    
     //    @EnvironmentObject var model: Job
     
-    @EnvironmentObject var modelDataObject: ModelData
+//    @EnvironmentObject var modelDataObject: ModelData
     @EnvironmentObject var locationManager: LocationManager
     @State private var showFilterScreen = false
     @State private var showFiltered = false
     
-
+/*
     var modelData: [Job] {
         modelDataObject.jobsDataStorage
     }
+ */
     /*
      var filter: [Job] {
      modelData.landmarks.filter { landmark in
@@ -42,7 +50,7 @@ struct QuestView: View {
             GeometryReader { gr in
                 ScrollView(.horizontal, showsIndicators: true) {
                     HStack(alignment: .top, spacing: 0) {
-                        ForEach(modelData, id: \.self) { data in
+                        ForEach(jobs, id: \.self) { data in
                             GeometryReader { geometry in
                                 LinearGradient(gradient: Gradient(colors: [Color(.sRGB, red: 30/255, green: 30/255, blue: 30/255), .white.opacity(0.5), .black]), startPoint: .top, endPoint: .bottom)
                                 .clipped()
@@ -129,7 +137,7 @@ struct ColorMode {
 struct QuestView_Previews: PreviewProvider {
     static var previews: some View {
         QuestView()
-            .environmentObject(ModelData())
+ //           .environmentObject(ModelData())
             .environmentObject(LocationManager())
     }
 }

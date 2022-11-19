@@ -4,12 +4,16 @@
 //
 //  Created by Orhan Salman on 10.11.22.
 //
-
+/*
 import Foundation
 import Combine
 import SwiftUI
 
-final class ModelData: ObservableObject {
+
+
+
+
+final class ModelData: ObservableObject, Decodable {
     @Published var jobsDataStorage: [Job] = load("Job.json")
     @Published var userDataStorage: [User] = load("User.json")
     @Published var skillDataStorage: [Skill] = load("Skill.json")
@@ -41,3 +45,4 @@ func load<T: Decodable>(_ filename: String) -> T {
 
 // 2. Create Appstorage
  
+*/

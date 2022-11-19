@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 09.11.22.
 //
-
+/*
 import Foundation
 
 struct GameEngine: Hashable, Codable, Identifiable {
@@ -75,7 +75,7 @@ struct GameEngine: Hashable, Codable, Identifiable {
         return buildRating
     }
 }
-
+*/
 
 /*
  // Timer
@@ -83,3 +83,4 @@ struct GameEngine: Hashable, Codable, Identifiable {
  
  https://www.hackingwithswift.com/books/ios-swiftui/counting-down-with-a-timer
  */
+

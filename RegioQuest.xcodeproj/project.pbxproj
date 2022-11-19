@@ -19,6 +19,12 @@
 		22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537F05291DE6CE00AF8B28 /* MainView.swift */; };
 		22537F08291DE7A900AF8B28 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537F07291DE7A900AF8B28 /* ScoreView.swift */; };
 		2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255003D29213ED3002B6D72 /* BranchenView.swift */; };
+		228111CB2927407B00042918 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228111CA2927407B00042918 /* DataHandler.swift */; };
+		228111CE292745B300042918 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228111CD292745B300042918 /* Server.swift */; };
+		228111D0292745BB00042918 /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228111CF292745BB00042918 /* Local.swift */; };
+		22A1DCDE2924A4CA00712521 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A1DCDD2924A4CA00712521 /* DetailsView.swift */; };
+		22A1DCE02924B06D00712521 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A1DCDF2924B06D00712521 /* Login.storyboard */; };
+		22A1DCE22924B07600712521 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A1DCE12924B07600712521 /* LoginViewController.swift */; };
 		22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32071291CBCC9008DAF17 /* GameEngine.swift */; };
 		22B32074291CBCCF008DAF17 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32073291CBCCF008DAF17 /* Job.swift */; };
 		22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32075291CBCD7008DAF17 /* ModelData.swift */; };
@@ -27,13 +33,17 @@
 		22B32080291CBD38008DAF17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3207F291CBD38008DAF17 /* HomeView.swift */; };
 		22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32081291CBD55008DAF17 /* LocationManager.swift */; };
 		22B32088291CBD8A008DAF17 /* Job.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B32087291CBD8A008DAF17 /* Job.json */; };
+		22DE872429240AB100AE7D30 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872329240AB100AE7D30 /* SignIn.swift */; };
+		22DE872629240AC600AE7D30 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872529240AC600AE7D30 /* SignUp.swift */; };
+		22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */; };
 		22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */; };
 		22E38FE6291CBA72009D49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE5291CBA72009D49E1 /* Assets.xcassets */; };
 		22E38FE9291CBA72009D49E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE8291CBA72009D49E1 /* Preview Assets.xcassets */; };
 		22E38FEB291CBA72009D49E1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FEA291CBA72009D49E1 /* Persistence.swift */; };
-		22E38FEE291CBA72009D49E1 /* RegioQuest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FEC291CBA72009D49E1 /* RegioQuest.xcdatamodeld */; };
 		22EE0E712921E5C800D91898 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EE0E702921E5C800D91898 /* Launch Screen.storyboard */; };
-		22EE0E742921E77D00D91898 /* ModelRelations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */; };
+		22EE0E742921E77D00D91898 /* RegioQuest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22EE0E722921E77D00D91898 /* RegioQuest.xcdatamodeld */; };
+		22EE0E762921F71200D91898 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE0E752921F71200D91898 /* StoryView.swift */; };
+		22FA09952923E56100A936AD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA09942923E56100A936AD /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +59,12 @@
 		22537F05291DE6CE00AF8B28 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		22537F07291DE7A900AF8B28 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		2255003D29213ED3002B6D72 /* BranchenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchenView.swift; sourceTree = "<group>"; };
+		228111CA2927407B00042918 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		228111CD292745B300042918 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		228111CF292745BB00042918 /* Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local.swift; sourceTree = "<group>"; };
+		22A1DCDD2924A4CA00712521 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		22A1DCDF2924B06D00712521 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		22A1DCE12924B07600712521 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		22B32071291CBCC9008DAF17 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		22B32073291CBCCF008DAF17 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		22B32075291CBCD7008DAF17 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
@@ -57,14 +73,20 @@
 		22B3207F291CBD38008DAF17 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		22B32081291CBD55008DAF17 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22B32087291CBD8A008DAF17 /* Job.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Job.json; sourceTree = "<group>"; };
+		22DE872329240AB100AE7D30 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		22DE872529240AC600AE7D30 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		22E38FDE291CBA71009D49E1 /* RegioQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegioQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegioQuestApp.swift; sourceTree = "<group>"; };
 		22E38FE5291CBA72009D49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22E38FE8291CBA72009D49E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22E38FEA291CBA72009D49E1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		22E38FED291CBA72009D49E1 /* RegioQuest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RegioQuest.xcdatamodel; sourceTree = "<group>"; };
 		22EE0E702921E5C800D91898 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelRelations.xcdatamodel; sourceTree = "<group>"; };
+		22EE0E752921F71200D91898 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		22FA09922923DC1F00A936AD /* RegioQuest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RegioQuest.entitlements; sourceTree = "<group>"; };
+		22FA09932923DC2200A936AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		22FA09942923E56100A936AD /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +118,15 @@
 			path = Profil;
 			sourceTree = "<group>";
 		};
+		228111CC292745AB00042918 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				228111CD292745B300042918 /* Server.swift */,
+				228111CF292745BB00042918 /* Local.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		22B3206E291CBCA4008DAF17 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +135,7 @@
 				22B32075291CBCD7008DAF17 /* ModelData.swift */,
 				22B32077291CBCDD008DAF17 /* User.swift */,
 				220526C2291E01DD001DF063 /* Skill.swift */,
+				228111CA2927407B00042918 /* DataHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -111,6 +143,7 @@
 		22B3206F291CBCA9008DAF17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22DE872029240AA100AE7D30 /* User */,
 				22537EFC291DCDFC00AF8B28 /* Profil */,
 				22537EFB291DCC8C00AF8B28 /* Quest */,
 				22B3207C291CBD17008DAF17 /* Score */,
@@ -119,6 +152,8 @@
 				22537F05291DE6CE00AF8B28 /* MainView.swift */,
 				220526BE291DF2E5001DF063 /* ContentView.swift */,
 				220526C0291DF2EB001DF063 /* MapView.swift */,
+				22A1DCDF2924B06D00712521 /* Login.storyboard */,
+				22A1DCE12924B07600712521 /* LoginViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -146,6 +181,7 @@
 			children = (
 				22B3207D291CBD29008DAF17 /* FilterView.swift */,
 				22B3207F291CBD38008DAF17 /* HomeView.swift */,
+				22EE0E752921F71200D91898 /* StoryView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -190,6 +226,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		22DE872029240AA100AE7D30 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				22DE872329240AB100AE7D30 /* SignIn.swift */,
+				22DE872529240AC600AE7D30 /* SignUp.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		22E38FD5291CBA71009D49E1 = {
 			isa = PBXGroup;
 			children = (
@@ -209,17 +254,22 @@
 		22E38FE0291CBA71009D49E1 /* RegioQuest */ = {
 			isa = PBXGroup;
 			children = (
+				228111CC292745AB00042918 /* Data */,
+				22FA09932923DC2200A936AD /* Info.plist */,
+				22FA09922923DC1F00A936AD /* RegioQuest.entitlements */,
 				22B32070291CBCAE008DAF17 /* Ressources */,
 				22B3206F291CBCA9008DAF17 /* Views */,
 				22B3206E291CBCA4008DAF17 /* Models */,
 				22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */,
 				22E38FE5291CBA72009D49E1 /* Assets.xcassets */,
 				22E38FEA291CBA72009D49E1 /* Persistence.swift */,
-				22E38FEC291CBA72009D49E1 /* RegioQuest.xcdatamodeld */,
 				22E38FE7291CBA72009D49E1 /* Preview Content */,
 				22B32081291CBD55008DAF17 /* LocationManager.swift */,
 				22EE0E702921E5C800D91898 /* Launch Screen.storyboard */,
-				22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */,
+				22EE0E722921E77D00D91898 /* RegioQuest.xcdatamodeld */,
+				22FA09942923E56100A936AD /* CoreDataStack.swift */,
+				22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */,
+				22A1DCDD2924A4CA00712521 /* DetailsView.swift */,
 			);
 			path = RegioQuest;
 			sourceTree = "<group>";
@@ -274,6 +324,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 22E38FD5291CBA71009D49E1;
 			productRefGroup = 22E38FDF291CBA71009D49E1 /* Products */;
@@ -290,6 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A1DCE02924B06D00712521 /* Login.storyboard in Resources */,
 				220526C7291E0224001DF063 /* GameEngine.json in Resources */,
 				22E38FE9291CBA72009D49E1 /* Preview Assets.xcassets in Resources */,
 				22E38FE6291CBA72009D49E1 /* Assets.xcassets in Resources */,
@@ -307,25 +359,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FA09952923E56100A936AD /* CoreDataStack.swift in Sources */,
 				22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */,
 				22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */,
 				220526BF291DF2E5001DF063 /* ContentView.swift in Sources */,
+				22EE0E762921F71200D91898 /* StoryView.swift in Sources */,
 				22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */,
+				22DE872429240AB100AE7D30 /* SignIn.swift in Sources */,
 				220526C3291E01DD001DF063 /* Skill.swift in Sources */,
 				22B32074291CBCCF008DAF17 /* Job.swift in Sources */,
 				22E38FEB291CBA72009D49E1 /* Persistence.swift in Sources */,
 				22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */,
 				22B32080291CBD38008DAF17 /* HomeView.swift in Sources */,
+				22DE872629240AC600AE7D30 /* SignUp.swift in Sources */,
 				22537EFE291DCE0A00AF8B28 /* ProfilView.swift in Sources */,
+				228111CE292745B300042918 /* Server.swift in Sources */,
 				220526C1291DF2EB001DF063 /* MapView.swift in Sources */,
 				22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */,
+				228111D0292745BB00042918 /* Local.swift in Sources */,
 				22B3207E291CBD29008DAF17 /* FilterView.swift in Sources */,
 				2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */,
+				22A1DCDE2924A4CA00712521 /* DetailsView.swift in Sources */,
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
-				22E38FEE291CBA72009D49E1 /* RegioQuest.xcdatamodeld in Sources */,
 				22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */,
 				22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */,
-				22EE0E742921E77D00D91898 /* ModelRelations.xcdatamodeld in Sources */,
+				228111CB2927407B00042918 /* DataHandler.swift in Sources */,
+				22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */,
+				22EE0E742921E77D00D91898 /* RegioQuest.xcdatamodeld in Sources */,
+				22A1DCE22924B07600712521 /* LoginViewController.swift in Sources */,
 				22537F08291DE7A900AF8B28 /* ScoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,12 +513,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RegioQuest/RegioQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RegioQuest/Preview Content\"";
 				DEVELOPMENT_TEAM = B52B5R8QVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RegioQuest/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Localization Always and When In Use";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = String;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = String;
@@ -486,12 +549,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RegioQuest/RegioQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RegioQuest/Preview Content\"";
 				DEVELOPMENT_TEAM = B52B5R8QVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RegioQuest/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Localization Always and When In Use";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = String;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = String;
@@ -539,23 +604,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		22E38FEC291CBA72009D49E1 /* RegioQuest.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				22E38FED291CBA72009D49E1 /* RegioQuest.xcdatamodel */,
-			);
-			currentVersion = 22E38FED291CBA72009D49E1 /* RegioQuest.xcdatamodel */;
-			path = RegioQuest.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		22EE0E722921E77D00D91898 /* ModelRelations.xcdatamodeld */ = {
+		22EE0E722921E77D00D91898 /* RegioQuest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */,
 			);
 			currentVersion = 22EE0E732921E77D00D91898 /* ModelRelations.xcdatamodel */;
-			path = ModelRelations.xcdatamodeld;
+			path = RegioQuest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

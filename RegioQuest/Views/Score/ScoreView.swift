@@ -11,6 +11,8 @@ struct ScoreView: View {
     
     
     var body: some View {
+        
+        
         VStack {
             NavigationStack {
                 List {

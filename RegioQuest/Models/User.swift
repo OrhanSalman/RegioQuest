@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 09.11.22.
 //
-
+/*
 import Foundation
 import CoreLocation
 import SwiftUI
@@ -67,3 +67,4 @@ struct User: Codable, Hashable, Identifiable {
         var contactMyPhone: Bool
     }
 }
+*/

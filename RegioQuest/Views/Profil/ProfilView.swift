@@ -11,9 +11,11 @@ import SwiftUI
 struct ProfilView: View {
     
     @State var tabIndex = 0
+    private let coreDataStack = CoreDataStack.shared
+    
     
     var body: some View {
-        VStack {
+        NavigationStack {
             VStack {
                 HStack {
                     CustomTopTabBar(tabIndex: $tabIndex)
@@ -26,12 +28,15 @@ struct ProfilView: View {
             VStack {
                 if tabIndex == 0 {
                     ContentProfil()
+                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
                 else if tabIndex == 1 {
                     ContentGift()
+                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
                 else if tabIndex == 2 {
                     ContentOptions()
+                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
             }
         }
@@ -115,6 +120,7 @@ extension View {
 }
 
 struct ContentProfil: View {
+    /*
     @EnvironmentObject var modelDataObject: ModelData
     var modelData: [User] {
         modelDataObject.userDataStorage
@@ -122,7 +128,7 @@ struct ContentProfil: View {
     var skillData: [Skill] {
         modelDataObject.skillDataStorage
     }
-    
+    */
     
     @State private var openForJobs = true
     @State private var contactMyMail = true
@@ -135,17 +141,23 @@ struct ContentProfil: View {
 
     @State private var selectedContactOption: ContactOption = .youMe
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+        animation: .default)
+    private var user: FetchedResults<User>
+    
     
     var body: some View {
-        ForEach(modelData) { data in
-            NavigationView {
+        ForEach(user) { data in
+            
                 List {
                     VStack {
                         Section() {
                             VStack {
                                 PhotoPicker()
                                 Spacer(minLength: 10)
-                                Text("@\(data.name)")
+                                Text(data.name ?? "Kein Name" )
                                 Divider()
                             }
                         }
@@ -157,22 +169,23 @@ struct ContentProfil: View {
                         HStack {
                             Text("Abschluss")
                             Spacer()
-                            Text(data.education)
+                            Text(data.education ?? "Keine Education")
                                 .foregroundColor(.teal)
                         }
                         HStack {
                             Text("Job")
                             Spacer()
-                            Text(data.job)
+                            Text(data.job ?? "Kein Job")
                                 .foregroundColor(.teal)
                         }
                         HStack {
                             Text("Region")
                             Spacer()
-                            Text(data.region)
+                            Text(data.region ?? "Keine Region")
                                 .foregroundColor(.teal)
                         }
                     }
+                    
                     Section(header: Text("Fortschritt")) {
                         NavigationLink(destination: SkillView()) {
                             Text("Einladungen")
@@ -186,30 +199,17 @@ struct ContentProfil: View {
                         NavigationLink(destination: SkillView()) {
                             Text("Quote")
                         }
-                        
                     }
+                    
                     Section(header: Text("Präferenzen")) {
-                        Picker(selection: $selectedContactOption, label: Text("Kontaktaufnahme")) {
-                            Text("Unternehmen kontaktieren").tag(ContactOption.youMe)
-                            Text("Ich kontaktiere selbst").tag(ContactOption.meYou)
-                        }
-                        .scaledToFit()
-
-                        /*
-                        Toggle("Kontakt per Email", isOn: Binding<Bool>(
-                            get: { data.preferences.contactMyMail },
-                            set: { value in
-                                data.preferences.contactMyMail = value
+                        Toggle("Profil mit Freunden teilen", isOn: Binding<Bool>(
+                            get: { data.shareWithFriends },
+                            set: {
+                                data.shareWithFriends = $0
+                                try? self.managedObjectContext.save()
                             }))
-                        Toggle("Kontakt per Telefon", isOn: Binding<Bool>(
-                            get: { data.preferences.contactMyPhone },
-                            set: { value in
-                                data.preferences.contactMyMail = value
-                            }))
-                        */
                     }
                 }
-            }
         }
     }
     // ToDo
@@ -224,29 +224,18 @@ struct ContentProfil: View {
         }
     }
 }
-/*
- struct ContentList: View {
- 
- @EnvironmentObject var modelData: ModelData
- 
- var body: some View {
- NavigationView {
- List {
- 
- Text("Bewerten")
- }
- .navigationTitle("Landmarks")
- }
- }
- }
- */
+
 
 struct SkillView: View {
     // ToDo
+
+    
+    /*
     @EnvironmentObject var modelDataObject: ModelData
     var modelData: [User] {
         modelDataObject.userDataStorage
     }
+    */
     
     @State private var current = 67.0
     @State private var minValue = 0.0
@@ -266,7 +255,6 @@ struct SkillView: View {
                     Text("\(Int(maxValue))")
                 }
             }
-            
         }
     }
 }
@@ -294,6 +282,7 @@ struct ContentOptions: View {
             .clipped()
             .overlay(VStack {
                 Text("Nur die App-Einstellungen! Nix mit RegioQuest!")
+                Text("Account löschen")
             }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .clipped(), alignment: .center)
@@ -304,6 +293,6 @@ struct ContentOptions: View {
 struct ProfilView_Previews: PreviewProvider {
     static var previews: some View {
         ProfilView()
-            .environmentObject(ModelData())
+//            .environmentObject(ModelData())
     }
 }
