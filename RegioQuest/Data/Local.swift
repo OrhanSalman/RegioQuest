@@ -6,13 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
-// Load all necessary data from server to Device
+struct Local: Identifiable {
+    
+    var id: UUID?
+    var latitude: Double?
+    var longitude: Double?
+}
 
-// Store them on the device
-
-// If any changes are made on the data, upload it to the server
-
-// Every 1/2 Hour ask server for update
-
-// Background process: download / upload data
+class LocalViewModel: ObservableObject {
+    @Published var local : [Local]
+    
+    init(items: [Local]) {
+        self.local = items
+    }
+}

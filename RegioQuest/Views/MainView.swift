@@ -10,45 +10,71 @@ import SwiftUI
 
 struct MainView: View {
     
+    
     @StateObject var locationManager = LocationManager()
-//    @StateObject var modelData = ModelData()
+    @ObservedObject var inMemoryDataStorage = InMemoryDataStorage()
     
-    @State var badgeCount  = 5
+    @State var homeBadgeCount = 0
+    @State var branchenBadgeCount = 0
+    @State var profileBadgeCount = 0
+    @State var scoreBadgeCount = 0
     
-    let coreDataStack = CoreDataStack.shared
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+    animation: .default) var userData: FetchedResults<User>
+
     
     var body: some View {
-        
-            TabView {
-                HomeView()
-                    .tabItem {
-                        Label("Home", systemImage: "house.fill")
-                    }
-    //                .environmentObject(modelData)
-                    .environment(\.managedObjectContext, coreDataStack.context)
-                    .environmentObject(locationManager)
-                BranchenView()
-                    .tabItem {
-                        Label("Berufe", systemImage: "map.circle.fill")
-                    }
-    //                .environmentObject(modelData)
-                    .environment(\.managedObjectContext, coreDataStack.context)
-                    .environmentObject(locationManager)
-                ScoreView()
-                    .tabItem {
-                        Label("Score", systemImage: "bell.fill")
-                    }
-                    .badge(badgeCount)
-                    .onTapGesture {
-                        badgeCount = 0
-                    }
-                    .environment(\.managedObjectContext, coreDataStack.context)
-                ProfilView()
-                    .tabItem {
-                        Label("Profil", systemImage: "person.crop.circle.fill")
-                    }
-    //                .environmentObject(modelData)
+
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+//                .environment(\.managedObjectContext, coreDataStack.context)
+                .environmentObject(locationManager)
+                .environmentObject(inMemoryDataStorage)
+                .badge(homeBadgeCount)
+                .onTapGesture {
+                    homeBadgeCount = 0
+                }
+            BranchenView()
+                .tabItem {
+                    Label("Berufe", systemImage: "map.circle.fill")
+                }
+//                .environment(\.managedObjectContext, coreDataStack.context)
+                .environmentObject(locationManager)
+                .environmentObject(inMemoryDataStorage)
+                .badge(branchenBadgeCount)
+                .onTapGesture {
+                    branchenBadgeCount = 0
+                }
+            ScoreView()
+                .tabItem {
+                    Label("Score", systemImage: "bell.fill")
+                }
+                .badge(scoreBadgeCount)
+                .onTapGesture {
+                    scoreBadgeCount = 0
+                }
+//                .environment(\.managedObjectContext, coreDataStack.context)
+                .environmentObject(inMemoryDataStorage)
+            CustomTabView()
+                .tabItem {
+                    Label("Profil", systemImage: "person.crop.circle.fill")
+                }
+                .badge(profileBadgeCount)
+                .onTapGesture {
+                    profileBadgeCount = 0
+                }
+                .environmentObject(inMemoryDataStorage)
+        }
+        .onAppear {
+            if(userData.isEmpty) {
+                profileBadgeCount = 1
             }
+        }
     }
 }
 

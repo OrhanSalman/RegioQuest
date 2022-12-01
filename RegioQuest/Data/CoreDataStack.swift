@@ -30,8 +30,11 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+/// Added local store for development purposes
+/// 
 import CoreData
 import CloudKit
+import SwiftUI
 
 final class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
@@ -48,6 +51,7 @@ final class CoreDataStack: ObservableObject {
         persistentContainer.viewContext
     }
     
+    // MARK: Containers on the Cloud
     var privatePersistentStore: NSPersistentStore {
         guard let privateStore = _privatePersistentStore else {
             fatalError("Private store is not set")
@@ -60,20 +64,29 @@ final class CoreDataStack: ObservableObject {
         }
         return publicStore
     }
-    
     var sharedPersistentStore: NSPersistentStore {
         guard let sharedStore = _sharedPersistentStore else {
             fatalError("Shared store is not set")
         }
         return sharedStore
     }
+    var localPersistentStore: NSPersistentStore {
+        guard let localStore = _localPersistentStore else {
+            fatalError("Local store is not set")
+        }
+        return localStore
+    }
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "RegioQuest")
         
-        guard let storeDescription = container.persistentStoreDescriptions.first else {
-            fatalError("Unable to get persistentStoreDescription")
-        }
+        // MARK: Load Container configurations (we have two, Default (for Cloud) and Local
+
+         guard let storeDescription = container.persistentStoreDescriptions.first else {
+             fatalError("Unable to get persistentStoreDescription")
+         }
+        
+        // MARK: Setting the Containers
         let privateStoreURL = storeDescription.url?.deletingLastPathComponent()
         storeDescription.url = privateStoreURL?.appendingPathComponent("private.sqlite")
         
@@ -85,6 +98,14 @@ final class CoreDataStack: ObservableObject {
             fatalError("Copying the private store description returned an unexpected value.")
         }
         sharedStoreDescription.url = sharedStoreURL
+        
+        // MARK: Setting the local container
+        let localStoreURL = storeDescription.url?.deletingLastPathComponent()
+        storeDescription.url = localStoreURL?.appendingPathComponent("local.sqlite")
+        guard let localStoreDescription = storeDescription.copy() as? NSPersistentStoreDescription else {
+            fatalError("Copying the local store description returned an unexpected value.")
+        }
+        localStoreDescription.url = localStoreURL
         
         guard let containerIdentifier = storeDescription.cloudKitContainerOptions?.containerIdentifier else {
             fatalError("Unable to get containerIdentifier")
@@ -117,23 +138,65 @@ final class CoreDataStack: ObservableObject {
         
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
+//        try? context.setQueryGenerationFrom(.current)
+        
         do {
             try container.viewContext.setQueryGenerationFrom(.current)
         } catch {
             fatalError("Failed to pin viewContext to the current generation: \(error)")
         }
+        // Additionally added
+        do {
+             try container.initializeCloudKitSchema()
+          } catch {
+            print("ERROR \(error)")
+         }
         
         return container
     }()
     
+    
+    // self, initialize
     private var _privatePersistentStore: NSPersistentStore?
     private var _sharedPersistentStore: NSPersistentStore?
     private var _publicPersistentStore: NSPersistentStore?
+    private var _localPersistentStore: NSPersistentStore?
     private init() {}
 }
 
 // MARK: Save or delete from Core Data
 extension CoreDataStack {
+    
+    static func fetchUsers(viewContext: NSManagedObjectContext) -> [User] {
+        
+        let request: NSFetchRequest<User> = User.fetchRequest()
+        let sectionSortDescriptor = NSSortDescriptor(key: "id", ascending: false)
+        let sortDescriptors = [sectionSortDescriptor]
+        request.sortDescriptors = sortDescriptors
+        
+        guard let result = try? viewContext.fetch(request) else {
+            return []
+        }
+        return result
+    }
+    
+    static func fetchQueryUserById(viewContext: NSManagedObjectContext, id: UUID, predicate: NSPredicate? = nil) -> [User] {
+        let request: NSFetchRequest<User> = User.fetchRequest()
+        
+        let projectpredicate = NSPredicate(format: "id == %@", id.uuidString)
+        
+        if let addtionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [projectpredicate, addtionalPredicate])
+        } else {
+            request.predicate = projectpredicate
+        }
+        
+        guard let result = try? viewContext.fetch(request) else {
+            return []
+        }
+        return result
+    }
+    
     func save() {
         if context.hasChanges {
             do {
@@ -151,6 +214,8 @@ extension CoreDataStack {
         }
     }
 }
+
+
 
 /*
 // ToDo: Later

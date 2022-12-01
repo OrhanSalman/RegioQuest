@@ -15,16 +15,17 @@ struct RegioQuestApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
-            LaunchScreen()
+            MainView()
 //                .environment(\.managedObjectContext, persistanceController.container.viewContext)
+//                .environment(\.managedObjectContext, cloudPersistanceController.context)
                 .environment(\.managedObjectContext, cloudPersistanceController.context)
-                
-            
+
             // Implementieren: Hinweis darauf, dass es sich um einen Prototypen
             // zur Veranschaulichung handelt, und gewisse Teile der App nicht die Gegenwart repräsentieren können, insbesondere die Quests. Die Quests sind inszeniert, daher führt auch kein Abschluss einer zu einem wirklichen Ausbildungsplatz
         }
     }
+    
+
 }
 
 /*

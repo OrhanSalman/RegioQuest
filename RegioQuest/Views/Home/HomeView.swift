@@ -16,17 +16,24 @@ import MapKit
  }
  */
 struct HomeView: View {
-    
-    //    @EnvironmentObject var model: Job
-    
-//    @EnvironmentObject var modelDataObject: ModelData
     @EnvironmentObject var locationManager: LocationManager
+    
     @State private var showFilterScreen = false
     @State private var showFiltered = false
+    
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+    animation: .default) var user: FetchedResults<User>
     
     var body: some View {
         NavigationView {
             
+            VStack {
+                ForEach(user) { data in
+                    Text(data.name ?? "Leer")
+                }
+            }
             List {
                 Text("Empfohlene Jobs für dich")
                 Text("Neueste Storys")

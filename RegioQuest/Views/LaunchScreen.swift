@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 15.11.22.
 //
-
+/*
 import SwiftUI
 import UIKit
 
@@ -12,15 +12,16 @@ struct LaunchScreen: View {
     
     // Local device core data store
     @Environment(\.managedObjectContext) private var viewContext
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
-        animation: .default)
-    
-    private var user: FetchedResults<User>
-    
+        animation: .default) private var user: FetchedResults<User>
+ 
     @State var text: String = "Suche Profil..."
     @State var isAnimating: Bool = true
     @State private var navigate = false
+    
+ //   @State var mach: LocalViewModel
     
     var body: some View {
         
@@ -33,84 +34,119 @@ struct LaunchScreen: View {
                     .padding(50)
                     .frame(alignment: .top)
                 
+ 
+                /*
                 ActivityIndicator(isAnimating: $isAnimating, textLabel: $text)
                     .onAppear {
-                        if (user.isEmpty) {
+                        while(user.isEmpty) {
+                            self.text = "Leer"
+                        }
+                        if(!user.isEmpty) {
+                            self.text = "Hab gefunden!"
+                            
+                        }
+                    }
+*/
+                
+                ActivityIndicator(isAnimating: $isAnimating, textLabel: $text)
+                /*
+                    .onAppear {
+                        
+                        if (user.isEmpty) {     // if it's the first time the user has installed this app
                             self.text = "Erstelle neuen default User..."
-                            delay()
                             guard createDefaultUser() == "Success" else {
                                 self.text = "Default User Fehler"
-                                delay()
-                                print("__________________________________________")
                                 fatalError(text)
                             }
                             self.text = "Du bist startklar ✅"
-                            delay()
-                            self.isAnimating = false
+//                            self.isAnimating = false
                             self.navigate = true
                         }
                         else {
-                            delay()
                             self.text = "Profildaten laden..."
                             for my in user {
                                 let a = " eingeloggt ✅"
-                                delay()
                                 let b = my.name ?? ""
                                 self.text = b + a
-                                self.isAnimating = false
+                                self.text = a
+//                                self.isAnimating = false
                                 self.navigate = true
-                                
-                                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                                print("Anzahl gefundener User auf diesem Gerät: \(user.count)")
-                                print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
                             }
                         }
+                        
                     }
-                    .fullScreenCover(isPresented: $navigate) {
-                        // Things to do when the screen is dismissed
-                    } content: {
-                        MainView()
-                    }
+                 */
+//                    .fullScreenCover(isPresented: $navigate, content: MainView.init)
+                
+            }
+        }
+        .onAppear {
+                Task {
+                    await onboarding()
+                }
+        }
+    }
+    
+    private func myUserFunc() async -> FetchedResults<User> {
+        viewContext.performAndWait {
+            @FetchRequest(
+                sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+                animation: .default) var users: FetchedResults<User>
+
+            return users
+        }
+    }
+    
+    
+    func onboarding() async {
+        if (self.user.isEmpty) {     // if it's the first time the user has installed this app
+            self.text = "Kein Profil gefunden. Erstelle neuen default User..."
+            guard createDefaultUser() == "Success" else {
+                self.text = "Default User Fehler"
+                fatalError(text)
+            }
+            self.text = "Du bist startklar ✅"
+//                            self.isAnimating = false
+            self.navigate = true
+        }
+        else {
+            self.text = "Profildaten laden..."
+            for my in self.user {
+                let a = " eingeloggt ✅"
+                let b = my.name ?? ""
+                self.text = b + a
+                self.text = a
+//                                self.isAnimating = false
+                self.navigate = true
             }
         }
     }
     
-    private func delay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            
-        }
-    }
-    
+
     private func createDefaultUser() -> String {
         let returnStatus: String
+
+//        let localUser = UserLocalData(context: viewContext)
+        let cloudUser = User(context: viewContext)
         
-        let user = User(context: viewContext)
-        
+        let userId = UUID()
         let randomNum = Int.random(in: 10000...99999)
         let jobArr = ["Deo-Tester", "Glückskeks-Autor", "Notenblatt-Umblätterer", "Kaugummi-Entferner", "Eincreme-Assistent", "Wasserrutschen-Tester", "Puppendoktor", "Golfballtaucher", "Professioneller Ansteher", "Möbil-Probesitzer", "Lebende Schaufensterpuppe", "Lego-Modellbauer", "Pferde-Zahnarzt", "Schlussmacher"]
         let userRegion = ["Ducktales", "Bikini Bottom", "Springfield", "Gotham City", "Smaugs Einöde", "Hogwarts", "Narnia", ]
         
-        let userId = UUID()
         
-        user.id = userId
-        user.email = ""
-        user.name = "User-" + String(randomNum)
-        user.education = "Irgend'ne Schule"
-//        user.image = UIImage(systemName: "turtlerock")?.jpegData(compressionQuality: 0.8)
-        user.job = jobArr.randomElement()
-        user.region = userRegion.randomElement()
-        user.shareWithFriends = true
-        let userPreferences = UserPreferences(context: viewContext)
+//        localUser.id = userId
+//        localUser.latitude = 0.0
+//        localUser.longitude = 0.0
+
+        cloudUser.id = userId
+        cloudUser.email = ""
+        cloudUser.name = "User-" + String(randomNum)
+        cloudUser.education = "Irgend'ne Schule"
+        cloudUser.job = jobArr.randomElement()
+        cloudUser.region = userRegion.randomElement()
+        cloudUser.shareWithFriends = true
         
-        userPreferences.userId = userId
-        userPreferences.contactMail = false
-        userPreferences.contactPhone = false
-        userPreferences.meYou = true
-        userPreferences.youMe = false
-        
-        user.userPreferences = userPreferences
-        
-        // 1. Save local
         do {
             try viewContext.save()
             returnStatus = "Success"
@@ -121,9 +157,6 @@ struct LaunchScreen: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        
-        // 2. Save in Cloud
-
     }
 }
 
@@ -176,3 +209,18 @@ struct Success: View {
             .foregroundColor(.green)
     }
 }
+
+
+extension UUID: RawRepresentable {
+    public var rawValue: String {
+        self.uuidString
+    }
+
+    public typealias RawValue = String
+
+    public init?(rawValue: RawValue) {
+        self.init(uuidString: rawValue)
+    }
+}
+
+*/
