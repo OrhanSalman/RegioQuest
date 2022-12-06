@@ -11,7 +11,7 @@ import SwiftUI
 struct CustomTabView: View {
     
     @State var tabIndex = 0
-    @StateObject var inMemoryDataStorage = InMemoryDataStorage()
+//    @StateObject var inMemoryDataStorage = InMemoryDataStorage()
     
     var body: some View {
         NavigationStack {
@@ -27,17 +27,17 @@ struct CustomTabView: View {
             VStack {
                 if tabIndex == 0 {
                     ProfilView()
-                        .environmentObject(inMemoryDataStorage)
+//                        .environmentObject(inMemoryDataStorage)
 //                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
                 else if tabIndex == 1 {
                     GiftView()
-                        .environmentObject(inMemoryDataStorage)
+//                        .environmentObject(inMemoryDataStorage)
 //                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
                 else if tabIndex == 2 {
                     OptionsView()
-                        .environmentObject(inMemoryDataStorage)
+//                        .environmentObject(inMemoryDataStorage)
 //                        .environment(\.managedObjectContext, coreDataStack.context)
                 }
             }

@@ -20,10 +20,11 @@ final class CloudKitService {
     }
 }
 
-@MainActor final class OnboardingViewModel: ObservableObject {
+@MainActor final class AccountServiceViewModel: ObservableObject {
     private static let logger = Logger(
-        subsystem: "com.aaplab.fastbot",
-        category: String(describing: OnboardingViewModel.self)
+//        subsystem: "com.aaplab.fastbot",
+        subsystem: "de.salman.RegioQuest",
+        category: String(describing: AccountServiceViewModel.self)
     )
 
     @Published private(set) var accountStatus: CKAccountStatus = .couldNotDetermine
@@ -39,8 +40,9 @@ final class CloudKitService {
     }
 }
 
-struct OnboardingView: View {
-    @StateObject private var viewModel = OnboardingViewModel()
+
+struct AccountServiceView: View {
+    @StateObject private var viewModel = AccountServiceViewModel()
     @State private var accountStatusAlertShown = false
     @Environment(\.dismiss) var dismiss
 
@@ -63,8 +65,9 @@ struct OnboardingView: View {
 
 
 
-struct OnboardingView_Previews: PreviewProvider {
+struct AccountServiceView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        AccountServiceView()
     }
 }
+

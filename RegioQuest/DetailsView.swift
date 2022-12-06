@@ -16,29 +16,99 @@ struct DetailsView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
         animation: .default) var user: FetchedResults<User>
     
+    @Namespace var topID
+    @Namespace var bottomID
+    
     var body: some View {
         
-        VStack {
-            if(user.isEmpty) {
-                Text("IsEmpty!!!")
-            }
-            else {
-                ForEach(user) { data in
-                    VStack {
-                        Text(data.id?.uuidString ?? "Null")
-                        Text(data.name ?? "Null")
-                        Text(data.region ?? "Null")
+        
+        
+        ScrollViewReader { proxy in
+            ScrollView {
+                ZStack {
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            withAnimation {
+                                proxy.scrollTo(topID)
+                            }
+                        } label: {
+                            Image(systemName: "chevron.down.square")
+                                .imageScale(.large)
+                                .symbolRenderingMode(.hierarchical)
+                                .scaleEffect(1.4, anchor: .center)
+                                .padding(.trailing, 20)
+                        }
+                        .id(bottomID)
+                        
+                        
+                        
+                    }
+                }
+                
+                VStack {
+                    ForEach(1..<100) { i in
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .fill(Color(.systemBackground))
+                            .overlay {
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: "info.square.fill")
+                                            .imageScale(.medium)
+                                            .symbolRenderingMode(.monochrome)
+                                            .foregroundColor(.indigo)
+                                    }
+                                    Divider()
+                                        .opacity(1)
+                                    Spacer()
+                                    HStack {
+                                        Text("@Storyteller")
+                                            .font(.subheadline.weight(.thin))
+                                        Spacer()
+                                    }
+                                }
+                                .padding()
+                            }
+                            .frame(height: 200)
+                            .clipped()
+                            .shadow(color: .primary.opacity(0.5), radius: 14, x: 0, y: 14)
+                            .padding(20)
+                    }
+                }
+
+                
+                
+                ZStack {
+                    HStack {
+                        Spacer()
+                        Button {
+                            withAnimation {
+                                proxy.scrollTo(bottomID)
+                            }
+                        } label: {
+                            Image(systemName: "chevron.up.square")
+                                .imageScale(.large)
+                                .symbolRenderingMode(.hierarchical)
+                                .scaleEffect(1.4, anchor: .center)
+                                .padding(.trailing, 20)
+                        }
+                        .id(topID)
                     }
                 }
             }
+            .scrollDisabled(true)
+
+            
         }
-        .onAppear {
-            Task {
-                await processFetchUser()
-            }
-        }
+        
+
     }
     
+    func color(fraction: Double) -> Color {
+        Color(red: fraction, green: 1 - fraction, blue: 0.5)
+    }
     
     private func myUserFunc() async -> FetchedResults<User> {
         viewContext.performAndWait {

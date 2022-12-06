@@ -9,22 +9,45 @@ import SwiftUI
 
 
 struct NoAccountView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
+    
+    // Account variables
+    @StateObject private var viewModel = AccountServiceViewModel()
+    @State private var accountStatusAlertShown = false
+    @Environment(\.dismiss) var dismiss
+    
     @State var text = "Profil anlegen"
     @State var count: Int = 0
+    
     var body: some View {
-        Text("Erstelle dir ein default Profil, damit Du die vollen Funktionalitäten nutzen kannst. Du kannst deine Daten jederzeit ändern, oder sie komplett löschen.")
+        Text("Lege ein anonymisiertes Profil in deiner iCloud an, um deine Fortschritte speichern zu können. Entscheide selbst, ob Du dein Profil mit anderen teilen möchtest, oder nicht. Du kannst jederzeit Änderungen vornehmen oder dein Profil löschen.")
+        
         Button(text) {
-            var create: Bool = createDefaultUser()
-            if(create) {
-                text = "Jawohl!"
-            }
-            else {
-                count = count + 1
-                text = "\(count) Fehler. Try again."
+            
+            if viewModel.accountStatus != .available {
+                accountStatusAlertShown = true
+                print("GESCHEITERT")
+            } else {
+//                dismiss()
+                // Create profil if user has a valid iCloud setting
+                let create: Bool = createDefaultUser()
+                if(create) {
+                    text = "Profil angelegt"
+                }
+                else {
+                    count = count + 1
+                    text = "\(count) Fehler. Try again."
+                }
             }
         }
         .offset(y: UIScreen.main.bounds.height * 0.4)
+        .alert("Du brauchst eine Verbindung zu iCloud. Bitte prüfe deine lokalen Account Einstellungen.", isPresented: $accountStatusAlertShown) {
+            Button("Ok!", role: .cancel, action: {})
+        }
+        .task {
+            await viewModel.fetchAccountStatus()
+        }
         
     }
     private func createDefaultUser() -> Bool {

@@ -12,18 +12,17 @@ struct MainView: View {
     
     
     @StateObject var locationManager = LocationManager()
-    @ObservedObject var inMemoryDataStorage = InMemoryDataStorage()
+//    @StateObject var inMemoryDataStorage = InMemoryDataStorage()
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+    animation: .default) var user: FetchedResults<User>
+
     @State var homeBadgeCount = 0
     @State var branchenBadgeCount = 0
     @State var profileBadgeCount = 0
     @State var scoreBadgeCount = 0
-    
-    @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(
-    sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
-    animation: .default) var userData: FetchedResults<User>
-
     
     var body: some View {
 
@@ -34,10 +33,10 @@ struct MainView: View {
                 }
 //                .environment(\.managedObjectContext, coreDataStack.context)
                 .environmentObject(locationManager)
-                .environmentObject(inMemoryDataStorage)
+//                .environmentObject(inMemoryDataStorage)
                 .badge(homeBadgeCount)
                 .onTapGesture {
-                    homeBadgeCount = 0
+                    self.homeBadgeCount = 0
                 }
             BranchenView()
                 .tabItem {
@@ -45,10 +44,10 @@ struct MainView: View {
                 }
 //                .environment(\.managedObjectContext, coreDataStack.context)
                 .environmentObject(locationManager)
-                .environmentObject(inMemoryDataStorage)
+//                .environmentObject(inMemoryDataStorage)
                 .badge(branchenBadgeCount)
                 .onTapGesture {
-                    branchenBadgeCount = 0
+                    self.branchenBadgeCount = 0
                 }
             ScoreView()
                 .tabItem {
@@ -56,23 +55,23 @@ struct MainView: View {
                 }
                 .badge(scoreBadgeCount)
                 .onTapGesture {
-                    scoreBadgeCount = 0
+                    self.scoreBadgeCount = 0
                 }
 //                .environment(\.managedObjectContext, coreDataStack.context)
-                .environmentObject(inMemoryDataStorage)
+//                .environmentObject(inMemoryDataStorage)
             CustomTabView()
                 .tabItem {
                     Label("Profil", systemImage: "person.crop.circle.fill")
                 }
                 .badge(profileBadgeCount)
                 .onTapGesture {
-                    profileBadgeCount = 0
+                    self.profileBadgeCount = 0
                 }
-                .environmentObject(inMemoryDataStorage)
+//                .environmentObject(inMemoryDataStorage)
         }
         .onAppear {
-            if(userData.isEmpty) {
-                profileBadgeCount = 1
+            if(user.isEmpty) {
+                self.profileBadgeCount = 1
             }
         }
     }

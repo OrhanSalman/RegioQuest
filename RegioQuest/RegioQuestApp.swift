@@ -9,35 +9,70 @@ import SwiftUI
 
 @main
 struct RegioQuestApp: App {
-//    let persistenceController = PersistenceController.shared
-//    let persistanceController = PersistenceController.shared
+    
     let cloudPersistanceController = CoreDataStack.shared
+    @AppStorage("userOnboarded") var userOnboarded: Bool = false
     
     var body: some Scene {
         WindowGroup {
-            MainView()
-//                .environment(\.managedObjectContext, persistanceController.container.viewContext)
-//                .environment(\.managedObjectContext, cloudPersistanceController.context)
-                .environment(\.managedObjectContext, cloudPersistanceController.context)
-
-            // Implementieren: Hinweis darauf, dass es sich um einen Prototypen
-            // zur Veranschaulichung handelt, und gewisse Teile der App nicht die Gegenwart repräsentieren können, insbesondere die Quests. Die Quests sind inszeniert, daher führt auch kein Abschluss einer zu einem wirklichen Ausbildungsplatz
+            if userOnboarded {
+                MainView()
+                    .environment(\.managedObjectContext, cloudPersistanceController.context)
+            }
+            else {
+                VStack {
+                    HStack {
+                        Text("Regionale Karriere App")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .padding(.vertical, 76)
+                    .padding(.horizontal, 24)
+                    .foregroundColor(.white)
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text("Universitätsstadt Siegen")
+                            .font(.system(size: 22, weight: .medium, design: .default))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .clipped()
+                        Text("Lerne deine Stadt und ihre vielfältigen Angebote an Karrieremöglichkeiten besser kennen")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundColor(.white)
+                        
+                        ZStack(alignment: .topLeading) {
+                            Button(action: {
+                                userOnboarded = true
+                            }){
+                                Text("Loslegen")
+                                    .font(.system(.body, design: .serif))
+                                    .padding(.vertical, 12)
+                                    .padding(.horizontal, 15)
+                                    .background(.green)
+                                    .foregroundColor(.black)
+                                    .mask { RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    }
+                                    .padding(.top, 8)
+                                    .shadow(color: .white.opacity(1.0), radius: 20, x: 0, y: 5)
+                            }
+                            
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    Spacer()
+                        .frame(height: 70)
+                        .clipped()
+                }
+                .background {
+                    Image("siegenufer")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .clipped()
+                .edgesIgnoringSafeArea(.all)
+            }
         }
     }
-    
-
 }
-
-/*
-struct StoryboardViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some UIViewController {
-        let storyboard = UIStoryboard(name: "Login", bundle: Bundle.main)
-        let controller = storyboard.instantiateViewController(identifier: "Main")
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
-}
-*/

@@ -10,10 +10,13 @@ import SwiftUI
 struct ProfilView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
+    
     @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
     animation: .default) var user: FetchedResults<User>
     
+    
+//    @EnvironmentObject var a: InMemoryDataStorage
     @State var badgeCount = 0
     
     var body: some View {
@@ -84,18 +87,6 @@ struct ProfilView: View {
             }
         }
     }
-    
-    /*
-    private func checkIfUserHasProfile() async -> Bool {
-        if(user.isEmpty) {
-            NoAccountView()
-            return false
-        }
-        else {
-            return true
-        }
-    }
-    */
 }
 
 struct ProfilView_Previews: PreviewProvider {

@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 struct SkillView: View {
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ User.id, ascending: true)], animation: .default) private var user: FetchedResults<User>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ User.id, ascending: true)], animation: .default) private var skill: FetchedResults<Skill>
     
     @State private var current = 67.0
     @State private var minValue = 0.0
@@ -18,7 +18,7 @@ struct SkillView: View {
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: true) {
-            ForEach(user) { data in
+            ForEach(skill) { data in
                 Gauge(value: current, in: minValue...maxValue) {
                     Text("BPM")
                 } currentValueLabel: {
