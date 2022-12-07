@@ -15,6 +15,7 @@ struct RegioQuestApp: App {
     
     var body: some Scene {
         WindowGroup {
+            
             if userOnboarded {
                 MainView()
                     .environment(\.managedObjectContext, cloudPersistanceController.context)

@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 16.11.22.
 //
-
+/*
 import SwiftUI
 import CloudKit
 import CoreData
@@ -146,3 +146,4 @@ struct DetailsView_Previews: PreviewProvider {
     }
 }
 
+*/

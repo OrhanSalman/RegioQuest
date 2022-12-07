@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         mapTypeSelector.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
     }
     
-    @objc func selectionChanged(){
+    @objc func selectionChanged() {
         switch mapTypeSelector.selectedSegmentIndex{
         case 0:
             mapView.preferredConfiguration = MKStandardMapConfiguration(elevationStyle: .realistic)
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func configureMapArea(){
+    func configureMapArea() {
         let region = MKCoordinateRegion(center: .init(latitude: 50.874886, longitude: 8.025132), span: .init(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.setRegion(region, animated: true)
         mapView.isZoomEnabled = true

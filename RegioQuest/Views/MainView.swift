@@ -10,30 +10,28 @@ import SwiftUI
 
 struct MainView: View {
     
-    
     @StateObject var locationManager = LocationManager()
-//    @StateObject var inMemoryDataStorage = InMemoryDataStorage()
+
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
     animation: .default) var user: FetchedResults<User>
-
+    
     @State var homeBadgeCount = 0
     @State var branchenBadgeCount = 0
     @State var profileBadgeCount = 0
     @State var scoreBadgeCount = 0
     
     var body: some View {
-
-        TabView {
+        
+        TabView() {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
-//                .environment(\.managedObjectContext, coreDataStack.context)
                 .environmentObject(locationManager)
-//                .environmentObject(inMemoryDataStorage)
+                .environmentObject(ViewRouter())
                 .badge(homeBadgeCount)
                 .onTapGesture {
                     self.homeBadgeCount = 0
@@ -42,9 +40,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Berufe", systemImage: "map.circle.fill")
                 }
-//                .environment(\.managedObjectContext, coreDataStack.context)
                 .environmentObject(locationManager)
-//                .environmentObject(inMemoryDataStorage)
                 .badge(branchenBadgeCount)
                 .onTapGesture {
                     self.branchenBadgeCount = 0
@@ -77,4 +73,9 @@ struct MainView: View {
     }
 }
 
-
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+            .environmentObject(ViewRouter())
+    }
+}
