@@ -11,7 +11,6 @@ import SwiftUI
 struct MainView: View {
     
     @StateObject var locationManager = LocationManager()
-
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
@@ -33,7 +32,7 @@ struct MainView: View {
                 .environmentObject(locationManager)
                 .environmentObject(ViewRouter())
                 .badge(homeBadgeCount)
-                .onTapGesture {
+                .onSubmit {
                     self.homeBadgeCount = 0
                 }
             BranchenView()
@@ -42,7 +41,7 @@ struct MainView: View {
                 }
                 .environmentObject(locationManager)
                 .badge(branchenBadgeCount)
-                .onTapGesture {
+                .onSubmit {
                     self.branchenBadgeCount = 0
                 }
             ScoreView()
@@ -50,7 +49,7 @@ struct MainView: View {
                     Label("Score", systemImage: "bell.fill")
                 }
                 .badge(scoreBadgeCount)
-                .onTapGesture {
+                .onSubmit {
                     self.scoreBadgeCount = 0
                 }
 //                .environment(\.managedObjectContext, coreDataStack.context)
