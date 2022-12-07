@@ -60,7 +60,7 @@ struct MainView: View {
                     Label("Profil", systemImage: "person.crop.circle.fill")
                 }
                 .badge(profileBadgeCount)
-                .onTapGesture {
+                .onSubmit {
                     self.profileBadgeCount = 0
                 }
 //                .environmentObject(inMemoryDataStorage)
