@@ -27,8 +27,9 @@ struct HomeView: View {
             HomePage()
         case .OrteView:
             OrteView()
+        case .AboutThisApp:
+            AboutThisApp()
         }
-        
     }
 }
 
@@ -37,93 +38,123 @@ struct HomePage: View {
     @State var sheet: Bool = false
     
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                VStack {
+        NavigationStack {
+            ScrollViewReader { proxy in
+                ScrollView {
                     VStack {
-                        /*
-                         Image("siegen")
-                         .renderingMode(.original)
-                         .resizable()
-                         .aspectRatio(contentMode: .fill)
-                         .frame(maxWidth: .infinity)
-                         */
                         VStack {
-                            AboutThisApp()
-                            VStack(spacing: 25) {
-                                HStack(spacing: 25) {
-                                    Button(action: {
-                                        withAnimation {
-                                            viewRouter.currentView = .OrteView
+                            /*
+                             Image("siegen")
+                             .renderingMode(.original)
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .frame(maxWidth: .infinity)
+                             */
+                            VStack {
+                                //                            AboutThisApp()
+                                VStack(spacing: 25) {
+                                    HStack(spacing: 25) {
+                                        Button(action: {
+                                            withAnimation {
+                                                viewRouter.currentView = .OrteView
+                                            }
+                                        }, label: {
+                                            Image(systemName: "map")
+                                                .imageScale(.medium)
+                                                .symbolRenderingMode(.monochrome)
+                                                .foregroundColor(.pink.opacity(0.75))
+                                                .scaleEffect(1.2, anchor: .center)
+                                        })
+                                        Button(action: {
+                                            
+                                        }, label: {
+                                            Image(systemName: "building.2.crop.circle")
+                                                .imageScale(.medium)
+                                                .symbolRenderingMode(.monochrome)
+                                                .foregroundColor(.pink.opacity(0.75))
+                                                .scaleEffect(1.2, anchor: .center)
+                                        })
+                                        NavigationLink(destination: StoryView()) {
+                                            Image(systemName: "person.wave.2")
+                                                .imageScale(.medium)
+                                                .symbolRenderingMode(.monochrome)
+                                                .foregroundColor(.pink.opacity(0.75))
+                                                .scaleEffect(1.2, anchor: .center)
                                         }
-                                    }, label: {
-                                        Image(systemName: "map")
-                                            .imageScale(.medium)
-                                            .symbolRenderingMode(.monochrome)
-                                            .foregroundColor(.pink.opacity(0.75))
-                                            .scaleEffect(1.2, anchor: .center)
-                                    })
-                                    Button(action: {
+                                        NavigationLink(destination: AboutThisApp()) {
+                                            Image(systemName: "info.square")
+                                                .imageScale(.medium)
+                                                .symbolRenderingMode(.monochrome)
+                                                .foregroundColor(.pink.opacity(0.75))
+                                                .scaleEffect(1.2, anchor: .center)
+                                        }
                                         
-                                    }, label: {
-                                        Image(systemName: "building.2.crop.circle")
-                                            .imageScale(.medium)
-                                            .symbolRenderingMode(.monochrome)
-                                            .foregroundColor(.pink.opacity(0.75))
-                                            .scaleEffect(1.2, anchor: .center)
-                                    })
-                                    Button(action: {
                                         
-                                    }, label: {
-                                        Image(systemName: "person.wave.2")
-                                            .imageScale(.medium)
-                                            .symbolRenderingMode(.monochrome)
-                                            .foregroundColor(.pink.opacity(0.75))
-                                            .scaleEffect(1.2, anchor: .center)
-                                    })
-                                    Button(action: {
                                         
-                                    }, label: {
-                                        Image(systemName: "info.square")
-                                            .imageScale(.medium)
-                                            .symbolRenderingMode(.monochrome)
-                                            .foregroundColor(.pink.opacity(0.75))
-                                            .scaleEffect(1.2, anchor: .center)
-                                    })
+                                        
+                                        /*
+                                         Button(action: {
+                                         withAnimation {
+                                         viewRouter.currentView = .AboutThisApp
+                                         }
+                                         }, label: {
+                                         Image(systemName: "info.square")
+                                         .imageScale(.medium)
+                                         .symbolRenderingMode(.monochrome)
+                                         .foregroundColor(.pink.opacity(0.75))
+                                         .scaleEffect(1.2, anchor: .center)
+                                         })
+                                         */
+                                    }
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .stroke(Color(.quaternaryLabel), lineWidth: 1)
+                                            .scaleEffect(1.4, anchor: .center)
+                                            .shadow(color: .primary.opacity(0.9), radius: 5, x: 0, y: 0)
+                                    }
+                                    Divider()
+                                        .padding(.horizontal, 60)
                                 }
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .stroke(Color(.quaternaryLabel), lineWidth: 1)
-                                        .scaleEffect(1.4, anchor: .center)
-                                        .shadow(color: .primary.opacity(0.9), radius: 5, x: 0, y: 0)
+                                .padding()
+                                VStack {
+                                    Text("Universitätsstadt Siegen")
+                                        .font(.title2.weight(.thin))
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                                            self.sheet.toggle()
+                                        }
                                 }
-                                Divider()
-                                    .padding(.horizontal, 60)
+                                .sheet(isPresented: $sheet) {
+                                    RegionSheet()
+                                }
                             }
-                            .padding()
+                        }
+                        ForEach(1...35, id: \.self) { _ in
+                            Text("Text")
                         }
                     }
-                    VStack {
-                        LinearGradient(gradient: Gradient(colors: [.white, .indigo]), startPoint: .top, endPoint: .bottom)
-                            .frame(height: 300)
-                            .overlay {
-                                Text("Universitätsstadt Siegen")
-                                    .font(.title2.weight(.thin))
-                                    .foregroundColor(.blue)
-                                    .onTapGesture {
-                                        self.sheet.toggle()
-                                    }
-                                Spacer()
-                            }
-                        
-                        
-                    }
-                    .sheet(isPresented: $sheet) {
-                        RegionSheet()
+                    .background {
+                        VStack {
+                            LinearGradient(gradient: Gradient(colors: [.indigo, .black.opacity(0)]), startPoint: .top, endPoint: .bottom)
+                                .rotationEffect(.degrees(0), anchor: .center)
+                                .frame(height: UIScreen.main.bounds.height * 0.5)
+                                .clipped()
+                                .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
+                                .offset(x: 0, y: -100)
+                            Spacer()
+                            LinearGradient(gradient: Gradient(colors: [.indigo, .black.opacity(0)]), startPoint: .bottom, endPoint: .top)
+                                .rotationEffect(.degrees(0), anchor: .center)
+                                .frame(height: UIScreen.main.bounds.height * 0.5)
+                                .clipped()
+                                .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
+                                .offset(x: 0, y: +100)
+                        }
+                        .ignoresSafeArea()
                     }
                 }
             }
         }
+        
     }
 }
 
@@ -193,36 +224,84 @@ struct RegionSheet: View {
         }
     }
 }
-
 struct AboutThisApp: View {
+    
+    @EnvironmentObject var viewRouter: ViewRouter
     var appId = "lacJwWZn5Ek"
+    
     var body: some View {
-        VStack {
-            VStack {
-                YouTubeView(videoId: appId)
-                    .padding()
-                    .frame(height: 300)
-                Text("Erfahre mehr über diese App")
-                    .font(.headline)
-            }
-            .padding()
-        }
-        .frame(maxWidth: .infinity)
-        .clipped()
-        .background {
-            Rectangle()
-                .stroke(Color(.tertiaryLabel), lineWidth: 2)
-                .shadow(color: .primary, radius: 15, x: 0, y: 0)
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    VStack {
+                        YouTubeView(videoId: appId)
+                            .padding()
+                            .frame(height: UIScreen.main.bounds.height * 0.35)
+                        Text("Erfahre mehr über diese App")
+                            .font(.headline)
+                    }
+                    .padding(.bottom)
+                }
+                .frame(maxWidth: .infinity)
                 .clipped()
+                .background {
+                    Rectangle()
+                        .stroke(Color(.tertiaryLabel), lineWidth: 2)
+                        .shadow(color: .primary, radius: 15, x: 0, y: 0)
+                        .clipped()
+                        .padding(.horizontal, 10)
+                        .scaleEffect(1, anchor: .center)
+                }
+                VStack(spacing: 15) {
+                    Text("Spielerisch zum Ausbildungsplatz")
+                        .font(.headline.weight(.bold))
+                        .padding(.bottom)
+                    
+                    HStack {
+                        HStack {
+                            Divider()
+                                .padding(.horizontal, 20)
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("Um was geht es?")
+                                    .font(.footnote.weight(.bold))
+                                Text("Ziel von RegioQuest ist es die nachhaltige Entwicklung eines auf spielerischen und ortsbasierten Ansätzen basierenden Systems, um das Matching von Ausbildungsinhalten und -plätzen zwischen Jugendlichen und Unternehmen zu unterstützen. Dadurch soll die Eingliederung von jungen Menschen in das Erwerbsleben vereinfacht werden. Das System umfasst eine mobile Applikation, welche für jugendliche Nutzerinnen und Nutzer konzipiert ist, sowie eine Webanwendung, welche den Unternehmen Möglichkeiten zur Erstellung von Aufgaben (s.g. Quests) und dadurch die subtile Vermittlung von Ausbildungsangeboten sowie erste Kontaktmöglichkeiten auf eine spielerische Art und Weise bietet. Innerhalb des Entwicklungsprozesses werden alle relevanten Akteure gemeinsam im Sinne des partizipativen Ansatzes an der Fragestellung arbeiten wie der Zugang zum Ausbildungsmarkt in Südwestfalen, als exemplarische Modellregion für ganz Nordrhein-Westfalen, digital gedacht werden kann, um langfristig den Bedarf an Fachkräften in NRW zu sichern.")
+                                    .font(.footnote.weight(.light))
+                                Spacer(minLength: 10)
+                                Text("Gamification")
+                                    .font(.footnote.weight(.bold))
+                                Text("Gamification ist ein Ansatz, bei dem spielerische Designelemente im nicht-spielerischen Kontext verwendet werden. ...")
+                                    .font(.footnote.weight(.light))
+                                Spacer(minLength: 10)
+                                Text("Deine Meinung zählt")
+                                    .font(.footnote.weight(.bold))
+                                Text("Bei dieser RegioQuest App handelt es sich um einen Prototypen, der nicht die finale App repräsentiert. ... Funktionalitäten zeigen ... Interaktionen ... Design ... Daher sind wir auf euer Feedback angewiesen. Was gefällt euch bisher, und was eher weniger? Was möchtet Ihr in der fertigen App haben? Wie soll das Design aussehen? ... Nehmt bitte an der anonymisierten Umfrage teil und helft uns, euch und eure Freunde bei der Suche nach einem Ausbildungsplatz zu helfen.")
+                                    .font(.footnote.weight(.light))
+                            }
+                            Divider()
+                                .padding(20)
+                        }
+                    }
+                    Divider()
+                    Text("👻")
+                        .font(.system(size: 250))
+                        .padding()
+                }
                 .padding(.horizontal, 10)
-                .scaleEffect(1, anchor: .center)
+                .clipped()
+            }
         }
-        VStack(spacing: 5) {
-            Text("Spielerisch zum Ausbildungsplatz")
-                .font(.headline.weight(.thin))
+        /*
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button("An Umfrage teilnehmen") {
+                    print("Pressed")
+                }
+                
+                Link("Mehr",
+                     destination: URL(string: "https://www.uni-siegen.de/start/news/oeffentlichkeit/952848.html")!)
+            }
         }
-        .padding(10)
-        .clipped()
+        */
     }
 }
 struct YouTubeView: UIViewRepresentable {
@@ -237,9 +316,22 @@ struct YouTubeView: UIViewRepresentable {
     }
 }
 
+struct InfoView: View {
+    var body: some View {
+        VStack {
+            Text("Ziel von RegioQuest ist es die nachhaltige Entwicklung eines auf spielerischen und ortsbasierten Ansätzen basierenden Systems, um das Matching von Ausbildungsinhalten und -plätzen zwischen Jugendlichen und Unternehmen zu unterstützen. Dadurch soll die Eingliederung von jungen Menschen in das Erwerbsleben vereinfacht werden. Das System umfasst eine mobile Applikation, welche für jugendliche Nutzerinnen und Nutzer konzipiert ist, sowie eine Webanwendung, welche den Unternehmen Möglichkeiten zur Erstellung von Aufgaben (s.g. Quests) und dadurch die subtile Vermittlung von Ausbildungsangeboten sowie erste Kontaktmöglichkeiten auf eine spielerische Art und Weise bietet. Innerhalb des Entwicklungsprozesses werden alle relevanten Akteure gemeinsam im Sinne des partizipativen Ansatzes an der Fragestellung arbeiten wie der Zugang zum Ausbildungsmarkt in Südwestfalen, als exemplarische Modellregion für ganz Nordrhein-Westfalen, digital gedacht werden kann, um langfristig den Bedarf an Fachkräften in NRW zu sichern.")
+                .fixedSize(horizontal: false, vertical: true)
+                .font(.body.weight(.regular))
+                .padding()
+                .multilineTextAlignment(.leading)
+        }
+    }
+}
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(ViewRouter())
     }
 }
+

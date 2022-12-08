@@ -10,6 +10,7 @@ import SwiftUI
 enum Pages {
     case HomeView
     case OrteView
+    case AboutThisApp
 }
 
 class ViewRouter: ObservableObject {

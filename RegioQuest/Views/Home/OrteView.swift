@@ -18,16 +18,18 @@ struct OrteView: View {
                 .ignoresSafeArea()
             VStack {
                 HStack(alignment: .firstTextBaseline) {
-                    Image(systemName: "chevron.backward.square")
-                        .imageScale(.large)
-                        .symbolRenderingMode(.monochrome)
-                        .scaleEffect(1.5, anchor: .center)
-                        .opacity(0.5)
-                        .onTapGesture {
-                            withAnimation {
-                                viewRouter.currentView = .HomeView
-                            }
+                    Button(action: {
+                        withAnimation {
+                            viewRouter.currentView = .HomeView
                         }
+                    }, label: {
+                        Image(systemName: "chevron.backward.square")
+                            .imageScale(.large)
+                            .symbolRenderingMode(.monochrome)
+                            .scaleEffect(1.5, anchor: .center)
+                            .foregroundColor(.black)
+                            .opacity(0.5)
+                    })
                     Spacer()
                 }
                 .scaleEffect(1, anchor: .center)

@@ -35,7 +35,7 @@ struct RegioQuestApp: App {
                         load = false
                     }
             }
-            else if onboard {
+            else if onboard && !userOnboarded {
                 VStack {
                     HStack {
                         Text("Regionale Karriere App")
