@@ -59,8 +59,8 @@ struct Storyteller: View {
                         VStack {
                             HStack {
                                 HStack(spacing: 10) {
-                                    Text("#1 \(i) |    \(zeit)")
-                                        .font(.subheadline.weight(.thin))
+                                    Text("#\(i) |    \(zeit)")
+                                        .font(.footnote.weight(.thin))
                                 }
                                 Spacer()
                                 Image(systemName: "eye.fill")
