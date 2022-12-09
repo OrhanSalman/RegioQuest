@@ -12,6 +12,7 @@
 		220526C7291E0224001DF063 /* GameEngine.json in Resources */ = {isa = PBXBuildFile; fileRef = 220526C6291E0224001DF063 /* GameEngine.json */; };
 		220526C9291E02B5001DF063 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 220526C8291E02B5001DF063 /* User.json */; };
 		220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC6CE293048B300810E6C /* LocalUserData.swift */; };
+		222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222372F12942C4E400155F1F /* SwiftUIView.swift */; };
 		22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EF9291DCC8800AF8B28 /* QuestView.swift */; };
 		22537EFE291DCE0A00AF8B28 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */; };
 		22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */; };
@@ -24,7 +25,7 @@
 		22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3E293E9CE400AFF219 /* ViewController.swift */; };
 		22A33F44293E9CE400AFF219 /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3F293E9CE400AFF219 /* OverlayViewController.swift */; };
 		22A33F49293EA7D600AFF219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A33F48293EA7D600AFF219 /* Main.storyboard */; };
-		22AAF9EF2941745C0032A7E2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAF9EE2941745C0032A7E2 /* InfoView.swift */; };
+		22AAF9EF2941745C0032A7E2 /* AboutThisAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAF9EE2941745C0032A7E2 /* AboutThisAppView.swift */; };
 		22B2018529401BF7009DD562 /* WunschView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2018429401BF7009DD562 /* WunschView.swift */; };
 		22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32071291CBCC9008DAF17 /* GameEngine.swift */; };
 		22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32075291CBCD7008DAF17 /* ModelData.swift */; };
@@ -33,10 +34,8 @@
 		22B32080291CBD38008DAF17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3207F291CBD38008DAF17 /* HomeView.swift */; };
 		22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32081291CBD55008DAF17 /* LocationManager.swift */; };
 		22B32088291CBD8A008DAF17 /* Job.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B32087291CBD8A008DAF17 /* Job.json */; };
-		22C229C9293F051600C2CE8C /* KarteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C229C8293F051600C2CE8C /* KarteView.swift */; };
 		22C229CB293F053F00C2CE8C /* OrteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C229CA293F053F00C2CE8C /* OrteView.swift */; };
 		22D9EE752936BD6D00225332 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9EE742936BD6D00225332 /* AccountService.swift */; };
-		22D9EE772938224200225332 /* NoAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9EE762938224200225332 /* NoAccountView.swift */; };
 		22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */; };
 		22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */; };
 		22E38FE6291CBA72009D49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE5291CBA72009D49E1 /* Assets.xcassets */; };
@@ -59,6 +58,7 @@
 		220526C6291E0224001DF063 /* GameEngine.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GameEngine.json; sourceTree = "<group>"; };
 		220526C8291E02B5001DF063 /* User.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		220DC6CE293048B300810E6C /* LocalUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserData.swift; sourceTree = "<group>"; };
+		222372F12942C4E400155F1F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		22537EF9291DCC8800AF8B28 /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		22A33F3E293E9CE400AFF219 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		22A33F3F293E9CE400AFF219 /* OverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
 		22A33F48293EA7D600AFF219 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		22AAF9EE2941745C0032A7E2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		22AAF9EE2941745C0032A7E2 /* AboutThisAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutThisAppView.swift; sourceTree = "<group>"; };
 		22B2018429401BF7009DD562 /* WunschView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunschView.swift; sourceTree = "<group>"; };
 		22B32071291CBCC9008DAF17 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		22B32075291CBCD7008DAF17 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
@@ -80,10 +80,8 @@
 		22B3207F291CBD38008DAF17 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		22B32081291CBD55008DAF17 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22B32087291CBD8A008DAF17 /* Job.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Job.json; sourceTree = "<group>"; };
-		22C229C8293F051600C2CE8C /* KarteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarteView.swift; sourceTree = "<group>"; };
 		22C229CA293F053F00C2CE8C /* OrteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrteView.swift; sourceTree = "<group>"; };
 		22D9EE742936BD6D00225332 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
-		22D9EE762938224200225332 /* NoAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAccountView.swift; sourceTree = "<group>"; };
 		22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		22E38FDE291CBA71009D49E1 /* RegioQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegioQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegioQuestApp.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 				22E7F8EA2929954C00726284 /* OptionsView.swift */,
 				22E7F8EC292995C500726284 /* GiftView.swift */,
 				22E7F8EE292995FB00726284 /* ProfilView.swift */,
-				22D9EE762938224200225332 /* NoAccountView.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -201,11 +198,10 @@
 				22B3207D291CBD29008DAF17 /* FilterView.swift */,
 				22B3207F291CBD38008DAF17 /* HomeView.swift */,
 				22EE0E752921F71200D91898 /* StoryView.swift */,
-				22C229C8293F051600C2CE8C /* KarteView.swift */,
 				22C229CA293F053F00C2CE8C /* OrteView.swift */,
 				22B2018429401BF7009DD562 /* WunschView.swift */,
 				22EBDDF42940D5920051F51A /* ViewRouter.swift */,
-				22AAF9EE2941745C0032A7E2 /* InfoView.swift */,
+				22AAF9EE2941745C0032A7E2 /* AboutThisAppView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -291,6 +287,7 @@
 				22E38FE7291CBA72009D49E1 /* Preview Content */,
 				22EE0E702921E5C800D91898 /* Launch Screen.storyboard */,
 				22A1DCDD2924A4CA00712521 /* DetailsView.swift */,
+				222372F12942C4E400155F1F /* SwiftUIView.swift */,
 			);
 			path = RegioQuest;
 			sourceTree = "<group>";
@@ -382,7 +379,6 @@
 			files = (
 				22FA09952923E56100A936AD /* CoreDataStack.swift in Sources */,
 				22A33F42293E9CE400AFF219 /* MarkerDetailViewController.swift in Sources */,
-				22C229C9293F051600C2CE8C /* KarteView.swift in Sources */,
 				22A33F44293E9CE400AFF219 /* OverlayViewController.swift in Sources */,
 				22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */,
 				22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */,
@@ -396,12 +392,11 @@
 				22E7F8EF292995FB00726284 /* ProfilView.swift in Sources */,
 				22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */,
 				22EBDDF52940D5920051F51A /* ViewRouter.swift in Sources */,
-				22AAF9EF2941745C0032A7E2 /* InfoView.swift in Sources */,
+				22AAF9EF2941745C0032A7E2 /* AboutThisAppView.swift in Sources */,
 				22E7F8EB2929954C00726284 /* OptionsView.swift in Sources */,
 				22B32080291CBD38008DAF17 /* HomeView.swift in Sources */,
 				22E7F8ED292995C500726284 /* GiftView.swift in Sources */,
 				22D9EE752936BD6D00225332 /* AccountService.swift in Sources */,
-				22D9EE772938224200225332 /* NoAccountView.swift in Sources */,
 				22537EFE291DCE0A00AF8B28 /* CustomTabView.swift in Sources */,
 				220526C1291DF2EB001DF063 /* MapView.swift in Sources */,
 				22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */,
@@ -411,6 +406,7 @@
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
 				22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */,
 				220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */,
+				222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */,
 				22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */,
 				22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */,
 				22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */,
