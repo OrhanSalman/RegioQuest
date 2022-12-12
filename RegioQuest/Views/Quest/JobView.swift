@@ -11,35 +11,14 @@ import MapKit
 struct JobView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
-//    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var locationManager: LocationManager
     
-//    @State private var showFilterScreen = false
-//    @State private var showFiltered = false
-    
-//    var functions = BranchenView()
-    
-//    var selectedJob: Job
-    
-    
-//   var predicate: UUID
-     var jobRequest: FetchRequest<Job>
+    // Init is required!
+    var jobRequest: FetchRequest<Job>
     init(jobRequest: FetchRequest<Job>) {
         self.jobRequest = jobRequest
     }
-//    var words: FetchedResults<Job>{jobRequest.wrappedValue}
-
-/*
-    init(selectedJob: Job, predicate: UUID, jobRequest: FetchRequest<Job>) {
-        @Environment(\.managedObjectContext) var managedObjectContext
-        self.selectedJob = selectedJob
-//        self.managedObjectContext = managedObjectContext
-        self.jobRequest = jobRequest
-        
-//        self.predicate = predicate
-        self.jobRequest = FetchRequest(entity: Job.entity(), sortDescriptors: [], predicate: NSPredicate(format: "%K == %@", (\Job.id)._kvcKeyPathString!, selectedJob.id! as CVarArg))
-    }
-*/
-
+    
     
     
     var body: some View {
@@ -53,12 +32,23 @@ struct JobView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width)
                     }
-                    
                     VStack {
+                        
                         HStack {
                             Text(data.name ?? "Kein Name")
                             Spacer()
-                            Text("2.7 km")
+                            VStack {
+                                if let location = locationManager.location {
+                                    
+                                    let questLocation: CLLocation = CLLocation(latitude: 50.99092883399603, longitude: 7.954069521589132)
+                                    
+                                    let userLocFromCLL2d: CLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                                    
+                                    let distance = questLocation.distance(from: userLocFromCLL2d) / 1000
+                                    Text(" \(String(format:"%.02f", distance)) km")
+                                        .font(.subheadline.weight(.light))
+                                }
+                            }
                         }
                         VStack(alignment: .leading, spacing: 20) {
                             Divider()
@@ -93,9 +83,10 @@ struct JobView: View {
                     }
                 }
             }
-
+            
         }
     }
+    
     
     
     func stringSeperator(imagePaths: String) -> [String] {

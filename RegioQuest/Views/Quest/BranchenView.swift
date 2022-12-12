@@ -133,7 +133,6 @@ struct BranchenView: View {
             }
         }
         .navigationBarTitle(Text("Branchen"))
-        
     }
     
     func arrAppend() async {
