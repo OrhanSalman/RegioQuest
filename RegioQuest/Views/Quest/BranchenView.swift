@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import MapKit
+/*
 struct Jobs: Hashable, Identifiable {
     
     
@@ -20,6 +21,7 @@ struct Jobs: Hashable, Identifiable {
     static let header2 = Jobs(name: "Kürzlich hinzugefügt", icon: "timer")
     
 }
+*/
 
 struct BranchenView: View {
     
@@ -29,9 +31,10 @@ struct BranchenView: View {
         animation: .default) var jobs: FetchedResults<Job>
     
     
-    let items: [Jobs] = [.header1, .header2]
+//    let items: [Jobs] = [.header1, .header2]
     @State private var lastSeen: Color = .green
     @State private var arr: [String] = []
+    
     var body: some View {
         
         // For tests
@@ -40,78 +43,97 @@ struct BranchenView: View {
          let createJob: Bool = createDefaultJobs()
          }
          */
-        
-        List {
-            DisclosureGroup("\(Image(systemName: "star")) Favoriten", content: {
-                ForEach(jobs) { job in
-                    if job.isFavorite {
-                        HStack {
-                            Text(job.name ?? "No Name found")
-                            Spacer()
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                }
-            })
-            DisclosureGroup("\(Image(systemName: "timer")) Kürzlich hinzugefügt", content: {
-                ForEach(jobs) { job in
-                    if !job.hasUserSeen  {
-                        HStack {
-                            Text(job.name ?? "No Name found")
-                        }
-                        .onTapGesture {
-                            job.hasUserSeen = true
-                        }
-                    }
-                }
-            })
-            DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) Alle", content: {
-                ForEach(jobs) { job in
-                    HStack {
-                        Text(job.name ?? "No Name found")
+        NavigationView {
+            List {
+                DisclosureGroup("\(Image(systemName: "star")) Favoriten", content: {
+                    ForEach(jobs, id: \.self) { job in
                         if job.isFavorite {
-                            Spacer()
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                    .onTapGesture {
-                        job.hasUserSeen = true
-                    }
-                }
-            })
-            DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) Branchen", content: {
-                
-                let uniqueStrings = removeDuplicates(array: arr.sorted())
-                
-                ForEach(uniqueStrings, id: \.self) { branche in
-                    DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) \(branche)", content: {
-                        var filtered = jobs.filter { ($0.branche?.contains(branche))! }
-                        ForEach(filtered) { job in
-                            HStack {
-                                Text(job.name ?? "Keine")
+                            NavigationLink(destination: JobView(jobRequest: FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Job.name, ascending: true)], predicate: NSPredicate(format: "id == %@", job.id! as CVarArg), animation: .default))) {
+                                HStack {
+
+                                }
+                                .frame(maxWidth: .infinity)
+                                .background {
+                                    HStack {
+                                        Text(job.name ?? "No Name found")
+                                        Spacer()
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.yellow)
+                                    }
+                                }
                             }
                         }
+                    }
+                })
 
-                    })
+                DisclosureGroup("\(Image(systemName: "timer")) Kürzlich hinzugefügt", content: {
+                    ForEach(jobs) { job in
+                        if !job.hasUserSeen  {
+                            HStack {
+                                NavigationLink(destination: JobView(jobRequest: FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Job.name, ascending: true)], predicate: NSPredicate(format: "id == %@", job.id! as CVarArg), animation: .default))) {
+                                    Text(job.name ?? "No Name found")
+                                }
+                            }
+                        }
+                    }
+                })
+                DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) Alle", content: {
+                    ForEach(jobs) { job in
+                        NavigationLink(destination: JobView(jobRequest: FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Job.name, ascending: true)], predicate: NSPredicate(format: "id == %@", job.id! as CVarArg), animation: .default))) {
+                            HStack {
+
+                            }
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                HStack {
+                                    Text(job.name ?? "No Name found")
+                                    Spacer()
+                                    if job.isFavorite {
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.yellow)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) Branchen", content: {
+                    
+                    let uniqueStrings = removeDuplicates(array: arr.sorted())
+                    
+                    ForEach(uniqueStrings, id: \.self) { branche in
+                        DisclosureGroup("\(Image(systemName: "rectangle.roundedtop")) \(branche)", content: {
+                            var filtered = jobs.filter { ($0.branche?.contains(branche))!
+                            }
+                            ForEach(filtered) { job in
+                                NavigationLink(destination: JobView(jobRequest: FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Job.name, ascending: true)], predicate: NSPredicate(format: "id == %@", job.id! as CVarArg), animation: .default))) {
+                                    HStack {
+
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .background {
+                                        HStack {
+                                            Text(job.name ?? "Keine")
+                                            Spacer()
+                                            if job.isFavorite {
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(.yellow)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        })
+                    }
+                })
+                .task {
+                    await arrAppend()
                 }
-                
-                
-            })
-            .task {
-                await arrAppend()
             }
-            
-            
-            /*
-             DisclosureGroup("\(Image(systemName: "timer")) Kürzlich hinzufgefügt", content: {
-             ForEach(jobss) { job in
-             Text(job.name ?? "No Name found")
-             }
-             })
-             */
         }
+        .navigationBarTitle(Text("Branchen"))
+        
     }
     
     func arrAppend() async {
@@ -122,22 +144,19 @@ struct BranchenView: View {
     }
     
     func removeDuplicates(array: [String]) -> [String] {
-        //Create an empty Set to track unique items
+        
         var set = Set<String>()
         let result = array.filter {
             guard !set.contains($0) else {
-                //If the set already contains this object, return false
-                //so we skip it
+
                 return false
             }
-            //Add this item to the set since it will now be in the array
             set.insert($0)
-            //Return true so that filtered array will contain this item.
+
             return true
         }
         return result
     }
-    
 }
 
 /*
@@ -184,8 +203,84 @@ struct BranchenView: View {
  return array
  }
  */
+/*
+struct JobView: View {
+    
+    @EnvironmentObject var locationManager: LocationManager
 
+    var selectedJob: Job
+    
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            Text("Dinge die man markiert erscheinen in Quest Push Notification")
+                VStack {
+                    ScrollView(.horizontal, showsIndicators: true) {
+                        Image("regio")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width)
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Text("Kein Name")
+                            Spacer()
+                            Text("2.7 km")
+                        }
+                        VStack(alignment: .leading, spacing: 20) {
+                            Divider()
+                            Text("Keine Beschreibung")
+                        }
+                        .font(.system(.subheadline, design: .rounded).weight(.thin))
+                        
+                        
+                        Divider()
+                    }
+                    .padding(30)
+                    
+                    VStack(spacing: 10) {
+                        Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.99092883399603, longitude: 7.954069521589132), latitudinalMeters: 6549.32, longitudinalMeters: 6566.81)),
+                            annotationItems: [PlacePin(latitude: 50.9910469, longitude: 7.9565371)],
+                            annotationContent: {
+                            MapMarker(
+                                coordinate: $0.location, tint: nil)
+                            
+                        })
+                        .onTapGesture {
+                            print("asdasd")
+                        }
+                        .allowsHitTesting(false)
+                        .frame(width: UIScreen.main.bounds.width, height: 250)
+                        .clipped()
+                        Divider()
+                        Spacer()
+                    }
+                }
+            }
+            
+        
 
+        .edgesIgnoringSafeArea(.top)
+        
+    }
+    
+    func stringSeperator(imagePaths: String) -> [String] {
+        let seperatedImages = imagePaths.components(separatedBy: ";")
+        return seperatedImages
+    }
+}
+
+struct PlacePin: Identifiable {
+    let id: String
+    let location: CLLocationCoordinate2D
+    
+    init(id: String = UUID().uuidString, latitude: Double, longitude: Double) {
+        self.id = id
+        self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+}
+*/
 
 struct BranchenView_Previews: PreviewProvider {
     static var previews: some View {

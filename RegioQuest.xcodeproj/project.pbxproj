@@ -34,6 +34,7 @@
 		22B32080291CBD38008DAF17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3207F291CBD38008DAF17 /* HomeView.swift */; };
 		22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32081291CBD55008DAF17 /* LocationManager.swift */; };
 		22B32088291CBD8A008DAF17 /* Job.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B32087291CBD8A008DAF17 /* Job.json */; };
+		22B8F9B4294402050075AED1 /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8F9B3294402050075AED1 /* JobView.swift */; };
 		22C229CB293F053F00C2CE8C /* OrteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C229CA293F053F00C2CE8C /* OrteView.swift */; };
 		22D9EE752936BD6D00225332 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9EE742936BD6D00225332 /* AccountService.swift */; };
 		22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */; };
@@ -80,6 +81,7 @@
 		22B3207F291CBD38008DAF17 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		22B32081291CBD55008DAF17 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22B32087291CBD8A008DAF17 /* Job.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Job.json; sourceTree = "<group>"; };
+		22B8F9B3294402050075AED1 /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
 		22C229CA293F053F00C2CE8C /* OrteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrteView.swift; sourceTree = "<group>"; };
 		22D9EE742936BD6D00225332 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				22537EF9291DCC8800AF8B28 /* QuestView.swift */,
 				2255003D29213ED3002B6D72 /* BranchenView.swift */,
+				22B8F9B3294402050075AED1 /* JobView.swift */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */,
 				22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */,
 				22B2018529401BF7009DD562 /* WunschView.swift in Sources */,
+				22B8F9B4294402050075AED1 /* JobView.swift in Sources */,
 				22EE0E762921F71200D91898 /* StoryView.swift in Sources */,
 				22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */,
 				22E7F8E92929951700726284 /* SkillView.swift in Sources */,
