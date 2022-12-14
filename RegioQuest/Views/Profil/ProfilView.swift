@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ProfilView: View {
-    
+    // ToDo: @Appstorage wenn user namen ändert. Erstmalig in CreateDefaultUser.
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
     animation: .default) var user: FetchedResults<User>
     
+    @AppStorage("userId") var userId: UUID?
+    @AppStorage("userName") var userName: String?
     @State var badgeCount = 0
     
     var body: some View {
@@ -21,7 +24,7 @@ struct ProfilView: View {
             NoAccountView()
         }
         else {
-            ForEach(user) { data in
+            ForEach(user) { data in         // Should not be for-each, only 1 user per device
                 List {
                     VStack {
                         Section() {
@@ -81,17 +84,22 @@ struct ProfilView: View {
                             }))
                     }
                 }
+                .onAppear {
+                    if (userId != data.id || userName != data.name) {
+                        self.userId = data.id
+                        self.userName = data.name
+                    }
+                }
             }
         }
     }
 }
 
 struct NoAccountView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     
     // Account variables
-    @StateObject private var viewModel = AccountServiceViewModel()
+    @StateObject private var viewModel = AccountServiceModel()
     @State private var accountStatusAlertShown = false
     @Environment(\.dismiss) var dismiss
     
@@ -100,6 +108,7 @@ struct NoAccountView: View {
     
     var body: some View {
         Text("Lege ein anonymisiertes Profil in deiner iCloud an, um deine Fortschritte speichern zu können. Entscheide selbst, ob Du dein Profil mit anderen teilen möchtest, oder nicht. Du kannst jederzeit Änderungen vornehmen oder dein Profil löschen.")
+            .padding()
         
         Button(text) {
             
@@ -126,25 +135,30 @@ struct NoAccountView: View {
         .task {
             await viewModel.fetchAccountStatus()
         }
-        
     }
     private func createDefaultUser() -> Bool {
-        var status: Bool = false
-
-//        let localUser = UserLocalData(context: viewContext)
-        let cloudUser = User(context: viewContext)
+        @AppStorage("userId") var userIdAppStorage: UUID?
+        @AppStorage("userName") var userNameAppStorage: String?
         
-        let userId = UUID()
+        var status: Bool = false
         let randomNum = Int.random(in: 10000...99999)
         let jobArr = ["Deo-Tester", "Glückskeks-Autor", "Notenblatt-Umblätterer", "Kaugummi-Entferner", "Eincreme-Assistent", "Wasserrutschen-Tester", "Puppendoktor", "Golfballtaucher", "Professioneller Ansteher", "Möbil-Probesitzer", "Lebende Schaufensterpuppe", "Lego-Modellbauer", "Pferde-Zahnarzt", "Schlussmacher"]
         let userRegion = ["Ducktales", "Bikini Bottom", "Springfield", "Gotham City", "Smaugs Einöde", "Hogwarts", "Narnia"]
+        let userId = UUID()
+        let userName = "User-" + String(randomNum)
+        
+        let cloudUser = User(context: viewContext)
         cloudUser.id = userId
-        cloudUser.email = ""
-        cloudUser.name = "User-" + String(randomNum)
+        cloudUser.email = "Keine Email"
+        cloudUser.name = userName
         cloudUser.education = "Irgend'ne Schule"
         cloudUser.job = jobArr.randomElement()
         cloudUser.region = userRegion.randomElement()
         cloudUser.shareWithFriends = true
+        
+        // Appstorage
+        userIdAppStorage = userId
+        userNameAppStorage = userName
         
         do {
             try viewContext.save()
@@ -162,5 +176,17 @@ struct NoAccountView: View {
 struct ProfilView_Previews: PreviewProvider {
     static var previews: some View {
         ProfilView()
+    }
+}
+
+extension UUID: RawRepresentable {
+    public var rawValue: String {
+        self.uuidString
+    }
+
+    public typealias RawValue = String
+
+    public init?(rawValue: RawValue) {
+        self.init(uuidString: rawValue)
     }
 }

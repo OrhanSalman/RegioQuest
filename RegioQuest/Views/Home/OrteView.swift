@@ -27,7 +27,7 @@ struct OrteView: View {
                             .imageScale(.large)
                             .symbolRenderingMode(.monochrome)
                             .scaleEffect(1.5, anchor: .center)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                             .opacity(0.5)
                     })
                     Spacer()
@@ -35,8 +35,8 @@ struct OrteView: View {
                 .scaleEffect(1, anchor: .center)
                 Spacer()
             }
-            .padding(25)
-            .padding(.vertical, 25)
+            .padding(20)
+            .padding(.vertical, 20)
             .ignoresSafeArea()
         }
     }

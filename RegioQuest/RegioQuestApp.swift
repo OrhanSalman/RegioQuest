@@ -10,7 +10,9 @@ import SwiftUI
 @main
 struct RegioQuestApp: App {
     
-    let cloudPersistanceController = CoreDataStack.shared
+    let cloudPersistanceController = CoreDataStack.shared.context
+    
+    
     @AppStorage("userOnboarded") var userOnboarded: Bool = false
     @State private var load: Bool = false
     @State private var onboard: Bool = true
@@ -30,7 +32,7 @@ struct RegioQuestApp: App {
             
             if userOnboarded {
                 MainView()
-                    .environment(\.managedObjectContext, cloudPersistanceController.context)
+                    .environment(\.managedObjectContext, cloudPersistanceController)
                     .onAppear {
                         load = false
                     }

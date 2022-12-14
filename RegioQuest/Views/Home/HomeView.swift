@@ -81,7 +81,6 @@ struct HomePage: View {
                                 .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
                                 .offset(x: 0, y: +100)
                         }
-                        
                     }
                 }
             }
