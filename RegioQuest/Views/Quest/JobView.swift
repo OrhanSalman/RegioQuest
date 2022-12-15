@@ -60,7 +60,7 @@ struct JobView: View {
                                     let userLocFromCLL2d: CLLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
                                     
                                     let distance = questLocation.distance(from: userLocFromCLL2d) / 1000
-                                    Text(" \(String(format:"%.02f", distance)) km")
+                                    Text("ca. \(String(format:"%.02f", distance)) km")
                                         .font(.subheadline.weight(.light))
                                         .onAppear {
                                             self.calculateDistanceProgress = false

@@ -9,14 +9,10 @@ import SwiftUI
 import CloudKit
 
 struct ProfilView: View {
-    // ToDo: @Appstorage wenn user namen ändert. Erstmalig in CreateDefaultUser.
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
     animation: .default) var user: FetchedResults<User>
-    
-    @AppStorage("userId") var userId: UUID?
-    @AppStorage("userName") var userName: String?
     @State var badgeCount = 0
     
     var body: some View {
@@ -74,7 +70,7 @@ struct ProfilView: View {
                             Text("Quote")
                         }
                     }
-                    
+
                     Section(header: Text("Präferenzen")) {
                         Toggle("Profil mit Freunden teilen", isOn: Binding<Bool>(
                             get: { data.shareWithFriends },
@@ -82,12 +78,6 @@ struct ProfilView: View {
                                 data.shareWithFriends = $0
                                 try? self.managedObjectContext.save()
                             }))
-                    }
-                }
-                .onAppear {
-                    if (userId != data.id || userName != data.name) {
-                        self.userId = data.id
-                        self.userName = data.name
                     }
                 }
             }
@@ -137,9 +127,6 @@ struct NoAccountView: View {
         }
     }
     private func createDefaultUser() -> Bool {
-        @AppStorage("userId") var userIdAppStorage: UUID?
-        @AppStorage("userName") var userNameAppStorage: String?
-        
         var status: Bool = false
         let randomNum = Int.random(in: 10000...99999)
         let jobArr = ["Deo-Tester", "Glückskeks-Autor", "Notenblatt-Umblätterer", "Kaugummi-Entferner", "Eincreme-Assistent", "Wasserrutschen-Tester", "Puppendoktor", "Golfballtaucher", "Professioneller Ansteher", "Möbil-Probesitzer", "Lebende Schaufensterpuppe", "Lego-Modellbauer", "Pferde-Zahnarzt", "Schlussmacher"]
@@ -155,10 +142,6 @@ struct NoAccountView: View {
         cloudUser.job = jobArr.randomElement()
         cloudUser.region = userRegion.randomElement()
         cloudUser.shareWithFriends = true
-        
-        // Appstorage
-        userIdAppStorage = userId
-        userNameAppStorage = userName
         
         do {
             try viewContext.save()

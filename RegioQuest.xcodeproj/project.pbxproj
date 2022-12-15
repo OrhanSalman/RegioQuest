@@ -22,7 +22,6 @@
 		2271350C29481D9A0053BB50 /* JobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271350B29481D9A0053BB50 /* JobViewModel.swift */; };
 		2271350E29481E9A0053BB50 /* JobListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271350D29481E9A0053BB50 /* JobListing.swift */; };
 		227EBE62294787B500258890 /* CloudKitStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */; };
-		22A1DCDE2924A4CA00712521 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A1DCDD2924A4CA00712521 /* DetailsView.swift */; };
 		22A33F41293E9CE400AFF219 /* LookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3C293E9CE400AFF219 /* LookViewController.swift */; };
 		22A33F42293E9CE400AFF219 /* MarkerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3D293E9CE400AFF219 /* MarkerDetailViewController.swift */; };
 		22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3E293E9CE400AFF219 /* ViewController.swift */; };
@@ -73,7 +72,6 @@
 		2271350B29481D9A0053BB50 /* JobViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobViewModel.swift; sourceTree = "<group>"; };
 		2271350D29481E9A0053BB50 /* JobListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListing.swift; sourceTree = "<group>"; };
 		227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitStoryViewModel.swift; sourceTree = "<group>"; };
-		22A1DCDD2924A4CA00712521 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		22A33F3C293E9CE400AFF219 /* LookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookViewController.swift; sourceTree = "<group>"; };
 		22A33F3D293E9CE400AFF219 /* MarkerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerDetailViewController.swift; sourceTree = "<group>"; };
 		22A33F3E293E9CE400AFF219 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 				22E38FE5291CBA72009D49E1 /* Assets.xcassets */,
 				22E38FE7291CBA72009D49E1 /* Preview Content */,
 				22EE0E702921E5C800D91898 /* Launch Screen.storyboard */,
-				22A1DCDD2924A4CA00712521 /* DetailsView.swift */,
 				222372F12942C4E400155F1F /* SwiftUIView.swift */,
 			);
 			path = RegioQuest;
@@ -429,7 +426,6 @@
 				22B3207E291CBD29008DAF17 /* FilterView.swift in Sources */,
 				227EBE62294787B500258890 /* CloudKitStoryViewModel.swift in Sources */,
 				2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */,
-				22A1DCDE2924A4CA00712521 /* DetailsView.swift in Sources */,
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
 				22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */,
 				220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */,

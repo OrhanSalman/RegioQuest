@@ -49,6 +49,12 @@ extension CloudKitService {
 }
 
 extension CloudKitService {
+    func delete(_ record: CKRecord) async throws {
+        try await CKContainer.default().publicCloudDatabase.deleteRecord(withID: record.recordID)
+    }
+}
+
+extension CloudKitService {
     func fetchStoryRecords() async throws -> [ModelStory] {
         let predicate = NSPredicate(
             format: "\(StoryRecordKeys.timestamp.rawValue) <= %@", Date.now as NSDate
@@ -68,7 +74,7 @@ extension CloudKitService {
 }
 
 extension CloudKitService {
-    func fetchMyStoryRecords(in userName: String) async throws -> [ModelStory] {
+    func fetchMyStoryRecords(in userName: String) async throws -> [ModelStory] {        // Should be done with user fetchUserRecordID
         let predicate = NSPredicate(
             format: "userName == %@", userName as NSString
         )

@@ -17,29 +17,45 @@ struct StoryView: View {
     @State private var addStory: Bool = false
     @StateObject private var vm = FetchStoryModel()
     @State private var presentStory: Bool = false
-    @AppStorage("userName") var userNameForOwnOrNotFilter: String?
+    @State private var isAddStoryDisabled: Bool = false
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+        animation: .default) var user: FetchedResults<User>
     
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 
                 if vm.allStories.isEmpty {
-                    Text("Lade Daten")
-                        .onAppear {
-                            Task {
-                                await vm.fetch()
-                            }
-                        }
+                    Text("Keine Stories gefunden. Sei der Erste!")
+                    //
                 }
                 else {
                     switch self.selectedFilter {
                     case .all:
-                        ShowStoryView(dataset: vm.allStories)
+                        ShowStoryView(dataset: vm.allStories, isDeleteEnabled: false)
+                            .onDisappear {
+                                Task {
+                                    await vm.fetch()
+                                }
+                            }
                     case .friends:
                         Text("Not implemented yet")
+                            .onDisappear {
+                                Task {
+                                    await vm.fetch()
+                                }
+                            }
                     case .own:
-                        ShowStoryView(dataset: vm.allStories.filter({ ($0.userName.contains(userNameForOwnOrNotFilter!))
-                        }))
+                        ShowStoryView(dataset: vm.allStories.filter({ ($0.userName.contains(user[0].name ?? ""))
+                        }), isDeleteEnabled: true)
+                        .onDisappear {
+                            Task {
+                                await vm.fetch()
+                            }
+                        }
                     }
                 }
             }
@@ -49,6 +65,14 @@ struct StoryView: View {
             await vm.fetch()
         }
         .task {
+            
+            if (user.isEmpty) {
+                isAddStoryDisabled = true
+            }
+            else if (!user.isEmpty) {
+                isAddStoryDisabled = false
+            }
+            
             await vm.fetch()
         }
         /*
@@ -57,22 +81,6 @@ struct StoryView: View {
          })
          */
         .toolbar {
-            /*
-             ToolbarItem(placement: .navigationBarTrailing, content: {
-             Menu("Filter") {
-             Picker("Filter", selection: $selectedFilter) {
-             Text("Alle").tag(Filter.all)
-             Text("Freunde").tag(Filter.friends)
-             Text("Eigene").tag(Filter.own)
-             }
-             }
-             })
-             */
-            /*
-             ToolbarItem(placement: .navigationBarTrailing) {
-             EditButton()
-             }
-             */
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack {
                     Menu {
@@ -85,7 +93,7 @@ struct StoryView: View {
                     } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                     }
-                    
+                    .disabled(isAddStoryDisabled)
                     
                     Button(action: {
                         Task {
@@ -99,9 +107,8 @@ struct StoryView: View {
                         AddStoryView()
                     }, label: {
                         Label("Filter", systemImage: "plus")
-                    })
+                    }).disabled(isAddStoryDisabled)
                 }
-                
             }
             /*
              ToolbarItem(placement: .navigationBarTrailing) {
@@ -117,11 +124,13 @@ struct StoryView: View {
 }
 
 struct AddStoryView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+        animation: .default) var user: FetchedResults<User>
+    
     @StateObject private var vm = CreateStoryModel()
     @Environment(\.dismiss) var dismiss
-    
-    @AppStorage("userId") var userId: UUID?
-    @AppStorage("userName") var userName: String?
     
     var body: some View {
         NavigationView {
@@ -138,7 +147,7 @@ struct AddStoryView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Speichern", action: {
                     Task {
-                        vm.story.userName = userName ?? "Kein Username"
+                        vm.story.userName = user[0].name ?? "Kein Username"
                         await vm.save()
                         dismiss()
                     }
@@ -163,10 +172,11 @@ struct DetailsStoryView: View {
 }
 
 struct ShowStoryView: View {
-    @StateObject private var vm = FetchStoryModel()
+    @StateObject private var vm = DeleteStoryModel()
     @State private var presentStory: Bool = false
     @State private var showDetailScreen: Bool = false
     @State var dataset: [ModelStory]
+    @State var isDeleteEnabled: Bool
     
     var body: some View {
         if dataset.isEmpty {
@@ -174,7 +184,7 @@ struct ShowStoryView: View {
         }
         else {
             ForEach(dataset, id: \.self) { data in
-                withAnimation {
+//                withAnimation {
                     VStack {
                         RoundedRectangle(cornerRadius: 20, style: .continuous)
                             .fill(Color(.systemBackground))
@@ -229,15 +239,47 @@ struct ShowStoryView: View {
                             .padding(20)
                         
                     }
+                    .deleteDisabled(isDeleteEnabled)
                     .transition(.scale)
+                /*
                     .onTapGesture {
                         presentStory.toggle()
                     }
+                 */
                     .sheet(isPresented: $presentStory, content: {
                         StorytellerSheet()
                     })
-                }
+                /*
+                    .contextMenu {
+                        Group {
+                            Button("Bearbeiten", action: {
+                                
+                                print("\(data.description)")
+                            })
+                            Button("Löschen", action: {
+                                // Remove from CloudKit
+                                sendToDelete(atOffsets: data)
+                                // Remove from dataset
+                                
+                            })
+                        }
+                    }
+                 */
             }
+            
+            /*
+             .onDelete { indexSet in
+             for index in indexSet {
+             sendToDelete(atOffsets: dataset[index])
+             }
+             }
+             */
+        }
+    }
+    
+    func sendToDelete(atOffsets: ModelStory) {
+        Task {
+            await vm.deleteSelectedStory(atOffsets: atOffsets)
         }
     }
 }
@@ -253,5 +295,15 @@ struct StorytellerSheet: View {
 struct StoryView_Previews: PreviewProvider {
     static var previews: some View {
         StoryView()
+    }
+}
+
+// To check an optional string if it's empty
+extension Optional where Wrapped == String {
+    var nilIfEmpty: String? {
+        guard let strongSelf = self else {
+            return nil
+        }
+        return strongSelf.isEmpty ? nil : strongSelf
     }
 }

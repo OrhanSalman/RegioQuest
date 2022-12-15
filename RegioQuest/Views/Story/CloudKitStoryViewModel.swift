@@ -6,6 +6,7 @@
 //
 import Foundation
 import OSLog
+import SwiftUI
 
 @MainActor final class CreateStoryModel: ObservableObject {
     private static let logger = Logger(
@@ -47,6 +48,8 @@ import OSLog
 
     private let cloudKitService = CloudKitService()
 
+//    @AppStorage("userName") var userNameForOwnOrNotFilter: String?
+    
     func fetch() async {
         isLoading = true
 
@@ -58,6 +61,49 @@ import OSLog
 
         isLoading = false
     }
+    /*
+    func fetchMyStories() async {
+        isLoading = true
+
+        do {
+            allStories = try await cloudKitService.fetchMyStoryRecords(in: userNameForOwnOrNotFilter ?? "")
+        } catch {
+            Self.logger.error("\(error.localizedDescription, privacy: .public)")
+        }
+
+        isLoading = false
+    }
+     */
 }
 
 
+@MainActor final class DeleteStoryModel: ObservableObject {
+    private static let logger = Logger(
+        subsystem: "de.salman.RegioQuest",
+        category: String(describing: DeleteStoryModel.self)
+    )
+
+    /*
+    @Published var story: ModelStory = .init(
+        userName: "",
+        title: "",
+        description: "",
+        timestamp: Date.now
+    )
+    */
+    @Published private(set) var isDeleting = false
+    
+    private let cloudKitService = CloudKitService()
+    
+    func deleteSelectedStory(atOffsets: ModelStory) async {
+        isDeleting = true
+        
+        do {
+            try await cloudKitService.delete(atOffsets.record)
+        } catch {
+            Self.logger.error("\(error.localizedDescription, privacy: .public)")
+        }
+        
+        isDeleting = false
+    }
+}
