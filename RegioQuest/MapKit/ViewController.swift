@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         self.mapView.setRegion(region, animated: true)
     }
     
-    func configureSegmentedControl(){
+    func configureSegmentedControl() {
         mapTypeSelector.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
     }
     
