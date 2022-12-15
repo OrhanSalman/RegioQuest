@@ -16,7 +16,7 @@
 /// instructional purposes related to programming, coding, application development,
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
+/// or sale is expressly withheld.l
 ///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
@@ -31,22 +31,29 @@
 /// THE SOFTWARE.
 
 /// Added local store for development purposes
-/// 
+///
+
 import CoreData
 import CloudKit
 import SwiftUI
+
+/*
+    Explanation's:
+    https://developer.apple.com/documentation/coredata/mirroring_a_core_data_store_with_cloudkit/syncing_a_core_data_store_with_cloudkit
+    https://developer.apple.com/documentation/coredata/mirroring_a_core_data_store_with_cloudkit/setting_up_core_data_with_cloudkit
+ */
 
 final class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
     
     var ckContainer: CKContainer {
         let storeDescription = persistentContainer.persistentStoreDescriptions.first
+
         guard let identifier = storeDescription?.cloudKitContainerOptions?.containerIdentifier else {
             fatalError("Unable to get container identifier")
         }
         return CKContainer(identifier: identifier)
     }
-    
     var context: NSManagedObjectContext {
         persistentContainer.viewContext
     }
@@ -70,21 +77,19 @@ final class CoreDataStack: ObservableObject {
         }
         return sharedStore
     }
-    var localPersistentStore: NSPersistentStore {
-        guard let localStore = _localPersistentStore else {
-            fatalError("Local store is not set")
-        }
-        return localStore
-    }
     
+    
+    // CloudKit section
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "RegioQuest")
         
         // MARK: Load Container configurations (we have two, Default (for Cloud) and Local
-
-         guard let storeDescription = container.persistentStoreDescriptions.first else {
+        guard let storeDescription = container.persistentStoreDescriptions.first else {
              fatalError("Unable to get persistentStoreDescription")
          }
+        storeDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        storeDescription.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+//        storeDescription.cloudKitContainerOptions?.databaseScope = .public
         
         // MARK: Setting the Containers
         let privateStoreURL = storeDescription.url?.deletingLastPathComponent()
@@ -98,14 +103,6 @@ final class CoreDataStack: ObservableObject {
             fatalError("Copying the private store description returned an unexpected value.")
         }
         sharedStoreDescription.url = sharedStoreURL
-        
-        // MARK: Setting the local container
-        let localStoreURL = storeDescription.url?.deletingLastPathComponent()
-        storeDescription.url = localStoreURL?.appendingPathComponent("local.sqlite")
-        guard let localStoreDescription = storeDescription.copy() as? NSPersistentStoreDescription else {
-            fatalError("Copying the local store description returned an unexpected value.")
-        }
-        localStoreDescription.url = localStoreURL
         
         guard let containerIdentifier = storeDescription.cloudKitContainerOptions?.containerIdentifier else {
             fatalError("Unable to get containerIdentifier")
@@ -160,7 +157,6 @@ final class CoreDataStack: ObservableObject {
     private var _privatePersistentStore: NSPersistentStore?
     private var _sharedPersistentStore: NSPersistentStore?
     private var _publicPersistentStore: NSPersistentStore?
-    private var _localPersistentStore: NSPersistentStore?
     private init() {}
 }
 
@@ -245,14 +241,14 @@ extension CoreDataStack {
         return false
     }
     
-    func getShare(_ destination: Destination) -> CKShare? {
-        guard isShared(object: destination) else { return nil }
-        guard let shareDictionary = try? persistentContainer.fetchShares(matching: [destination.objectID]),
-              let share = shareDictionary[destination.objectID] else {
+    func getShare(_ story: Story) -> CKShare? {
+        guard isShared(object: story) else { return nil }
+        guard let shareDictionary = try? persistentContainer.fetchShares(matching: [story.objectID]),
+              let share = shareDictionary[story.objectID] else {
             print("Unable to get CKShare")
             return nil
         }
-        share[CKShare.SystemFieldKey.title] = destination.caption
+        share[CKShare.SystemFieldKey.title] = story.title
         return share
     }
     

@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 10.11.22.
 //
-
+/*
 import SwiftUI
 import MapKit
 
@@ -14,13 +14,8 @@ struct QuestView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Job.id, ascending: true)],
-        animation: .default)
-    private var jobs: FetchedResults<Job>
-    private let stack = CoreDataStack.shared
+        animation: .default)  var jobs: FetchedResults<Job>
     
-    //    @EnvironmentObject var model: Job
-    
-//    @EnvironmentObject var modelDataObject: ModelData
     @EnvironmentObject var locationManager: LocationManager
     @State private var showFilterScreen = false
     @State private var showFiltered = false
@@ -50,7 +45,7 @@ struct QuestView: View {
             GeometryReader { gr in
                 ScrollView(.horizontal, showsIndicators: true) {
                     HStack(alignment: .top, spacing: 0) {
-                        ForEach(jobs, id: \.self) { data in
+                        ForEach(jobs) { data in
                             GeometryReader { geometry in
                                 LinearGradient(gradient: Gradient(colors: [Color(.sRGB, red: 30/255, green: 30/255, blue: 30/255), .white.opacity(0.5), .black]), startPoint: .top, endPoint: .bottom)
                                 .clipped()
@@ -137,7 +132,7 @@ struct ColorMode {
 struct QuestView_Previews: PreviewProvider {
     static var previews: some View {
         QuestView()
- //           .environmentObject(ModelData())
             .environmentObject(LocationManager())
     }
 }
+*/

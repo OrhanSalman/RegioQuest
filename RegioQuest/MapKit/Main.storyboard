@@ -175,6 +175,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="s0d-ra-aZl" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2YR-by-xdI">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>

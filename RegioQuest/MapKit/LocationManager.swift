@@ -15,6 +15,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
     // Start region to Siegen
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.87489, longitude: 8.02513), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
+//    @Published var location: CLLocationCoordinate2D?
     @Published var location: CLLocationCoordinate2D?
     var locationManager: CLLocationManager?
     

@@ -6,15 +6,57 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct OrteView: View {
+    
+    @EnvironmentObject var viewRouter: ViewRouter
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            StoryboardView()
+                .ignoresSafeArea()
+            VStack {
+                HStack(alignment: .firstTextBaseline) {
+                    Button(action: {
+                        withAnimation {
+                            viewRouter.currentView = .HomeView
+                        }
+                    }, label: {
+                        Image(systemName: "chevron.backward.square")
+                            .imageScale(.large)
+                            .symbolRenderingMode(.monochrome)
+                            .scaleEffect(1.5, anchor: .center)
+                            .foregroundColor(.primary)
+                            .opacity(0.5)
+                    })
+                    Spacer()
+                }
+                .scaleEffect(1, anchor: .center)
+                Spacer()
+            }
+            .padding(20)
+            .padding(.vertical, 20)
+            .ignoresSafeArea()
+        }
     }
 }
+
+struct StoryboardView: UIViewControllerRepresentable {
+    func makeUIViewController(context content: Context) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let controller = storyboard.instantiateViewController(withIdentifier: "Main")
+        return controller
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        
+    }
+}
+
 
 struct OrteView_Previews: PreviewProvider {
     static var previews: some View {
         OrteView()
+            .environmentObject(ViewRouter())
     }
 }

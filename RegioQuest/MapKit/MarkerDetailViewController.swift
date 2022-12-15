@@ -14,7 +14,7 @@ class MarkerDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let selectedItem{
+        if let selectedItem {
             titleLabel.text = selectedItem.name ?? ""
             contentLabel.text = selectedItem.placemark.title ?? ""
         }
@@ -23,7 +23,7 @@ class MarkerDetailViewController: UIViewController {
         
     }
     
-    @objc func buttonTapped(){
+    @objc func buttonTapped() {
         if let selectedItem{
             selectedItem.openInMaps()
         }

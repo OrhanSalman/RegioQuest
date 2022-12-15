@@ -14,7 +14,7 @@ class OverlayViewController: UIViewController {
         
         configureMapArea()
         
-        if let location = locationManager.location{
+        if let location = locationManager.location {
             lookForLatestLocation(location: location)
         }
         
@@ -22,14 +22,14 @@ class OverlayViewController: UIViewController {
         
     }
     
-    func configureMapArea(){
+    func configureMapArea() {
         let region = MKCoordinateRegion(center: .init(latitude: 39.925533, longitude: 32.866287), span: .init(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.setRegion(region, animated: true)
         mapView.isZoomEnabled = true
         
     }
     
-    func lookForLatestLocation(location: CLLocation){
+    func lookForLatestLocation(location: CLLocation) {
         
         self.mapView.showsUserLocation = true
         let region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.005, longitudeDelta: 0.005))
@@ -37,12 +37,12 @@ class OverlayViewController: UIViewController {
         self.mapView.setRegion(region, animated: true)
     }
     
-    func addOverlays(){
+    func addOverlays() {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "Market"
         let search = MKLocalSearch(request: request)
         search.start { response, error in
-            if let error = error as? MKError{
+            if let error = error as? MKError {
                 print(error.localizedDescription)
             } else if let response{
                 
@@ -64,7 +64,7 @@ class OverlayViewController: UIViewController {
     }
 }
 
-extension OverlayViewController: MKMapViewDelegate{
+extension OverlayViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKCircleRenderer(overlay: overlay)
