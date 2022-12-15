@@ -249,7 +249,6 @@ struct ShowStoryView: View {
                     .sheet(isPresented: $presentStory, content: {
                         StorytellerSheet()
                     })
-                /*
                     .contextMenu {
                         Group {
                             Button("Bearbeiten", action: {
@@ -264,7 +263,6 @@ struct ShowStoryView: View {
                             })
                         }
                     }
-                 */
             }
             
             /*

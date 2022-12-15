@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         mapView.isZoomEnabled = true
     }
     /*
-    func searchPlace(){
+    func searchPlace() {
         mapView.removeAnnotations(foundAnnotations)
         foundAnnotations.removeAll()
         foundLocations.removeAll()

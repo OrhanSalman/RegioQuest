@@ -7,18 +7,19 @@
 import Foundation
 import OSLog
 import SwiftUI
+import CloudKit
 
 @MainActor final class CreateStoryModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "de.salman.RegioQuest",
         category: String(describing: CreateStoryModel.self)
     )
-    
     @Published var story: ModelStory = .init(
         userName: "",
         title: "",
         description: "",
-        timestamp: Date.now
+        timestamp: Date.now,
+        associatedRecord: CKRecord(recordType: "Story")
     )
     @Published private(set) var isSaving = false
     
@@ -99,7 +100,7 @@ import SwiftUI
         isDeleting = true
         
         do {
-            try await cloudKitService.delete(atOffsets.record)
+            try await cloudKitService.delete(atOffsets.associatedRecord)
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }

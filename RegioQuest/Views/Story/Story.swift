@@ -13,6 +13,7 @@ struct ModelStory: Hashable {
     var title: String
     var description: String
     var timestamp: Date
+    let associatedRecord: CKRecord
 }
 
 enum StoryRecordKeys: String {
@@ -41,8 +42,9 @@ extension ModelStory {
             let title = record[StoryRecordKeys.title.rawValue] as? String,
             let userName = record[StoryRecordKeys.userName.rawValue] as? String,
             let description = record[StoryRecordKeys.description.rawValue] as? String,
-            let timestamp = record[StoryRecordKeys.timestamp.rawValue] as? Date
+            let timestamp = record[StoryRecordKeys.timestamp.rawValue] as? Date,
+            let associatedRecord = record as? CKRecord
         else { return nil }
-        self = .init(userName: userName, title: title, description: description, timestamp: timestamp)
+        self = .init(userName: userName, title: title, description: description, timestamp: timestamp, associatedRecord: associatedRecord)
     }
 }

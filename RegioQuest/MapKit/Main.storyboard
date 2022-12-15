@@ -81,7 +81,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1vU-1E-Grw">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
-                                <standardMapConfiguration key="preferredConfiguration" elevationStyle="realistic"/>
+                                <standardMapConfiguration key="preferredConfiguration" elevationStyle="realistic" showsTraffic="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="IuY-xs-j1H" id="Hn2-GW-5dq"/>
                                 </connections>
