@@ -22,7 +22,6 @@ struct StoryView: View {
     @State private var presentStory: Bool = false
     @State private var isAddStoryDisabled: Bool = false
     @State private var accountID: CKRecord.ID?
-//    @State private var accountIDFromView: String?
     @State var activate: Bool = false
     
     @FetchRequest(
@@ -31,62 +30,31 @@ struct StoryView: View {
     
     var body: some View {
         NavigationStack {
-            ForEach(vm.allStories, id: \.self) { a in
-                VStack {
-                    Text(a.title)
-                }
-
-                    .padding(30)
-            }
-        }
-        .task {
-            Task {
-                iCloudUserIDAsync { (recordID: CKRecord.ID?, error: NSError?) in
-                    if let userID = recordID {
-                        print("received iCloudID \(userID)")
-                        accountID = userID
-                        print("ACCOUNTID: \(self.accountID)")
-                        callMyFunction()
-                    } else {
-                        print("Fetched iCloudID was nil")
-                    }
-                }
-            }
-            // We call the above function here and "await it via the value activate"
-            
-        }
-        
-        /*
-        NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 
-                if vm.allStories.isEmpty {
-                    Text("Keine Stories gefunden. Sei der Erste!")
-                    //
-                }
-                else {
-                    switch self.selectedFilter {
-                    case .all:
-                        ShowStoryView(dataset: vm.allStories, isDeleteEnabled: true)
-                            .onDisappear {
-                                Task {
-                                    await vm.fetch()
-                                }
+                switch self.selectedFilter {
+                case .all:
+                    if vm.allStories.isEmpty {
+                        Text("Keine Stories gefunden. Sei der Erste!")
+                            .padding(20)
+                    }
+                    else {
+                        ShowStoryView(dataset: vm.allStories, isDeleteDisabled: true)
+                            .task {
+                                await whichToFetch()
                             }
-                    case .friends:
-                        Text("Not implemented yet")
-                            .onDisappear {
-                                Task {
-                                    await vm.fetch()
-                                }
-                            }
-                    case .own:
-                        ShowStoryView(dataset: vm.allStories.filter({ ($0.userName.contains(user[0].name ?? ""))
-                        }), isDeleteEnabled: false)
-                        .onDisappear {
-                            Task {
-                                await vm.fetch()
-                            }
+                    }
+                case .friends:
+                    Text("Not implemented yet")
+                case .own:
+                    if vm.allStories.isEmpty {
+                        Text("Du hast noch keine Story veröffentlicht.")
+                            .padding(20)
+                    }
+                    else {
+                        ShowStoryView(dataset: vm.allStories, isDeleteDisabled: false)
+                        .task {
+                            await whichToFetch()
                         }
                     }
                 }
@@ -94,8 +62,8 @@ struct StoryView: View {
         }
         .redacted(reason: vm.isLoading ? .placeholder : [])
         .refreshable {
-            await vm.fetch()
-        }
+            await whichToFetch()
+              }
         .task {
             if (user.isEmpty) {
                 isAddStoryDisabled = true
@@ -103,14 +71,8 @@ struct StoryView: View {
             else if (!user.isEmpty) {
                 isAddStoryDisabled = false
             }
-            
-            await vm.fetch()
+            await whichToFetch()
         }
-        /*
-         .sheet(isPresented: $addStory, content: {
-         AddStoryView()
-         })
-         */
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack {
@@ -128,7 +90,7 @@ struct StoryView: View {
                     
                     Button(action: {
                         Task {
-                            await vm.fetch()
+                            await whichToFetch()
                         }
                     }, label: {
                         Image(systemName: "arrow.clockwise")
@@ -141,19 +103,34 @@ struct StoryView: View {
                     }).disabled(isAddStoryDisabled)
                 }
             }
-            /*
-             ToolbarItem(placement: .navigationBarTrailing) {
-             NavigationLink(destination: {
-             AddStoryView()
-             }, label: {
-             Label("Filter", systemImage: "plus")
-             })
-             }
-             */
         }
-         */
     }
-    func callMyFunction() {
+    func whichToFetch() async {
+        if selectedFilter == .all {
+            await vm.fetch()
+        }
+        else if selectedFilter == .own {
+            Task {
+                iCloudUserIDAsync { (recordID: CKRecord.ID?, error: NSError?) in
+                    if let userID = recordID {
+                        print("received iCloudID \(userID)")
+                        accountID = userID
+                        print("ACCOUNTID: \(self.accountID)")
+                        callMyStoriesFunction()
+                    } else {
+                        print("Fetched iCloudID was nil")
+                    }
+                }
+            }
+        }
+        else if selectedFilter == .friends {
+            print("Friends not implemented")
+        }
+        else {
+            print("Error in selected Filter")
+        }
+    }
+    func callMyStoriesFunction() {
         Task {
             print("ACTIVATE: \(activate)")
             print("ACTIVATED_ID: \(accountID)")
@@ -240,7 +217,7 @@ struct ShowStoryView: View {
     @State private var presentStory: Bool = false
     @State private var showDetailScreen: Bool = false
     @State var dataset: [ModelStory]
-    @State var isDeleteEnabled: Bool
+    @State var isDeleteDisabled: Bool
     
     var body: some View {
         if dataset.isEmpty {
@@ -303,7 +280,7 @@ struct ShowStoryView: View {
                             .padding(20)
                         
                     }
-                    .deleteDisabled(isDeleteEnabled)
+                    .deleteDisabled(isDeleteDisabled)
                     .transition(.scale)
                 /*
                     .onTapGesture {
@@ -330,7 +307,7 @@ struct ShowStoryView: View {
                                 Label("Löschen", systemImage: "trash")
                             }
                         })
-                        .disabled(isDeleteEnabled)
+                        .disabled(isDeleteDisabled)
                     }
             }
             
