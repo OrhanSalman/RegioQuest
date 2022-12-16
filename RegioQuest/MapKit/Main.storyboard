@@ -26,7 +26,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="chH-Xy-4CZ"/>
                                 </connections>
                             </mapView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="THH-eW-HB2">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="THH-eW-HB2">
                                 <rect key="frame" x="20" y="720" width="350" height="32"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <segments>

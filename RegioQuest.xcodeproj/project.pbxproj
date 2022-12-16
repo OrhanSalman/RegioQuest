@@ -13,6 +13,7 @@
 		220526C9291E02B5001DF063 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 220526C8291E02B5001DF063 /* User.json */; };
 		220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC6CE293048B300810E6C /* LocalUserData.swift */; };
 		222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222372F12942C4E400155F1F /* SwiftUIView.swift */; };
+		22247E60294B927F00CC5633 /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22247E5F294B927F00CC5633 /* StoryViewModel.swift */; };
 		22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EF9291DCC8800AF8B28 /* QuestView.swift */; };
 		22537EFE291DCE0A00AF8B28 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */; };
 		22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */; };
@@ -32,7 +33,6 @@
 		22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32071291CBCC9008DAF17 /* GameEngine.swift */; };
 		22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32075291CBCD7008DAF17 /* ModelData.swift */; };
 		22B32078291CBCDD008DAF17 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32077291CBCDD008DAF17 /* User.swift */; };
-		22B3207E291CBD29008DAF17 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3207D291CBD29008DAF17 /* FilterView.swift */; };
 		22B32080291CBD38008DAF17 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3207F291CBD38008DAF17 /* HomeView.swift */; };
 		22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B32081291CBD55008DAF17 /* LocationManager.swift */; };
 		22B32088291CBD8A008DAF17 /* Job.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B32087291CBD8A008DAF17 /* Job.json */; };
@@ -40,7 +40,6 @@
 		22C229CB293F053F00C2CE8C /* OrteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C229CA293F053F00C2CE8C /* OrteView.swift */; };
 		22C44FC62949460300244E1C /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C44FC52949460300244E1C /* Story.swift */; };
 		22D9EE752936BD6D00225332 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9EE742936BD6D00225332 /* CloudKitService.swift */; };
-		22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */; };
 		22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */; };
 		22E38FE6291CBA72009D49E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE5291CBA72009D49E1 /* Assets.xcassets */; };
 		22E38FE9291CBA72009D49E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E38FE8291CBA72009D49E1 /* Preview Assets.xcassets */; };
@@ -63,6 +62,7 @@
 		220526C8291E02B5001DF063 /* User.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		220DC6CE293048B300810E6C /* LocalUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserData.swift; sourceTree = "<group>"; };
 		222372F12942C4E400155F1F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		22247E5F294B927F00CC5633 /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		22537EF9291DCC8800AF8B28 /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 		22B32071291CBCC9008DAF17 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		22B32075291CBCD7008DAF17 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		22B32077291CBCDD008DAF17 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		22B3207D291CBD29008DAF17 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		22B3207F291CBD38008DAF17 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		22B32081291CBD55008DAF17 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		22B32087291CBD8A008DAF17 /* Job.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Job.json; sourceTree = "<group>"; };
@@ -90,7 +89,6 @@
 		22C229CA293F053F00C2CE8C /* OrteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrteView.swift; sourceTree = "<group>"; };
 		22C44FC52949460300244E1C /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		22D9EE742936BD6D00225332 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
-		22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		22E38FDE291CBA71009D49E1 /* RegioQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegioQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E38FE1291CBA71009D49E1 /* RegioQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegioQuestApp.swift; sourceTree = "<group>"; };
 		22E38FE5291CBA72009D49E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +161,7 @@
 				22EE0E752921F71200D91898 /* StoryView.swift */,
 				227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */,
 				22C44FC52949460300244E1C /* Story.swift */,
+				22247E5F294B927F00CC5633 /* StoryViewModel.swift */,
 			);
 			path = Story;
 			sourceTree = "<group>";
@@ -199,7 +198,6 @@
 				22B3207C291CBD17008DAF17 /* Score */,
 				22B3207A291CBD0C008DAF17 /* Home */,
 				22537F05291DE6CE00AF8B28 /* MainView.swift */,
-				22DE872B29241ACA00AE7D30 /* LaunchScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,7 +215,6 @@
 		22B3207A291CBD0C008DAF17 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				22B3207D291CBD29008DAF17 /* FilterView.swift */,
 				22B3207F291CBD38008DAF17 /* HomeView.swift */,
 				22C229CA293F053F00C2CE8C /* OrteView.swift */,
 				22B2018429401BF7009DD562 /* WunschView.swift */,
@@ -403,6 +400,7 @@
 				22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */,
 				22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */,
 				22B2018529401BF7009DD562 /* WunschView.swift in Sources */,
+				22247E60294B927F00CC5633 /* StoryViewModel.swift in Sources */,
 				22B8F9B4294402050075AED1 /* JobView.swift in Sources */,
 				22EE0E762921F71200D91898 /* StoryView.swift in Sources */,
 				22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */,
@@ -423,7 +421,6 @@
 				220526C1291DF2EB001DF063 /* MapView.swift in Sources */,
 				22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */,
 				2271350C29481D9A0053BB50 /* JobViewModel.swift in Sources */,
-				22B3207E291CBD29008DAF17 /* FilterView.swift in Sources */,
 				227EBE62294787B500258890 /* CloudKitStoryViewModel.swift in Sources */,
 				2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */,
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
@@ -432,7 +429,6 @@
 				222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */,
 				22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */,
 				22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */,
-				22DE872C29241ACA00AE7D30 /* LaunchScreen.swift in Sources */,
 				22EE0E742921E77D00D91898 /* RegioQuest.xcdatamodeld in Sources */,
 				22537F08291DE7A900AF8B28 /* ScoreView.swift in Sources */,
 				22C44FC62949460300244E1C /* Story.swift in Sources */,
