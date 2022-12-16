@@ -62,19 +62,21 @@ import CloudKit
 
         isLoading = false
     }
-    /*
-    func fetchMyStories() async {
-        isLoading = true
 
+    func fetchMyStories(accountID: CKRecord.ID) async {
+        isLoading = true
+        print("ACCOUNTID IN VIEWMODEL: \(accountID)")
         do {
-            allStories = try await cloudKitService.fetchMyStoryRecords(in: userNameForOwnOrNotFilter ?? "")
+            allStories = try await cloudKitService.fetchMyStoryRecords(accountID: accountID)
+            for i in allStories {
+                print("DATEN: \(i.title)")
+            }
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
 
         isLoading = false
     }
-     */
 }
 
 

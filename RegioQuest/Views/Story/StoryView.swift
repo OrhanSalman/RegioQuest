@@ -6,25 +6,57 @@
 //
 
 import SwiftUI
+import CloudKit
 
 enum Filter {
     case all, friends, own
 }
 
 struct StoryView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.dismiss) var dismiss
+    
     @State private var selectedFilter: Filter = .all
     @State private var addStory: Bool = false
     @StateObject private var vm = FetchStoryModel()
     @State private var presentStory: Bool = false
     @State private var isAddStoryDisabled: Bool = false
+    @State private var accountID: CKRecord.ID?
+//    @State private var accountIDFromView: String?
+    @State var activate: Bool = false
     
-    @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
         animation: .default) var user: FetchedResults<User>
     
     var body: some View {
+        NavigationStack {
+            ForEach(vm.allStories, id: \.self) { a in
+                VStack {
+                    Text(a.title)
+                }
+
+                    .padding(30)
+            }
+        }
+        .task {
+            Task {
+                iCloudUserIDAsync { (recordID: CKRecord.ID?, error: NSError?) in
+                    if let userID = recordID {
+                        print("received iCloudID \(userID)")
+                        accountID = userID
+                        print("ACCOUNTID: \(self.accountID)")
+                        callMyFunction()
+                    } else {
+                        print("Fetched iCloudID was nil")
+                    }
+                }
+            }
+            // We call the above function here and "await it via the value activate"
+            
+        }
+        
+        /*
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {
                 
@@ -35,7 +67,7 @@ struct StoryView: View {
                 else {
                     switch self.selectedFilter {
                     case .all:
-                        ShowStoryView(dataset: vm.allStories, isDeleteEnabled: false)
+                        ShowStoryView(dataset: vm.allStories, isDeleteEnabled: true)
                             .onDisappear {
                                 Task {
                                     await vm.fetch()
@@ -50,7 +82,7 @@ struct StoryView: View {
                             }
                     case .own:
                         ShowStoryView(dataset: vm.allStories.filter({ ($0.userName.contains(user[0].name ?? ""))
-                        }), isDeleteEnabled: true)
+                        }), isDeleteEnabled: false)
                         .onDisappear {
                             Task {
                                 await vm.fetch()
@@ -65,7 +97,6 @@ struct StoryView: View {
             await vm.fetch()
         }
         .task {
-            
             if (user.isEmpty) {
                 isAddStoryDisabled = true
             }
@@ -120,6 +151,29 @@ struct StoryView: View {
              }
              */
         }
+         */
+    }
+    func callMyFunction() {
+        Task {
+            print("ACTIVATE: \(activate)")
+            print("ACTIVATED_ID: \(accountID)")
+            await vm.fetchMyStories(accountID: accountID!)
+        }
+    }
+    func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecord.ID?, _ error: NSError?) -> ()) {
+        let container = CKContainer.default()
+        container.fetchUserRecordID() {
+            recordID, error in
+            if error != nil {
+                print(error!.localizedDescription)
+                complete(nil, error as NSError?)
+                self.accountID = recordID
+                print("ACCOUNTID: \(self.accountID)")
+            } else {
+                print("fetched ID \(recordID?.recordName)")
+                complete(recordID, nil)
+            }
+        }
     }
 }
 
@@ -132,6 +186,8 @@ struct AddStoryView: View {
     @StateObject private var vm = CreateStoryModel()
     @Environment(\.dismiss) var dismiss
     
+    @State var showAlert = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -142,6 +198,9 @@ struct AddStoryView: View {
             }
             .listStyle(InsetGroupedListStyle())
         }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Gespeichert"), message: Text("Es kann ein paar Minuten dauern, bis deine Story sichtbar wird. Aktualisiere die Seite zwischendurch."), dismissButton: .default(Text("Ok")))
+        })
         .navigationBarTitle("Neue Story erzählen", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -149,8 +208,9 @@ struct AddStoryView: View {
                     Task {
                         vm.story.userName = user[0].name ?? "Kein Username"
                         await vm.save()
-                        dismiss()
+                        showAlert = true
                     }
+                    dismiss()
                 })
                 .disabled(vm.story.title.isEmpty || vm.story.description.isEmpty)
             }
@@ -172,6 +232,10 @@ struct DetailsStoryView: View {
 }
 
 struct ShowStoryView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
+        animation: .default) var user: FetchedResults<User>
     @StateObject private var vm = DeleteStoryModel()
     @State private var presentStory: Bool = false
     @State private var showDetailScreen: Bool = false
@@ -250,18 +314,23 @@ struct ShowStoryView: View {
                         StorytellerSheet()
                     })
                     .contextMenu {
-                        Group {
+                        Group(content: {
                             Button("Bearbeiten", action: {
                                 
                                 print("\(data.description)")
                             })
-                            Button("Löschen", action: {
+                            Button(role: .destructive) {
                                 // Remove from CloudKit
-                                sendToDelete(atOffsets: data)
+                                if let index = dataset.firstIndex(of: data) {
+                                  dataset.remove(at: index)
+                                }
                                 // Remove from dataset
-                                
-                            })
-                        }
+                                sendToDelete(atOffsets: data)
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                        })
+                        .disabled(isDeleteEnabled)
                     }
             }
             
