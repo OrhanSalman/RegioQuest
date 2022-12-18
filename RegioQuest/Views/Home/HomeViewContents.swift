@@ -12,42 +12,42 @@ final class HomeViewContents: ObservableObject {
     @Published var homeViewContentsMap: [String] = [
         "map",
         "Entdecke deine Stadt",
-        "Erforsche deine Region und die Vielzahl an Möglichkeiten, die sie bietet ",
+        "Erforsche deine Region und die Vielzahl an Möglichkeiten die sie zu bieten hat",
         "mappin.and.ellipse",
-        "Test",
-        "Test",
-        "map",
-        "Test",
-        "Test",
-        "map",
-        "Test",
-        "Test"
+        "Ausbildungen",
+        "Löse Quests und erhalte eine Einladung von Unternehmen, die deinen Vorstellungen entsprechen. ",
+        "sparkle.magnifyingglass",
+        "Erhalte vorab Einblicke in Unternehmen",
+        "Entdecke Insidereinblicke in Unternehmen und ihren Beschäftigungsmöglichkeiten",
+        "arrowshape.turn.up.left.2.fill",
+        "Navigation",
+        "Tippe auf Kartenmarkierungen und lass dich zum Ziel navigieren"
     ]
     @Published var homeViewContentsOrte: [String] = [
         "building.2.crop.circle",
         "Das wichtigste im Detail",
-        "Entdecke interessante Quests von Unternehmen durch die Look Around Ansicht.",
-        "map",
-        "Test",
-        "Test",
-        "map",
-        "Test",
-        "Test",
-        "map",
-        "Test",
-        "Test"
+        "Smarte Funktionen für eine effektive Suche",
+        "binoculars.fill",
+        "Streetmap",
+        "Die Look Around Ansicht ermöglicht es dir bequem von zuhause Unternehmen und ihre Quests zu entdecken.",
+        "star.fill",
+        "Lege deine Favoriten fest",
+        "Favorisiere für dich in Frage kommende Ausbildungsangebote ",
+        "bell.fill",
+        "Lass dich benachrichten",
+        "Erhalte automatische Benachrichtigungen durch die App wenn Du dich in der Nähe einer Quest befindest"
     ]
     @Published var homeViewContentsStories: [String] = [
         "person.wave.2",
         "Was deine Freunde und andere so erzählen",
-        "Hast Du Schwierigkeiten mit einer Quest? Frag andere, oder informiere dich vorab.",
+        "Hast Du Schwierigkeiten mit einer Quest? Frag andere oder lies, was sie zu erzählen haben",
+        "person.3.sequence.fill",
+        "Kontaktliste",
+        "Füge deine Freunde in deine Kontaktliste ein",
         "map",
-        "Test",
-        "Test",
-        "map",
-        "Test",
-        "Test",
-        "map",
+        "Sharing",
+        "Teile deinen Score mit deinen Freunden",
+        "square.and.arrow.up.fill",
         "Test",
         "Test"
     ]
@@ -55,7 +55,7 @@ final class HomeViewContents: ObservableObject {
         "info.square",
         "Unser Ziel",
         "Alles, was die RegioQuest App für dich bereithält",
-        "map",
+        "flag.2.crossed.fill",
         "Test",
         "Test",
         "map",
@@ -66,3 +66,6 @@ final class HomeViewContents: ObservableObject {
         "Test"
     ]
 }
+
+
+// Multiplayer game, ar, location tracking, pokemon

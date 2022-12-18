@@ -50,7 +50,6 @@ struct HomePage: View {
                             .clipped()
                             
                             VStack {
-                                TopTapBarView()
                                 VStack {
                                     Text("Universitätsstadt Siegen")
                                         .font(.title2.weight(.thin))
@@ -62,6 +61,7 @@ struct HomePage: View {
                                 .sheet(isPresented: $sheet) {
                                     RegionSheet()
                                 }
+                                TopTapBarView()
                                 Divider()
                                 ContentView(textContent: content.homeViewContentsMap)
                                 ContentView(textContent: content.homeViewContentsOrte)
@@ -196,15 +196,15 @@ struct ContentView: View {
                     Spacer()
                 }
                 HStack {
-                    Image(systemName: "square.and.arrow.up.on.square.fill")
+                    Image(systemName: textContent[6])
                         .foregroundColor(.pink)
                         .font(.title.weight(.regular))
                         .frame(width: 60, height: 50)
                         .clipped()
                     VStack(alignment: .leading, spacing: 3) {
-                        Text(textContent[4])
+                        Text(textContent[7])
                             .font(.footnote.weight(.regular))
-                        Text(textContent[5])
+                        Text(textContent[8])
                             .font(.footnote)
                             .foregroundColor(.secondary)
                     }
@@ -212,15 +212,15 @@ struct ContentView: View {
                     Spacer()
                 }
                 HStack {
-                    Image(systemName: "sparkle.magnifyingglass")
+                    Image(systemName: textContent[9])
                         .foregroundColor(.pink)
                         .font(.title.weight(.regular))
                         .frame(width: 60, height: 50)
                         .clipped()
                     VStack(alignment: .leading, spacing: 3) {
-                        Text(textContent[6])
+                        Text(textContent[10])
                             .font(.footnote.weight(.regular))
-                        Text(textContent[7])
+                        Text(textContent[11])
                             .font(.footnote)
                             .foregroundColor(.secondary)
                     }
