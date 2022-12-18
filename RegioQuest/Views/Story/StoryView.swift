@@ -19,7 +19,7 @@ struct StoryView: View {
     @State private var selectedFilter: Filter = .all
     @State private var addStory: Bool = false
     @StateObject private var vm = FetchStoryModel()
-    @State private var presentStory: Bool = false
+    //    @State private var presentStory: Bool = false
     @State private var isAddStoryDisabled: Bool = false
     @State private var accountID: CKRecord.ID?
     @State var activate: Bool = false
@@ -34,36 +34,42 @@ struct StoryView: View {
                 
                 switch self.selectedFilter {
                 case .all:
-                    if vm.allStories.isEmpty {
-                        Text("Keine Stories gefunden. Sei der Erste!")
-                            .padding(20)
+                    VStack {
+                        if vm.allStories.isEmpty {
+                            Text("Keine Stories gefunden. Sei der Erste!")
+                                .padding(20)
+                        }
+                        else {
+                            ShowStoryView(dataset: vm.allStories, isDeleteDisabled: true)
+                        }
                     }
-                    else {
-                        ShowStoryView(dataset: vm.allStories, isDeleteDisabled: true)
-                            .task {
-                                await whichToFetch()
-                            }
+                    .task {
+                        await whichToFetch()
                     }
                 case .friends:
                     Text("Not implemented yet")
                 case .own:
-                    if vm.allStories.isEmpty {
-                        Text("Du hast noch keine Story veröffentlicht.")
-                            .padding(20)
-                    }
-                    else {
-                        ShowStoryView(dataset: vm.allStories, isDeleteDisabled: false)
-                        .task {
-                            await whichToFetch()
+                    VStack {
+                        if vm.userStories.isEmpty {
+                            Text("Du hast noch keine Story veröffentlicht.")
+                                .padding(20)
                         }
+                        else {
+                            ShowStoryView(dataset: vm.userStories, isDeleteDisabled: false)
+                        }
+                    }
+                    .task {
+                        await whichToFetch()
                     }
                 }
             }
         }
         .redacted(reason: vm.isLoading ? .placeholder : [])
         .refreshable {
-            await whichToFetch()
-              }
+            Task {
+                await whichToFetch()
+            }
+        }
         .task {
             if (user.isEmpty) {
                 isAddStoryDisabled = true
@@ -71,7 +77,9 @@ struct StoryView: View {
             else if (!user.isEmpty) {
                 isAddStoryDisabled = false
             }
-            await whichToFetch()
+            Task {
+                await whichToFetch()
+            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -107,21 +115,30 @@ struct StoryView: View {
     }
     func whichToFetch() async {
         if selectedFilter == .all {
-            await vm.fetch()
+            Task {
+                await vm.fetch()
+            }
+            for i in vm.allStories {
+                print("TITEL: \(i.title)")
+            }
+            print("_________________________________")
         }
         else if selectedFilter == .own {
             Task {
                 iCloudUserIDAsync { (recordID: CKRecord.ID?, error: NSError?) in
                     if let userID = recordID {
-                        print("received iCloudID \(userID)")
                         accountID = userID
-                        print("ACCOUNTID: \(self.accountID)")
                         callMyStoriesFunction()
                     } else {
+                        debugPrint(error)
                         print("Fetched iCloudID was nil")
                     }
                 }
             }
+            for i in vm.userStories {
+                print("TITEL: \(i.title)")
+            }
+            print("_________________________________")
         }
         else if selectedFilter == .friends {
             print("Friends not implemented")
@@ -132,8 +149,6 @@ struct StoryView: View {
     }
     func callMyStoriesFunction() {
         Task {
-            print("ACTIVATE: \(activate)")
-            print("ACTIVATED_ID: \(accountID)")
             await vm.fetchMyStories(accountID: accountID!)
         }
     }
@@ -145,9 +160,7 @@ struct StoryView: View {
                 print(error!.localizedDescription)
                 complete(nil, error as NSError?)
                 self.accountID = recordID
-                print("ACCOUNTID: \(self.accountID)")
             } else {
-                print("fetched ID \(recordID?.recordName)")
                 complete(recordID, nil)
             }
         }
@@ -213,114 +226,101 @@ struct ShowStoryView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
         animation: .default) var user: FetchedResults<User>
-    @StateObject private var vm = DeleteStoryModel()
+    @StateObject private var vm = FetchStoryModel()
     @State private var presentStory: Bool = false
     @State private var showDetailScreen: Bool = false
     @State var dataset: [ModelStory]
     @State var isDeleteDisabled: Bool
     
     var body: some View {
-        if dataset.isEmpty {
-            Text("Es gibt noch keine Stories")
-        }
-        else {
-            ForEach(dataset, id: \.self) { data in
-//                withAnimation {
-                    VStack {
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(Color(.systemBackground))
-                            .overlay {
-                                VStack {
-                                    HStack {
-                                        Text(data.title)
-                                            .clipped()
-                                            .font(.headline.weight(.bold))
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .lineLimit(1)
-                                        Spacer()
-                                        Image(systemName: "eye.fill")
-                                            .imageScale(.medium)
-                                            .symbolRenderingMode(.monochrome)
-                                            .foregroundColor(.indigo)
-                                    }
-                                    Divider()
-                                        .opacity(1)
-                                    HStack {
-                                        ScrollView(.vertical, showsIndicators: true) {
-                                            VStack {
-                                                Text(data.description)
-                                                    .font(.footnote.weight(.regular))
-                                            }
+        ForEach(dataset, id: \.self) { data in
+            withAnimation {
+                VStack {
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color(.systemBackground))
+                        .overlay {
+                            VStack {
+                                HStack {
+                                    Text(data.title)
+                                        .clipped()
+                                        .font(.headline.weight(.bold))
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .lineLimit(1)
+                                    Spacer()
+                                    Image(systemName: "eye.fill")
+                                        .imageScale(.medium)
+                                        .symbolRenderingMode(.monochrome)
+                                        .foregroundColor(.indigo)
+                                }
+                                Divider()
+                                    .opacity(1)
+                                HStack {
+                                    ScrollView(.vertical, showsIndicators: true) {
+                                        VStack {
+                                            Text(data.description)
+                                                .font(.footnote.weight(.regular))
                                         }
-                                        Spacer()
                                     }
                                     Spacer()
-                                    
-                                    HStack {
-                                        Text("@\(data.userName)")
-                                            .font(.caption.weight(.light))
-                                        Spacer()
-                                        Text(data.timestamp, style: .date)
-                                            .font(.caption.weight(.thin))
-                                        Text(data.timestamp, style: .time)
-                                            .font(.caption.weight(.thin))
-                                    }
                                 }
-                                .padding()
-                                .onTapGesture {
-                                    showDetailScreen.toggle()
-                                }
-                                .sheet(isPresented: $showDetailScreen, content: {
-                                    DetailsStoryView(content: data)
-                                })
-                            }
-                            .frame(height: 200)
-                            .clipped()
-                            .shadow(color: .primary.opacity(0.5), radius: 14, x: 0, y: 14)
-                            .padding(20)
-                        
-                    }
-                    .deleteDisabled(isDeleteDisabled)
-                    .transition(.scale)
-                /*
-                    .onTapGesture {
-                        presentStory.toggle()
-                    }
-                 */
-                    .sheet(isPresented: $presentStory, content: {
-                        StorytellerSheet()
-                    })
-                    .contextMenu {
-                        Group(content: {
-                            Button("Bearbeiten", action: {
+                                Spacer()
                                 
-                                print("\(data.description)")
-                            })
-                            Button(role: .destructive) {
-                                // Remove from CloudKit
-                                if let index = dataset.firstIndex(of: data) {
-                                  dataset.remove(at: index)
+                                HStack {
+                                    Text("@\(data.userName)")
+                                        .font(.caption.weight(.light))
+                                    Spacer()
+                                    Text(data.timestamp, style: .date)
+                                        .font(.caption.weight(.thin))
+                                    Text(data.timestamp, style: .time)
+                                        .font(.caption.weight(.thin))
                                 }
-                                // Remove from dataset
-                                sendToDelete(atOffsets: data)
-                            } label: {
-                                Label("Löschen", systemImage: "trash")
                             }
+                            .padding()
+                            .onTapGesture {
+                                showDetailScreen.toggle()
+                            }
+                            .sheet(isPresented: $showDetailScreen, content: {
+                                DetailsStoryView(content: data)
+                            })
+                        }
+                        .frame(height: 200)
+                        .clipped()
+                        .shadow(color: .primary.opacity(0.5), radius: 14, x: 0, y: 14)
+                        .padding(20)
+                    
+                }
+                .deleteDisabled(isDeleteDisabled)
+                .transition(.scale)
+                /*
+                 .onTapGesture {
+                 presentStory.toggle()
+                 }
+                 */
+                .sheet(isPresented: $presentStory, content: {
+                    StorytellerSheet()
+                })
+                .contextMenu {
+                    Group(content: {
+                        Button("Bearbeiten", action: {
+                            
+                            print("\(data.description)")
                         })
-                        .disabled(isDeleteDisabled)
-                    }
+                        Button(role: .destructive) {
+                            // Remove from CloudKit
+                            if let index = dataset.firstIndex(of: data) {
+                                dataset.remove(at: index)
+                            }
+                            // Remove from dataset
+                            sendToDelete(atOffsets: data)
+                        } label: {
+                            Label("Löschen", systemImage: "trash")
+                        }
+                    })
+                    .disabled(isDeleteDisabled)
+                }
             }
-            
-            /*
-             .onDelete { indexSet in
-             for index in indexSet {
-             sendToDelete(atOffsets: dataset[index])
-             }
-             }
-             */
         }
     }
-    
     func sendToDelete(atOffsets: ModelStory) {
         Task {
             await vm.deleteSelectedStory(atOffsets: atOffsets)

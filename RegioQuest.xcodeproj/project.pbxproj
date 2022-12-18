@@ -13,7 +13,6 @@
 		220526C9291E02B5001DF063 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 220526C8291E02B5001DF063 /* User.json */; };
 		220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DC6CE293048B300810E6C /* LocalUserData.swift */; };
 		222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222372F12942C4E400155F1F /* SwiftUIView.swift */; };
-		22247E60294B927F00CC5633 /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22247E5F294B927F00CC5633 /* StoryViewModel.swift */; };
 		22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EF9291DCC8800AF8B28 /* QuestView.swift */; };
 		22537EFE291DCE0A00AF8B28 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */; };
 		22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */; };
@@ -22,7 +21,9 @@
 		2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255003D29213ED3002B6D72 /* BranchenView.swift */; };
 		2271350C29481D9A0053BB50 /* JobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271350B29481D9A0053BB50 /* JobViewModel.swift */; };
 		2271350E29481E9A0053BB50 /* JobListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271350D29481E9A0053BB50 /* JobListing.swift */; };
-		227EBE62294787B500258890 /* CloudKitStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */; };
+		22720E66294D235F008EC16D /* HomeViewContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22720E65294D235F008EC16D /* HomeViewContents.swift */; };
+		22720E68294D5DDA008EC16D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22720E67294D5DDA008EC16D /* Test.swift */; };
+		227EBE62294787B500258890 /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EBE61294787B500258890 /* StoryViewModel.swift */; };
 		22A33F41293E9CE400AFF219 /* LookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3C293E9CE400AFF219 /* LookViewController.swift */; };
 		22A33F42293E9CE400AFF219 /* MarkerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3D293E9CE400AFF219 /* MarkerDetailViewController.swift */; };
 		22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A33F3E293E9CE400AFF219 /* ViewController.swift */; };
@@ -62,7 +63,6 @@
 		220526C8291E02B5001DF063 /* User.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		220DC6CE293048B300810E6C /* LocalUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserData.swift; sourceTree = "<group>"; };
 		222372F12942C4E400155F1F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
-		22247E5F294B927F00CC5633 /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		22537EF9291DCC8800AF8B28 /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		22537EFD291DCE0A00AF8B28 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		22537EFF291DD62A00AF8B28 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
@@ -71,7 +71,9 @@
 		2255003D29213ED3002B6D72 /* BranchenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchenView.swift; sourceTree = "<group>"; };
 		2271350B29481D9A0053BB50 /* JobViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobViewModel.swift; sourceTree = "<group>"; };
 		2271350D29481E9A0053BB50 /* JobListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListing.swift; sourceTree = "<group>"; };
-		227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitStoryViewModel.swift; sourceTree = "<group>"; };
+		22720E65294D235F008EC16D /* HomeViewContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContents.swift; sourceTree = "<group>"; };
+		22720E67294D5DDA008EC16D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		227EBE61294787B500258890 /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		22A33F3C293E9CE400AFF219 /* LookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookViewController.swift; sourceTree = "<group>"; };
 		22A33F3D293E9CE400AFF219 /* MarkerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerDetailViewController.swift; sourceTree = "<group>"; };
 		22A33F3E293E9CE400AFF219 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -159,9 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				22EE0E752921F71200D91898 /* StoryView.swift */,
-				227EBE61294787B500258890 /* CloudKitStoryViewModel.swift */,
+				227EBE61294787B500258890 /* StoryViewModel.swift */,
 				22C44FC52949460300244E1C /* Story.swift */,
-				22247E5F294B927F00CC5633 /* StoryViewModel.swift */,
 			);
 			path = Story;
 			sourceTree = "<group>";
@@ -220,6 +221,7 @@
 				22B2018429401BF7009DD562 /* WunschView.swift */,
 				22EBDDF42940D5920051F51A /* ViewRouter.swift */,
 				22AAF9EE2941745C0032A7E2 /* AboutThisAppView.swift */,
+				22720E65294D235F008EC16D /* HomeViewContents.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -305,6 +307,7 @@
 				22E38FE7291CBA72009D49E1 /* Preview Content */,
 				22EE0E702921E5C800D91898 /* Launch Screen.storyboard */,
 				222372F12942C4E400155F1F /* SwiftUIView.swift */,
+				22720E67294D5DDA008EC16D /* Test.swift */,
 			);
 			path = RegioQuest;
 			sourceTree = "<group>";
@@ -400,7 +403,6 @@
 				22537F00291DD62A00AF8B28 /* PhotoPicker.swift in Sources */,
 				22537F06291DE6CE00AF8B28 /* MainView.swift in Sources */,
 				22B2018529401BF7009DD562 /* WunschView.swift in Sources */,
-				22247E60294B927F00CC5633 /* StoryViewModel.swift in Sources */,
 				22B8F9B4294402050075AED1 /* JobView.swift in Sources */,
 				22EE0E762921F71200D91898 /* StoryView.swift in Sources */,
 				22B32072291CBCC9008DAF17 /* GameEngine.swift in Sources */,
@@ -410,6 +412,7 @@
 				22E38FEB291CBA72009D49E1 /* Persistence.swift in Sources */,
 				22E7F8EF292995FB00726284 /* ProfilView.swift in Sources */,
 				2271350E29481E9A0053BB50 /* JobListing.swift in Sources */,
+				22720E66294D235F008EC16D /* HomeViewContents.swift in Sources */,
 				22B32082291CBD55008DAF17 /* LocationManager.swift in Sources */,
 				22EBDDF52940D5920051F51A /* ViewRouter.swift in Sources */,
 				22AAF9EF2941745C0032A7E2 /* AboutThisAppView.swift in Sources */,
@@ -421,11 +424,12 @@
 				220526C1291DF2EB001DF063 /* MapView.swift in Sources */,
 				22E38FE2291CBA71009D49E1 /* RegioQuestApp.swift in Sources */,
 				2271350C29481D9A0053BB50 /* JobViewModel.swift in Sources */,
-				227EBE62294787B500258890 /* CloudKitStoryViewModel.swift in Sources */,
+				227EBE62294787B500258890 /* StoryViewModel.swift in Sources */,
 				2255003E29213ED3002B6D72 /* BranchenView.swift in Sources */,
 				22B32078291CBCDD008DAF17 /* User.swift in Sources */,
 				22A33F43293E9CE400AFF219 /* ViewController.swift in Sources */,
 				220DC6CF293048B300810E6C /* LocalUserData.swift in Sources */,
+				22720E68294D5DDA008EC16D /* Test.swift in Sources */,
 				222372F22942C4E400155F1F /* SwiftUIView.swift in Sources */,
 				22B32076291CBCD7008DAF17 /* ModelData.swift in Sources */,
 				22537EFA291DCC8800AF8B28 /* QuestView.swift in Sources */,
@@ -438,7 +442,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		22E38FEF291CBA72009D49E1 /* Debug */ = {
+		22720E69294D6046008EC16D /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -496,7 +500,103 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (Production)";
+		};
+		22720E6A294D6046008EC16D /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RegioQuest/RegioQuest.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RegioQuest/Preview Content\"";
+				DEVELOPMENT_TEAM = B52B5R8QVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RegioQuest/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Localization Always and When In Use";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = String;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = String;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.salman.RegioQuest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Production)";
+		};
+		22E38FEF291CBA72009D49E1 /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Staging)";
 		};
 		22E38FF0291CBA72009D49E1 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -545,6 +645,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -552,7 +653,7 @@
 			};
 			name = Release;
 		};
-		22E38FF2291CBA72009D49E1 /* Debug */ = {
+		22E38FF2291CBA72009D49E1 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -586,7 +687,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug (Staging)";
 		};
 		22E38FF3291CBA72009D49E1 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -630,7 +731,8 @@
 		22E38FD9291CBA71009D49E1 /* Build configuration list for PBXProject "RegioQuest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22E38FEF291CBA72009D49E1 /* Debug */,
+				22E38FEF291CBA72009D49E1 /* Debug (Staging) */,
+				22720E69294D6046008EC16D /* Debug (Production) */,
 				22E38FF0291CBA72009D49E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -639,7 +741,8 @@
 		22E38FF1291CBA72009D49E1 /* Build configuration list for PBXNativeTarget "RegioQuest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22E38FF2291CBA72009D49E1 /* Debug */,
+				22E38FF2291CBA72009D49E1 /* Debug (Staging) */,
+				22720E6A294D6046008EC16D /* Debug (Production) */,
 				22E38FF3291CBA72009D49E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

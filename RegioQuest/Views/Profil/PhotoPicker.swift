@@ -15,6 +15,9 @@ struct PhotoPicker: View {
     
     var body: some View {
         
+/*
+ https://blog.devgenius.io/saving-images-in-coredata-8739690d0520
+ */
         if(selectedImageData == nil) {
             PhotosPicker(
                 selection: $selectedItem,

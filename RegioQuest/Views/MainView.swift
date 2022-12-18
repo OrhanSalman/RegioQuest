@@ -29,6 +29,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
+//                .preferredColorScheme(.dark)
                 .environmentObject(locationManager)
                 .environmentObject(ViewRouter())
                 .badge(homeBadgeCount)
@@ -44,7 +45,7 @@ struct MainView: View {
                 .onSubmit {
                     self.branchenBadgeCount = 0
                 }
-            ScoreView()
+            SwiftUIView()
                 .tabItem {
                     Label("Score", systemImage: "bell.fill")
                 }

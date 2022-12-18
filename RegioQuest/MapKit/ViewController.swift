@@ -10,6 +10,12 @@ class ViewController: UIViewController {
 //    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var mapTypeSelector: UISegmentedControl!
     
+    
+    let distance: CLLocationDistance = 650
+    let pitch: CGFloat = 65
+    let heading = 0.0
+    var camera: MKMapCamera?
+    
     let locationManager = CLLocationManager()
     
     var foundLocations : [MKMapItem] = []
@@ -20,12 +26,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         askUserLocation()
-        
+        // https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
         configureMapArea()
         configureSegmentedControl()
         
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         if let location = locationManager.location{
             lookForLatestLocation(location: location)
@@ -36,12 +41,18 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func lookForLatestLocation(location: CLLocation){
+    func lookForLatestLocation(location: CLLocation) {
         
         self.mapView.showsUserLocation = true
         let region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 8.005, longitudeDelta: 8.005))
         self.mapView.setCenter(location.coordinate, animated: true)
         self.mapView.setRegion(region, animated: true)
+        
+        camera = MKMapCamera(lookingAtCenter: location.coordinate,
+            fromDistance: distance,
+            pitch: pitch,
+            heading: heading)
+        mapView.camera = camera!
     }
     
     func configureSegmentedControl() {
@@ -60,7 +71,7 @@ class ViewController: UIViewController {
             break
         }
     }
-    
+    // Look Around
     func configureMapArea() {
         let region = MKCoordinateRegion(center: .init(latitude: 50.874886, longitude: 8.025132), span: .init(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.setRegion(region, animated: true)

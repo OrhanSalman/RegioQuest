@@ -72,30 +72,11 @@ extension CloudKitService {
         return records.compactMap(ModelStory.init)
     }
 }
-/*
-extension CloudKitService {
-    func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecord.ID?, _ error: NSError?) -> ()) {
-        let container = CKContainer.default()
-        container.fetchUserRecordID() {
-            recordID, error in
-            if error != nil {
-                print(error!.localizedDescription)
-                complete(nil, error as NSError?)
-                self.accountID = recordID?.recordName
-                print("ACCOUNTID: \(self.accountID)")
-            } else {
-                print("fetched ID \(recordID?.recordName)")
-                complete(recordID, nil)
-            }
-        }
-    }
-}
-*/
+
 extension CloudKitService {
     
     func fetchMyStoryRecords(accountID: CKRecord.ID) async throws -> [ModelStory] {
-            
-        print("ACCOUNTID_WICHTIG: \(accountID)")
+        
         let predicate = NSPredicate(
             format: "creatorUserRecordID == %@", accountID
         )
