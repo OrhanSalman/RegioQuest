@@ -93,3 +93,83 @@ extension CloudKitService {
         return records.compactMap(ModelStory.init)
     }
 }
+
+extension CloudKitService {
+    func fetchSkillRecords() async throws -> [ModelSkill] {
+        let predicate = NSPredicate(
+            format: "\(SkillRecordKeys.name.rawValue) <= %@", Date.now as NSDate
+        )
+
+        let query = CKQuery(
+            recordType: SkillRecordKeys.type.rawValue,
+            predicate: predicate
+        )
+
+        query.sortDescriptors = [.init(key: SkillRecordKeys.name.rawValue, ascending: true)]
+
+        let result = try await CKContainer.default().publicCloudDatabase.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        return records.compactMap(ModelSkill.init)
+    }
+}
+
+extension CloudKitService {
+    
+    func fetchMySkillRecords(accountID: CKRecord.ID) async throws -> [ModelSkill] {
+        
+        let predicate = NSPredicate(
+            format: "creatorUserRecordID == %@", accountID
+        )
+        
+        let query = CKQuery(
+            recordType: SkillRecordKeys.type.rawValue,
+            predicate: predicate
+        )
+
+        query.sortDescriptors = [.init(key: SkillRecordKeys.name.rawValue, ascending: true)]
+
+        let result = try await CKContainer.default().publicCloudDatabase.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        return records.compactMap(ModelSkill.init)
+    }
+}
+
+extension CloudKitService {
+    func fetchQuestRecords() async throws -> [ModelQuest] {
+        let predicate = NSPredicate(
+            format: "\(QuestRecordKeys.title.rawValue) <= %@", Date.now as NSDate
+        )
+
+        let query = CKQuery(
+            recordType: QuestRecordKeys.type.rawValue,
+            predicate: predicate
+        )
+
+        query.sortDescriptors = [.init(key: QuestRecordKeys.title.rawValue, ascending: true)]
+
+        let result = try await CKContainer.default().publicCloudDatabase.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        return records.compactMap(ModelQuest.init)
+    }
+}
+
+extension CloudKitService {
+    
+    func fetchMyQuestRecords(accountID: CKRecord.ID) async throws -> [ModelQuest] {
+        
+        let predicate = NSPredicate(
+            format: "creatorUserRecordID == %@", accountID
+        )
+        
+        let query = CKQuery(
+            recordType: QuestRecordKeys.type.rawValue,
+            predicate: predicate
+        )
+
+        query.sortDescriptors = [.init(key: QuestRecordKeys.title.rawValue, ascending: true)]
+
+        let result = try await CKContainer.default().publicCloudDatabase.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        return records.compactMap(ModelQuest.init)
+    }
+}

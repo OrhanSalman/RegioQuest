@@ -25,47 +25,66 @@ struct MainView: View {
     var body: some View {
         
         TabView() {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
-//                .preferredColorScheme(.dark)
-                .environmentObject(locationManager)
-                .environmentObject(ViewRouter())
-                .badge(homeBadgeCount)
-                .onSubmit {
-                    self.homeBadgeCount = 0
-                }
-            BranchenView()
-                .tabItem {
-                    Label("Berufe", systemImage: "map.circle.fill")
-                }
-                .environmentObject(locationManager)
-                .badge(branchenBadgeCount)
-                .onSubmit {
-                    self.branchenBadgeCount = 0
-                }
-            SwiftUIView()
-                .tabItem {
-                    Label("Score", systemImage: "bell.fill")
-                }
-                .badge(scoreBadgeCount)
-                .onSubmit {
-                    self.scoreBadgeCount = 0
-                }
-//                .environment(\.managedObjectContext, coreDataStack.context)
-//                .environmentObject(inMemoryDataStorage)
-            CustomTabView()
-                .tabItem {
-                    Label("Profil", systemImage: "person.crop.circle.fill")
-                }
-                .badge(profileBadgeCount)
-                .onSubmit {
-                    self.profileBadgeCount = 0
-                }
-//                .environmentObject(inMemoryDataStorage)
+            Group {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+    //                .preferredColorScheme(.dark)
+                    .environmentObject(locationManager)
+                    .environmentObject(ViewRouter())
+                    .badge(homeBadgeCount)
+                    .onSubmit {
+                        self.homeBadgeCount = 0
+                    }
+                BranchenView()
+                    .tabItem {
+                        Label("Quests", systemImage: "gamecontroller")
+                    }
+                    .environmentObject(locationManager)
+                    .badge(branchenBadgeCount)
+                    .onSubmit {
+                        self.branchenBadgeCount = 0
+                    }
+                /*
+                ARViewLoad()
+                    .tabItem {
+                        Label("Game", systemImage: "gamecontroller")
+                    }
+                    .badge(scoreBadgeCount)
+                    .onSubmit {
+                        self.scoreBadgeCount = 0
+                    }
+                 */
+                SkillView()
+                    .tabItem {
+                        Label("Skills", systemImage: "brain.head.profile")
+                    }
+                    .badge(scoreBadgeCount)
+                    .onSubmit {
+                        self.scoreBadgeCount = 0
+                    }
+                CustomTabView()
+                    .tabItem {
+                        Label("Profil", systemImage: "person.crop.circle.fill")
+                    }
+                    .badge(profileBadgeCount)
+                    .onSubmit {
+                        self.profileBadgeCount = 0
+                    }
+            }
+            .toolbar(.visible , for: .tabBar)
         }
         .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+//            appearance.backgroundColor = UIColor(Color.primary.opacity(0.2))
+            
+            // Use this appearance when scrolling behind the TabView:
+            UITabBar.appearance().standardAppearance = appearance
+            // Use this appearance when scrolled all the way up:
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+            
             if(user.isEmpty) {
                 self.profileBadgeCount = 1
             }

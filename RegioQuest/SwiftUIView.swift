@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SwiftUIView: View {
     @State var progressValue: CGFloat = 0.77
     @State var text = "Quote"
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ User.id, ascending: true)], animation: .default) private var skill: FetchedResults<Skill>
+    
+    @State private var current = 67.0
+    @State private var minValue = 0.0
+    @State private var maxValue = 100.0
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
@@ -59,7 +68,7 @@ struct SwiftUIView: View {
                     .frame(width: UIScreen.main.bounds.width)
             }
             .frame(width: UIScreen.main.bounds.width)
-            
+            /*
             HStack {
                 ProgressBar(progress: 0.77, text: "Quote")
                 Spacer()
@@ -68,10 +77,18 @@ struct SwiftUIView: View {
                 ProgressBar(progress: 0.26, text: "Erfolg")
             }
             .padding(.horizontal, 50)
+            */
+            VStack {
+                ForEach(0..<10, id: \.self) { _ in
+                    StyledGaugeOld()
+                }
+            }
+            .padding()
         }
         .ignoresSafeArea()
     }
 }
+/*
 // Quest übersicht hier machen
 struct ProgressBar: View {
     @State var progress: CGFloat
@@ -105,6 +122,31 @@ struct ProgressBar: View {
             }
             Text(text)
         }
+    }
+}
+*/
+struct StyledGaugeOld: View {
+    @State private var current = 67.0
+    @State private var minValue = 50.0
+    @State private var maxValue = 170.0
+    let gradient = Gradient(colors: [.green, .yellow, .orange, .red])
+
+    var body: some View {
+        Gauge(value: current, in: minValue...maxValue) {
+            Image(systemName: "heart.fill")
+                .foregroundColor(.red)
+        } currentValueLabel: {
+            Text("\(Int(current))")
+                .foregroundColor(Color.green)
+        } minimumValueLabel: {
+            Text("\(Int(minValue))")
+                .foregroundColor(Color.green)
+        } maximumValueLabel: {
+            Text("\(Int(maxValue))")
+                .foregroundColor(Color.red)
+        }
+        .gaugeStyle(.accessoryCircular)
+        .tint(gradient)
     }
 }
 

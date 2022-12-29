@@ -43,12 +43,11 @@ struct HomePage: View {
                         VStack {
                             VStack {
                                 Image("spielerischregio")
-                                    .renderingMode(.original)
                                     .resizable()
+                                    .renderingMode(.original)
                                     .aspectRatio(contentMode: .fit)
                             }
                             .clipped()
-                            
                             VStack {
                                 VStack {
                                     Text("Universitätsstadt Siegen")
@@ -85,12 +84,14 @@ struct HomePage: View {
                                 .clipped()
                                 .mask { RoundedRectangle(cornerRadius: 10, style: .continuous) }
                                 .offset(x: 0, y: +100)
+                            
                         }
                     }
                 }
             }
-            .edgesIgnoringSafeArea(.top)
         }
+        .padding(.bottom, 20)
+        .ignoresSafeArea()
     }
 }
 
@@ -105,7 +106,7 @@ struct TopTapBarView: View {
                     }
                 }, label: {
                     Image(systemName: "map")
-                        .imageScale(.medium)
+                        .imageScale(.large)
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(.pink.opacity(0.75))
                         .scaleEffect(1.2, anchor: .center)
@@ -113,21 +114,21 @@ struct TopTapBarView: View {
                 Button(action: {
                 }, label: {
                     Image(systemName: "building.2.crop.circle")
-                        .imageScale(.medium)
+                        .imageScale(.large)
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(.pink.opacity(0.75))
                         .scaleEffect(1.2, anchor: .center)
                 })
                 NavigationLink(destination: StoryView()) {
                     Image(systemName: "person.wave.2")
-                        .imageScale(.medium)
+                        .imageScale(.large)
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(.pink.opacity(0.75))
                         .scaleEffect(1.2, anchor: .center)
                 }
                 NavigationLink(destination: AboutThisAppView()) {
                     Image(systemName: "info.square")
-                        .imageScale(.medium)
+                        .imageScale(.large)
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(.pink.opacity(0.75))
                         .scaleEffect(1.2, anchor: .center)

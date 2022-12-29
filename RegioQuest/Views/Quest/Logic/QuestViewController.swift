@@ -1,25 +1,28 @@
 //
-//  StoryViewModel.swift
+//  QuestViewController.swift
 //  RegioQuest
 //
-//  Created by Orhan Salman on 12.12.22.
+//  Created by Orhan Salman on 20.12.22.
 //
+
 import Foundation
 import OSLog
 import SwiftUI
 import CloudKit
 
-@MainActor final class CreateStoryModel: ObservableObject {
+@MainActor final class CreateQuestModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "de.salman.RegioQuest",
         category: String(describing: CreateStoryModel.self)
     )
-    @Published var story: ModelStory = .init(
-        userName: "",
+    @Published var quest: ModelQuest = .init(
         title: "",
         description: "",
+        latitude: 0.0,
+        longitude: 0.0,
+        branche: "",
         timestamp: Date.now,
-        associatedRecord: CKRecord(recordType: "Story")
+        associatedRecord: CKRecord(recordType: "Quest")
     )
     @Published private(set) var isSaving = false
     
@@ -29,7 +32,7 @@ import CloudKit
         isSaving = true
         
         do {
-            try await cloudKitService.save(story.record)
+            try await cloudKitService.save(quest.record)
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
@@ -38,16 +41,15 @@ import CloudKit
     }
 }
 
-@MainActor final class FetchStoryModel: ObservableObject {
+@MainActor final class FetchQuestModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "de.salman.RegioQuest",
-        category: String(describing: FetchStoryModel.self)
+        category: String(describing: FetchQuestModel.self)
     )
     
-    @Published private(set) var allStories: [ModelStory] = []
-    @Published private(set) var userStories: [ModelStory] = []
+    @Published private(set) var allQuests: [ModelQuest] = []
+    @Published private(set) var userQuests: [ModelQuest] = []
     @Published private(set) var isLoading = false
-    @Published private(set) var isDeleting = false
     
     private let cloudKitService = CloudKitService()
     
@@ -55,7 +57,7 @@ import CloudKit
         isLoading = true
         
         do {
-            allStories = try await cloudKitService.fetchStoryRecords()
+            allQuests = try await cloudKitService.fetchQuestRecords()
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
@@ -67,24 +69,12 @@ import CloudKit
         isLoading = true
         
         do {
-            userStories = try await cloudKitService.fetchMyStoryRecords(accountID: accountID)
+            userQuests = try await cloudKitService.fetchMyQuestRecords(accountID: accountID)
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
         
         isLoading = false
-    }
-    
-    func deleteSelectedStory(atOffsets: ModelStory) async {
-        isDeleting = true
-        
-        do {
-            try await cloudKitService.delete(atOffsets.associatedRecord)
-        } catch {
-            Self.logger.error("\(error.localizedDescription, privacy: .public)")
-        }
-        
-        isDeleting = false
     }
 }
 

@@ -63,26 +63,6 @@ struct BranchenView: View {
                 
                 DisclosureGroup("\(Image(systemName: "waveform.path.ecg.rectangle")) Für dich empfohlen", content: {
                     Text("Not implemented yet")
-                    /*
-                     ForEach(jobs, id: \.self) { job in
-                     if job.isFavorite {
-                     NavigationLink(destination: JobView(jobRequest: FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Job.name, ascending: true)], predicate: NSPredicate(format: "id == %@", job.id! as CVarArg), animation: .default))) {
-                     HStack {
-                     
-                     }
-                     .frame(maxWidth: .infinity)
-                     .background {
-                     HStack {
-                     Text(job.name ?? "No Name found")
-                     Spacer()
-                     Image(systemName: "star.fill")
-                     .foregroundColor(.yellow)
-                     }
-                     }
-                     }
-                     }
-                     }
-                     */
                 })
                 
                 DisclosureGroup("\(Image(systemName: "timer")) Kürzlich hinzugefügt", content: {
@@ -151,7 +131,7 @@ struct BranchenView: View {
                 })
                 
             }
-            .navigationTitle(Text("Branchen"))
+            .navigationTitle(Text("Quests"))
         }
         .onAppear {
             // For tests
@@ -194,54 +174,6 @@ struct BranchenView: View {
             }
         }
     }
-    
-    /*
-     Task
-     {
-        do {
-              data = try await fetchUserRecord()
-           }
-           catch
-           {
-              print(error)
-           }
-      }
-     */
-    
-    /*
-    func fetchUserRecord() async throws -> [Double]
-    {
-        CKContainer.default().
-        yourContainer.fetchUserRecordIDWithCompletionHandler { (userID, error) -> Void in
-            if let userID = userID {
-                // here's your userID (recordID) to play with
-            }
-        }
-        
-        var data: [Double] = [0, 1, 2]    // you don't really want the
-        let aWeekAgo = Date().addingTimeInterval(-604800)
-
-        let reference = CKReference(recordID: userID, action: .None)
-        
-       let publicDB = CKContainer.default().publicCloudDatabase
-       let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
-       let query = CKQuery(recordType: "Jobs", predicate: predicate)
-       let (values, cursor) = try await publicDB.records(matching: query, resultsLimit: 100)
-
-
-        
-       for r in values
-       {
-           if let rec = try? r.1.get()
-           {
-               data.append(rec["value"] as! Double)
-           }
-       }
-       
-       return data
-           
-     }
-    */
     func arrAppend() async {
         arr.removeAll()
         for branchen in jobs {
