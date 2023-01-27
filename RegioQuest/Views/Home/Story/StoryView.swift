@@ -103,7 +103,7 @@ struct StoryView: View {
                     }, label: {
                         Image(systemName: "arrow.clockwise")
                     })
-                    
+
                     NavigationLink(destination: {
                         AddStoryView()
                     }, label: {
@@ -118,10 +118,6 @@ struct StoryView: View {
             Task {
                 await vm.fetch()
             }
-            for i in vm.allStories {
-                print("TITEL: \(i.title)")
-            }
-            print("_________________________________")
         }
         else if selectedFilter == .own {
             Task {
@@ -135,10 +131,6 @@ struct StoryView: View {
                     }
                 }
             }
-            for i in vm.userStories {
-                print("TITEL: \(i.title)")
-            }
-            print("_________________________________")
         }
         else if selectedFilter == .friends {
             print("Friends not implemented")

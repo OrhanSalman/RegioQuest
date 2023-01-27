@@ -21,8 +21,8 @@ struct JobView: View {
 
     
     // Init is required for @FetchRequest!
-    var jobRequest: FetchRequest<Job>
-    init(jobRequest: FetchRequest<Job>) {
+    var jobRequest: FetchRequest<Quest>
+    init(jobRequest: FetchRequest<Quest>) {
         self.jobRequest = jobRequest
         self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: jobRequest.wrappedValue.first?.latitude ?? 0, longitude: jobRequest.wrappedValue.first?.longitude ?? 0), latitudinalMeters: 600.0, longitudinalMeters: 600.0)
     }
@@ -46,7 +46,7 @@ struct JobView: View {
                     }
                     VStack {
                         HStack {
-                            Text(data.name ?? "Kein Name")
+                            Text(data.title ?? "Kein Titel")
                             Spacer()
                             VStack {
                                 if calculateDistanceProgress {
@@ -114,7 +114,7 @@ struct JobView: View {
                                 }
                                 .offset(x: 160, y: -100)
                                 .onTapGesture {
-                                    let url = URL(string: "maps://?saddr=&daddr=\(50.9910469),\(7.9565371)")
+                                    let url = URL(string: "maps://?saddr=&daddr=\(self.latitude),\(self.longitude)")
                                     if UIApplication.shared.canOpenURL(url!) {
                                         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
                                     }

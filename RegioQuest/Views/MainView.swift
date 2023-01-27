@@ -22,6 +22,8 @@ struct MainView: View {
     @State var profileBadgeCount = 0
     @State var scoreBadgeCount = 0
     
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some View {
         
         TabView() {
@@ -37,6 +39,7 @@ struct MainView: View {
                     .onSubmit {
                         self.homeBadgeCount = 0
                     }
+                
                 BranchenView()
                     .tabItem {
                         Label("Quests", systemImage: "gamecontroller")
@@ -46,8 +49,7 @@ struct MainView: View {
                     .onSubmit {
                         self.branchenBadgeCount = 0
                     }
-                /*
-                ARViewLoad()
+                QuestGameView()
                     .tabItem {
                         Label("Game", systemImage: "gamecontroller")
                     }
@@ -55,7 +57,7 @@ struct MainView: View {
                     .onSubmit {
                         self.scoreBadgeCount = 0
                     }
-                 */
+                 
                 SkillView()
                     .tabItem {
                         Label("Skills", systemImage: "brain.head.profile")

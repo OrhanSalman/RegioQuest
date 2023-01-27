@@ -1,15 +1,21 @@
 
 import UIKit
 import MapKit
-
+import SwiftUI
+import CoreData
 
 class ViewController: UIViewController {
     
+    @StateObject private var vm = FetchQuestModel()
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    let context = CoreDataStack.shared.context
     
     @IBOutlet weak var mapView : MKMapView!
 //    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var mapTypeSelector: UISegmentedControl!
     
+    @IBOutlet weak var resetCenter: UILabel!
     
     let distance: CLLocationDistance = 650
     let pitch: CGFloat = 65
@@ -25,6 +31,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
+        
         askUserLocation()
         // https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
         configureMapArea()
@@ -32,7 +40,7 @@ class ViewController: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        if let location = locationManager.location{
+        if let location = locationManager.location {
             lookForLatestLocation(location: location)
         }
     }
@@ -47,6 +55,11 @@ class ViewController: UIViewController {
         let region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 8.005, longitudeDelta: 8.005))
         self.mapView.setCenter(location.coordinate, animated: true)
         self.mapView.setRegion(region, animated: true)
+        self.mapView.userTrackingMode = .followWithHeading
+        self.mapView.isRotateEnabled = false
+        self.mapView.isZoomEnabled = false
+        self.mapView.isScrollEnabled = false
+        self.mapView.showsCompass = false
         
         camera = MKMapCamera(lookingAtCenter: location.coordinate,
             fromDistance: distance,
@@ -71,12 +84,31 @@ class ViewController: UIViewController {
             break
         }
     }
-    // Look Around
+    
     func configureMapArea() {
         let region = MKCoordinateRegion(center: .init(latitude: 50.874886, longitude: 8.025132), span: .init(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.setRegion(region, animated: true)
         mapView.isZoomEnabled = true
+        
+        var annotations = [MKPointAnnotation]()
+        
+        let fetchRequest: NSFetchRequest<Quest> = Quest.fetchRequest()
+        do {
+            let entities = try context.fetch(fetchRequest)
+            for i in entities {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: i.latitude, longitude: i.longitude)
+                annotation.title = i.title
+                annotation.subtitle = i.descripti ?? "Keine Beschreibung"
+                annotations.append(annotation)
+                mapView.addAnnotations(annotations)
+            }
+        } catch {
+            print("Fetch failed")
+        }
     }
+
+    
     /*
     func searchPlace() {
         mapView.removeAnnotations(foundAnnotations)
@@ -98,6 +130,7 @@ class ViewController: UIViewController {
         
     }
     */
+    /*
     func addPlacesToAnnotations() {
         for location in foundLocations {
             let annotation = MKPointAnnotation()
@@ -107,14 +140,14 @@ class ViewController: UIViewController {
         }
         self.mapView.addAnnotations(foundAnnotations)
     }
-
+    */
 }
 
-extension ViewController : CLLocationManagerDelegate{
+extension ViewController : CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedWhenInUse{
-            if let location = manager.location{
+        if manager.authorizationStatus == .authorizedWhenInUse {
+            if let location = manager.location {
                 self.mapView.showsUserLocation = true
                 let region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.005, longitudeDelta: 0.005))
                 self.mapView.setCenter(location.coordinate, animated: true)
@@ -131,7 +164,7 @@ extension ViewController : CLLocationManagerDelegate{
 }
 
 
-extension ViewController: MKMapViewDelegate{
+extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
@@ -147,8 +180,37 @@ extension ViewController: MKMapViewDelegate{
         selectedAnnotation = annotation
         presentWithSheet(item: annotation)
     }
+    /*
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let destination = MKPlacemark(coordinate: view.annotation!.coordinate)
+        let source = MKPlacemark(coordinate: mapView.userLocation.coordinate)
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: source)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .walking
+        request.requestsAlternateRoutes = true
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard let routes = response?.routes else { return }
+            for route in routes {
+                mapView.addOverlay(route.polyline)
+                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+    }
+    */
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .blue
+            renderer.lineWidth = 5
+            return renderer
+        } else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+    }
     
-    func presentWithSheet(item: MKAnnotation){
+    func presentWithSheet(item: MKAnnotation) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "MarkerDetailViewController") as? MarkerDetailViewController else { return }
         vc.selectedItem = foundLocations.filter({ $0.placemark.coordinate == item.coordinate }).first
         if let sheet = vc.sheetPresentationController {
@@ -160,7 +222,7 @@ extension ViewController: MKMapViewDelegate{
     }
 }
 
-extension ViewController: UISheetPresentationControllerDelegate{
+extension ViewController: UISheetPresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         if let selectedAnnotation{
             mapView.deselectAnnotation(selectedAnnotation, animated: true)
@@ -169,7 +231,7 @@ extension ViewController: UISheetPresentationControllerDelegate{
     }
 }
 /*
-extension ViewController: UITextFieldDelegate{
+extension ViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = textField.text,
@@ -186,7 +248,4 @@ extension CLLocationCoordinate2D : Equatable{
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return (lhs.latitude == rhs.latitude) && (lhs.longitude == rhs.longitude)
     }
-    
-    
-    
 }

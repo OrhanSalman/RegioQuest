@@ -8,73 +8,20 @@
 import SwiftUI
 import CloudKit
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        UNUserNotificationCenter.current().delegate = self
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (authorized, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            
-            if authorized {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
-        }
-        
-        return true
-    }
-
-    // MARK: UISceneSession Lifecycle
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
-
-}
-
-// MARK: Push notifications
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        completionHandler([.alert, .sound])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Notification tapped!")
-        
-        completionHandler()
-    }
-}
-
 @main
 struct RegioQuestApp: App {
-    
+    @Environment(\.managedObjectContext) private var viewContext
     let cloudPersistanceController = CoreDataStack.shared.context
     
     @StateObject private var pushService = PushNotificationService()
+//    @StateObject private var initialize = StartUpMethods()
     
     @AppStorage("userOnboarded") var userOnboarded: Bool = false
     @State private var load: Bool = false
     @State private var onboard: Bool = true
     
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             if load {
@@ -121,7 +68,18 @@ struct RegioQuestApp: App {
                                 Button(action: {
                                     onboard = false
                                     load = true
+                                    /*
+                                    let options = Notis(context: viewContext)
+                                    options.story = false
+                                    options.temp = "temp"
                                     
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                     */
 //                                    userOnboarded = true
 
                                 }){
@@ -156,4 +114,108 @@ struct RegioQuestApp: App {
             }
         }
     }
+    
+    private func setNotificationOptions() {
+        let options = Notis(context: viewContext)
+        options.story = false
+        
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
+/*
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    @StateObject private var pushService = PushNotificationService()
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default) var notifications: FetchedResults<Notis>
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { success, error in
+            if let error = error {
+                print(error)
+                for el in self.notifications {
+                    el.story = false
+                    print("BENACHRICHTIGUNG: \(el.story)")
+                }
+            } else if success {
+                print("Notification permissions Success")
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                for el in self.notifications {
+                    el.story = true
+                    print("BENACHRICHTIGUNG: \(el.story)")
+                }
+            }
+            else {
+                print("Notification permissions Failure")
+            }
+        }
+        
+        
+        /*
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (authorized, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                for el in self.notifications {
+                    el.story = false
+                }
+            }
+            
+            if authorized {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+                for el in self.notifications {
+                    el.story = true
+                }
+            }
+        }
+        */
+        return true
+    }
+
+    // MARK: UISceneSession Lifecycle
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+
+
+}
+
+// MARK: Push notifications
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Notification tapped!")
+        
+        completionHandler()
+    }
+}
+
+*/

@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 20.12.22.
 //
-
+/*
 import SwiftUI
 import RealityKit
 import ARKit
@@ -271,3 +271,4 @@ struct ARViewLoad_Previews : PreviewProvider {
     }
 }
 #endif
+*/

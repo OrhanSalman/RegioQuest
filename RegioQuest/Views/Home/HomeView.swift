@@ -97,6 +97,8 @@ struct HomePage: View {
 
 struct TopTapBarView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @State var infoBadge = 1
+    
     var body: some View {
         VStack(spacing: 25) {
             HStack(spacing: 25) {
@@ -132,6 +134,10 @@ struct TopTapBarView: View {
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(.pink.opacity(0.75))
                         .scaleEffect(1.2, anchor: .center)
+                        .badge(infoBadge)
+                        .onSubmit {
+                            self.infoBadge = 0
+                        }
                 }
             }
             .background {

@@ -24,7 +24,7 @@ class MarkerDetailViewController: UIViewController {
     }
     
     @objc func buttonTapped() {
-        if let selectedItem{
+        if let selectedItem {
             selectedItem.openInMaps()
         }
     }

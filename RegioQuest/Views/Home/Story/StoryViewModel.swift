@@ -35,7 +35,6 @@ import CloudKit
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
-        print("WICHTIG: \(story.title)")
         pushService.subscribeToNotifications(body: story.title)
         isSaving = false
     }

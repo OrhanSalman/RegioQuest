@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ARView: UIViewControllerRepresentable {
     func makeUIViewController(context content: Context) -> UIViewController {
-        let storyboard = UIStoryboard(name: "ARMain", bundle: Bundle.main)
-        let controller = storyboard.instantiateViewController(withIdentifier: "ARMain")
+        let storyboard = UIStoryboard(name: "ARView", bundle: Bundle.main)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ARViewController")
         return controller
     }
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {

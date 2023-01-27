@@ -20,7 +20,7 @@ struct ProfilView: View {
             NoAccountView()
         }
         else {
-            ForEach(user) { data in         // Should not be for-each, only 1 user per device
+            ForEach(user) { data in
                 List {
                     VStack {
                         Section() {
@@ -79,6 +79,28 @@ struct ProfilView: View {
                                 try? self.managedObjectContext.save()
                             }))
                     }
+                    
+                    Section(header: Text("Profil löschen")) {
+                        HStack {
+                            Button("Profildaten löchen", role: .destructive, action: {
+                                withAnimation {
+                                    for data in user {
+                                        managedObjectContext.delete(data)
+                                        // ToDo: delete stories, skills, etc.
+                                    }
+                                    do {
+                                        try managedObjectContext.save()
+                                    } catch {
+                                        print(error)
+                                    }
+                            }
+                            })
+                            Spacer()
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
+
+                    }
                 }
             }
         }
@@ -104,7 +126,6 @@ struct NoAccountView: View {
             
             if viewModel.accountStatus != .available {
                 accountStatusAlertShown = true
-                print("GESCHEITERT")
             } else {
 //                dismiss()
                 // Create profil if user has a valid iCloud setting

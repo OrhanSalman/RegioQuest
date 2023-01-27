@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     var body: some View {
-        Text("Neues TabItem, dass alle Games in der unmitellbaren Nähe anzeigt. Distance mitnehmen. Start Button. Bedingungen setzen (Multiplayer oder nicht)")
+        Text("Neues TabItem, das alle Games in der unmitellbaren Nähe anzeigt. Distance mitnehmen. Start Button. Bedingungen setzen (Multiplayer oder nicht)")
     }
 }
 

@@ -4,7 +4,7 @@
 //
 //  Created by Orhan Salman on 10.11.22.
 //
-
+/*
 import CoreData
 
 struct PersistenceController {
@@ -36,3 +36,4 @@ struct PersistenceController {
     }
 }
 
+*/

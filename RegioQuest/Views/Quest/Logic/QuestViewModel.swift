@@ -13,7 +13,7 @@ import CloudKit
 @MainActor final class CreateQuestModel: ObservableObject {
     private static let logger = Logger(
         subsystem: "de.salman.RegioQuest",
-        category: String(describing: CreateStoryModel.self)
+        category: String(describing: CreateQuestModel.self)
     )
     @Published var quest: ModelQuest = .init(
         title: "",
@@ -65,7 +65,7 @@ import CloudKit
         isLoading = false
     }
     
-    func fetchMyStories(accountID: CKRecord.ID) async {
+    func fetchMyQuests(accountID: CKRecord.ID) async {
         isLoading = true
         
         do {

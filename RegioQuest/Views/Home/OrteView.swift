@@ -28,7 +28,7 @@ struct OrteView: View {
                                 viewRouter.currentView = .HomeView
                             }
                         }, label: {
-                            Image(systemName: "chevron.backward.square")
+                            Image(systemName: "x.circle")
                                 .imageScale(.large)
                                 .symbolRenderingMode(.monochrome)
                                 .scaleEffect(1.5, anchor: .center)
@@ -41,7 +41,7 @@ struct OrteView: View {
                     Spacer()
                 }
                 .padding(20)
-                .padding(.vertical, 20)
+                .padding(.vertical, 30)
                 .ignoresSafeArea()
             }
         })

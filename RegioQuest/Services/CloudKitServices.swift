@@ -137,7 +137,7 @@ extension CloudKitService {
 extension CloudKitService {
     func fetchQuestRecords() async throws -> [ModelQuest] {
         let predicate = NSPredicate(
-            format: "\(QuestRecordKeys.title.rawValue) <= %@", Date.now as NSDate
+            format: "\(QuestRecordKeys.timestamp.rawValue) <= %@", Date.now as NSDate
         )
 
         let query = CKQuery(
