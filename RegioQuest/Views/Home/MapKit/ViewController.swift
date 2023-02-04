@@ -33,6 +33,26 @@ class ViewController: UIViewController {
         
         mapView.delegate = self
         
+        var annotations = [MKPointAnnotation]()
+        
+        let fetchRequest: NSFetchRequest<Quest> = Quest.fetchRequest()
+        do {
+            let entities = try context.fetch(fetchRequest)
+            for i in entities {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: i.latitude, longitude: i.longitude)
+                annotation.title = i.title
+                annotation.subtitle = i.descripti ?? "Keine Beschreibung"
+                annotations.append(annotation)
+                mapView.addAnnotations(annotations)
+//                mapView.addAnnotation(annotation)
+                
+                print("ANNOTATIONS: \(annotation)")
+            }
+        } catch {
+            print("Fetch failed")
+        }
+        
         askUserLocation()
         // https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
         configureMapArea()
@@ -50,7 +70,6 @@ class ViewController: UIViewController {
     }
     
     func lookForLatestLocation(location: CLLocation) {
-        
         self.mapView.showsUserLocation = true
         let region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 8.005, longitudeDelta: 8.005))
         self.mapView.setCenter(location.coordinate, animated: true)
@@ -89,7 +108,8 @@ class ViewController: UIViewController {
         let region = MKCoordinateRegion(center: .init(latitude: 50.874886, longitude: 8.025132), span: .init(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.setRegion(region, animated: true)
         mapView.isZoomEnabled = true
-        
+  
+        /*
         var annotations = [MKPointAnnotation]()
         
         let fetchRequest: NSFetchRequest<Quest> = Quest.fetchRequest()
@@ -101,11 +121,15 @@ class ViewController: UIViewController {
                 annotation.title = i.title
                 annotation.subtitle = i.descripti ?? "Keine Beschreibung"
                 annotations.append(annotation)
-                mapView.addAnnotations(annotations)
+//                mapView.addAnnotations(annotations)
+                mapView.addAnnotation(annotation)
+                
+                print("ANNOTATIONS: \(annotation)")
             }
         } catch {
             print("Fetch failed")
         }
+         */
     }
 
     
@@ -219,6 +243,9 @@ extension ViewController: MKMapViewDelegate {
             sheet.prefersGrabberVisible = true
         }
         present(vc, animated: true)
+        
+        print("ANNOTATIONSS: \(foundLocations.filter({ $0.placemark.coordinate == item.coordinate }).first)")
+        
     }
 }
 

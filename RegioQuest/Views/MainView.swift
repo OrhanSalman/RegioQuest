@@ -16,6 +16,11 @@ struct MainView: View {
     @FetchRequest(
     sortDescriptors: [NSSortDescriptor(keyPath: \User.id, ascending: true)],
     animation: .default) var user: FetchedResults<User>
+    /*
+    @FetchRequest(
+    sortDescriptors: [NSSortDescriptor(keyPath: \Badges.id, ascending: true)],
+    animation: .default) var badges: FetchedResults<Badges>
+*/
     
     @State var homeBadgeCount = 0
     @State var branchenBadgeCount = 0
@@ -39,25 +44,28 @@ struct MainView: View {
                     .onSubmit {
                         self.homeBadgeCount = 0
                     }
+                    .edgesIgnoringSafeArea(.top)
                 
                 BranchenView()
                     .tabItem {
-                        Label("Quests", systemImage: "gamecontroller")
+                        Label("Suche", systemImage: "location.magnifyingglass")
                     }
                     .environmentObject(locationManager)
                     .badge(branchenBadgeCount)
                     .onSubmit {
                         self.branchenBadgeCount = 0
                     }
-                QuestGameView()
+//                QuestGameView()
+                QuestsNearByList()
                     .tabItem {
-                        Label("Game", systemImage: "gamecontroller")
+                        Label("Quests", systemImage: "gamecontroller")
                     }
+                    .environmentObject(locationManager)
                     .badge(scoreBadgeCount)
                     .onSubmit {
                         self.scoreBadgeCount = 0
                     }
-                 
+                 /*
                 SkillView()
                     .tabItem {
                         Label("Skills", systemImage: "brain.head.profile")
@@ -66,6 +74,7 @@ struct MainView: View {
                     .onSubmit {
                         self.scoreBadgeCount = 0
                     }
+                  */
                 CustomTabView()
                     .tabItem {
                         Label("Profil", systemImage: "person.crop.circle.fill")

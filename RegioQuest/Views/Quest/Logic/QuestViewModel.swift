@@ -58,6 +58,11 @@ import CloudKit
         
         do {
             allQuests = try await cloudKitService.fetchQuestRecords()
+            
+            for i in allQuests {
+                print("COUNT: \(allQuests.count)")
+                print("GEFETCHED: \(i.timestamp)")
+            }
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }

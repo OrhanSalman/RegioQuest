@@ -63,7 +63,7 @@ struct SkillView: View {
         }
         .navigationTitle("Deine Skills")
         .padding(.bottom, 20)
-        .edgesIgnoringSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
     }
 }
 

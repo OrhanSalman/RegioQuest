@@ -260,6 +260,7 @@ struct RegionSheet: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
+            
             VStack {
                 MapView(region: region, lineCoordinates: coordArr.map {
                     CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])

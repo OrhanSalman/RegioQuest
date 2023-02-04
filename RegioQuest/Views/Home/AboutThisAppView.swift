@@ -81,9 +81,7 @@ struct AboutThisAppView: View {
                     }
                     Divider()
                         .padding(.horizontal, 30)
-                    Text("👻")
-                        .font(.system(size: 250))
-                        .padding()
+
                 }
                 .padding(.horizontal, 10)
                 .clipped()

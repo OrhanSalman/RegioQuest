@@ -139,13 +139,14 @@ extension CloudKitService {
         let predicate = NSPredicate(
             format: "\(QuestRecordKeys.timestamp.rawValue) <= %@", Date.now as NSDate
         )
+        
 
         let query = CKQuery(
             recordType: QuestRecordKeys.type.rawValue,
             predicate: predicate
         )
 
-        query.sortDescriptors = [.init(key: QuestRecordKeys.title.rawValue, ascending: true)]
+        query.sortDescriptors = [.init(key: QuestRecordKeys.timestamp.rawValue, ascending: false)]
 
         let result = try await CKContainer.default().publicCloudDatabase.records(matching: query)
         let records = result.matchResults.compactMap { try? $0.1.get() }

@@ -57,49 +57,25 @@ struct ProfilView: View {
                     }
                     
                     Section(header: Text("Fortschritt")) {
-                        NavigationLink(destination: SkillView()) {
+                        NavigationLink(destination: InvitationsView()) {
                             Text("Einladungen")
-                        }
-                        NavigationLink(destination: SkillView()) {
-                            Text("Quests")
                         }
                         NavigationLink(destination: SkillView()) {
                             Text("Skills")
                         }
-                        NavigationLink(destination: SkillView()) {
-                            Text("Quote")
-                        }
                     }
 
-                    Section(header: Text("Präferenzen")) {
+                    Section(header: Text("Freunde")) {
+                        // ToDo: Statt toggle share sf-symbol
                         Toggle("Profil mit Freunden teilen", isOn: Binding<Bool>(
                             get: { data.shareWithFriends },
                             set: {
                                 data.shareWithFriends = $0
                                 try? self.managedObjectContext.save()
                             }))
-                    }
-                    
-                    Section(header: Text("Profil löschen")) {
-                        HStack {
-                            Button("Profildaten löchen", role: .destructive, action: {
-                                withAnimation {
-                                    for data in user {
-                                        managedObjectContext.delete(data)
-                                        // ToDo: delete stories, skills, etc.
-                                    }
-                                    do {
-                                        try managedObjectContext.save()
-                                    } catch {
-                                        print(error)
-                                    }
-                            }
-                            })
-                            Spacer()
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
+                        NavigationLink(destination: FriendsView()) {
+                            Text("Freundesliste")
                         }
-
                     }
                 }
             }
@@ -147,7 +123,7 @@ struct NoAccountView: View {
             await viewModel.fetchAccountStatus()
         }
     }
-    private func createDefaultUser() -> Bool {
+    func createDefaultUser() -> Bool {
         var status: Bool = false
         let randomNum = Int.random(in: 10000...99999)
         let jobArr = ["Deo-Tester", "Glückskeks-Autor", "Notenblatt-Umblätterer", "Kaugummi-Entferner", "Eincreme-Assistent", "Wasserrutschen-Tester", "Puppendoktor", "Golfballtaucher", "Professioneller Ansteher", "Möbil-Probesitzer", "Lebende Schaufensterpuppe", "Lego-Modellbauer", "Pferde-Zahnarzt", "Schlussmacher"]

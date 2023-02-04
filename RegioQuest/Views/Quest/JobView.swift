@@ -13,8 +13,8 @@ struct JobView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var locationManager: LocationManager
     @State private var calculateDistanceProgress: Bool = true
-    @State private var latitude: Double?
-    @State private var longitude: Double?
+    @State private var latitude: Double = 0.0
+    @State private var longitude: Double = 0.0
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 600.0, longitudinalMeters: 600.0)
     
 //    @StateObject private var vm: JobViewModel

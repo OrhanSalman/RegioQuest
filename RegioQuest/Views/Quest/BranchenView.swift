@@ -60,7 +60,7 @@ struct BranchenView: View {
                         }
                     }
                 })
-                DisclosureGroup("\(Image(systemName: "square.stack.3d.up")) Branchen", content: {
+                DisclosureGroup("\(Image(systemName: "square.stack.3d.up")) Kategorien", content: {
                     
                     let uniqueStrings = removeDuplicates(array: arr.sorted())
                     
@@ -120,9 +120,8 @@ struct BranchenView: View {
             await vm.fetch()
             // Save to CoreData
             for quest in vm.allQuests {
+                
                 // Check if questID already exists, if yes, skip to next CKRecord
-                
-                
                 if quests.contains(where:  {
                     $0.title == quest.title
                 }) {

@@ -10,17 +10,32 @@ import CloudKit
 
 @main
 struct RegioQuestApp: App {
-    @Environment(\.managedObjectContext) private var viewContext
     let cloudPersistanceController = CoreDataStack.shared.context
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default) var notifications: FetchedResults<Subscriptions>
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Quest.title, ascending: true)],
+        animation: .default) var quests: FetchedResults<Quest>
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Quest.title, ascending: true)],
+        animation: .default) var user: FetchedResults<User>
+    
     @StateObject private var pushService = PushNotificationService()
-//    @StateObject private var initialize = StartUpMethods()
     
     @AppStorage("userOnboarded") var userOnboarded: Bool = false
     @State private var load: Bool = false
     @State private var onboard: Bool = true
-    
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @StateObject private var vm_q = FetchQuestModel()
+    @StateObject private var vm_s = FetchStoryModel()
+    @StateObject private var vm_sk = FetchSkillModel()
+    
+    @State private var progressText: String = ""
+    @State private var fetch: Bool = false
     
     var body: some Scene {
         WindowGroup {
@@ -31,16 +46,79 @@ struct RegioQuestApp: App {
                 })
                 .onAppear {
                     userOnboarded = true
+                    fetch = true
                 }
             }
             
             if userOnboarded {
-                MainView()
-                    .environment(\.managedObjectContext, cloudPersistanceController)
-                    .onAppear {
-                        pushService.requestNotificationPermissions()
+                if fetch {
+                    ProgressView(label: {
+                        Text(progressText)
+                            .font(.headline)
+                    })
+                    .task {
                         load = false
+                        progressText = "Lade Datensätze aus der Cloud"
+                        
+                        // Quests
+                        await vm_q.fetch()
+                        
+                        // ToDo ERROR: Geht nur wenn Profil vorhanden ist!
+                        if user.isEmpty {
+                            fetch.toggle()
+                            return
+                        }
+                        else {
+                            // Save Quest to CoreData
+                            for quest in vm_q.allQuests {
+                                
+                                // Check if questID already exists, if yes, skip to next CKRecord
+                                if quests.contains(where:  {
+                                    $0.title == quest.title
+                                }) {
+                                    print("Quest exists")
+                                }
+                                else {
+                                    let quests = Quest(context: managedObjectContext)
+                                    quests.title = quest.title
+                                    quests.latitude = quest.latitude
+                                    quests.longitude = quest.longitude
+                                    quests.branche = quest.branche
+                                    //                        quests.id = String("\(quest.record.recordID)")
+                                    quests.id = UUID()
+                                    quests.descripti = quest.description
+                                    quests.hasUserFinished = false
+                                    quests.hasUserSeen = false
+                                    quests.isFavorite = false
+                                    quests.score = 0.0
+                                    
+                                    do {
+                                        try managedObjectContext.save()
+                                    } catch {
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                }
+                            }
+                            // Stories
+                            await vm_s.fetch()
+                            // Skills
+                            await vm_sk.fetch()
+                            
+                            fetch.toggle()
+                        }
                     }
+                }
+                else {
+                    MainView()
+                        .environment(\.managedObjectContext, cloudPersistanceController)
+                        .onAppear {
+                            
+                            UIApplication.shared.applicationIconBadgeNumber = 0
+                            pushService.requestNotificationPermissions()
+                            load = false
+                        }
+                }
             }
             else if onboard && !userOnboarded {
                 VStack {
@@ -112,18 +190,6 @@ struct RegioQuestApp: App {
                 .clipped()
                 .edgesIgnoringSafeArea(.all)
             }
-        }
-    }
-    
-    private func setNotificationOptions() {
-        let options = Notis(context: viewContext)
-        options.story = false
-        
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

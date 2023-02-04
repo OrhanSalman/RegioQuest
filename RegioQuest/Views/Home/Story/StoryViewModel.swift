@@ -25,7 +25,7 @@ import CloudKit
     
     private let cloudKitService = CloudKitService()
     
-    @StateObject private var pushService = PushNotificationService()
+    private let pushService = PushNotificationService()
     
     func save() async {
         isSaving = true
@@ -35,7 +35,7 @@ import CloudKit
         } catch {
             Self.logger.error("\(error.localizedDescription, privacy: .public)")
         }
-        pushService.subscribeToNotifications(body: story.title)
+        pushService.subscribeToStories()
         isSaving = false
     }
 }
